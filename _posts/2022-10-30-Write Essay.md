@@ -1,6 +1,6 @@
 ---
 layout: mypost
-title: Whitesides' Group: Writing a Paper
+title: Whitesides' Group - Writing a Paper
 categories: [论文阅读]
 ---
 
