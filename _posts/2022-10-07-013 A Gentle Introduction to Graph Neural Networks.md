@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: 013 A Gentle Introduction to Graph Neural Networks
-categories: [论文阅读, GNN]
+categories: [论文阅读, GNN, 已读论文]
 ---
 
 - [标题](#标题)
@@ -40,7 +40,6 @@ Distill, 2021.09, 24 citations
     
     我觉得，GNN的通道，是反映在顶点、边、全局这三个通道的。或者说，MLP可以有多个MLP，对应的就是多个channel了。
     
-
 -   通过堆叠信息传递GNN网络层，一个节点就可以最终获得整个图的所有信息。  
     也就是说，在三层之后，一个顶点就距离自己三步的顶点信息了。
     

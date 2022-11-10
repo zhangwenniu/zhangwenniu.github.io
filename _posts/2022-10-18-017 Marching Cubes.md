@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: 017 Marching cubes, A high resolution 3D surface construction algorithm
-categories: [论文阅读, Mesh重建]
+categories: [论文阅读, Mesh重建, 已读论文]
 ---
 
 - [标题](#标题)

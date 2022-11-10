@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: 015 NeRF Representing Scenes as Neural Radiance Fields for View Synthesis
-categories: [论文阅读, NeRF]
+categories: [论文阅读, NeRF, 已读论文]
 ---
 
 - [标题](#标题)

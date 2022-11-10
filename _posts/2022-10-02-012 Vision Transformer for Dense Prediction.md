@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: 012 Vision Transformer for Dense Prediction
-categories: [论文阅读, Transformer, Vision Transformer, Dense Prediction]
+categories: [论文阅读, Transformer, Vision Transformer, Dense Prediction, 已读论文]
 ---
 
 - [解决问题](#解决问题)
