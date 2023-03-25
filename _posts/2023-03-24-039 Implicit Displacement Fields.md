@@ -116,7 +116,7 @@ $$f(x,y,z) = A * exp\left(-\begin{pmatrix}(x-x_0)&(y-y_0)&(z-z_0)\end{pmatrix}\b
 
 ---
 
-## 隐式偏移场（Implicit Displacement Fields, IDF) 
+## 3.1 隐式偏移场（Implicit Displacement Fields, IDF) 
 
 学习displacement function的方法是源于传统。在传统方法中，物体的平滑表面是已知的，在平滑表面上采样离散的点，通过对离散点增加偏移值，变为精细表面。但是本文中有两种不同，第一，表面点并不是离散的，而是处处有值的，这个值是通过sdf、MLP学习到的。第二，平滑的表面本身并不是已知的，而是通过学习得到的，平滑表面、偏移距离都是在线学习得到的。
 
@@ -128,10 +128,36 @@ $$f(x,y,z) = A * exp\left(-\begin{pmatrix}(x-x_0)&(y-y_0)&(z-z_0)\end{pmatrix}\b
 
 ---
 
-## 网络设计和训练
+## 3.2 网络设计和训练
 
 ---
 
 “Therefore, we adopt a progressive learning scheme, which first trains N ωB , and then gradually increase the impact of N ωD .” (Yifan 等, 2022, p. 5) 这一点很重要，如果有一个基函数，一个平移函数，这两者之间的偏移量是需要一种先后顺序的。应当先有基函数的收敛，再逐步训练平移函数。
 
 ---
+
+## 3.3 可迁移的隐式位移场
+
+> However, empirical studies (Chan et al., 2020) suggest that SIREN does not handle high-dimensional inputs well.
+
+这里说的Chan et al., 2020指的是下面的文章。
+
+> Eric R Chan, Marco Monteiro, Petr Kellnhofer, Jiajun Wu, and Gordon  Wetzstein. pi-gan: Periodic implicit generative adversarial networks for 3d-aware image synthesis. arXiv preprint arXiv:2012.00926, 2020.
+
+说是实验发现，SIREN的网络架构，对于高维的输入并不能够很好的处理。
+
+# 4. 实验结果
+
+## 实验细节
+
+最大的可变化因子被设置为0.05了，数值很小。在自己实现的想法中，应当注意。
+
+# 5. 结论和局限性
+
+论文最后说，自己的两组模型需要预先配准好。
+
+
+
+
+
+说实话，最后的实验结果，都是快速浏览过去的，留下一些印象是，论文中轮流固定基函数、置换函数，并评价他们互相迁移时候的网络性能表现。
