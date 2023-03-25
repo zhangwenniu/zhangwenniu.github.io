@@ -130,3 +130,8 @@ $$f(x,y,z) = A * exp\left(-\begin{pmatrix}(x-x_0)&(y-y_0)&(z-z_0)\end{pmatrix}\b
 
 ## 网络设计和训练
 
+---
+
+“Therefore, we adopt a progressive learning scheme, which first trains N ωB , and then gradually increase the impact of N ωD .” (Yifan 等, 2022, p. 5) 这一点很重要，如果有一个基函数，一个平移函数，这两者之间的偏移量是需要一种先后顺序的。应当先有基函数的收敛，再逐步训练平移函数。
+
+---
