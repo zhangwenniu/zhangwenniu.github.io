@@ -1,0 +1,79 @@
+---
+layout: mypost
+title: 052 吴博剑博士的毕业论文
+categories: [论文阅读, 透明模型, 读完论文]
+---
+# 文章信息
+
+## 标题
+
+基于图像的透明物体重建与渲染（Image-based Modelling and Rendering of Transparent Objects）
+
+## 作者
+
+吴博剑博士，毕业于中国科学院深圳先进技术研究院。
+
+指导教师：黄惠教授，中国科学院深圳先进技术研究院/深圳大学。
+
+毕业的学位类别：工学博士。
+
+学科专业：计算机应用技术-计算机图形学。
+
+论文时间：2019年12月。
+
+作者在读博期间发表的文章如下：
+
+```
+【l】1 Bojian Wu，Jiahui Lyu，Hui Huang．Deep View Synthesis for Transparent
+Objects．Submitted to IEEE Transactions on Visualization and Computer Graphics
+(SCI，CCF A，IF：3.780)
+【2】Bojian Wu，Hui Huang．Survey on 3D Reconstruction of Transparent Objects．
+Journal of Computer-Aided Design＆Computer Graphics．Accepted．(EI，IF：1．550)
+【3】Bojian Wu，Yang Zhou，Yiming Qian，Minglun Gong，and HuiHuang．Full 3D
+Reconstruction ofTransparent Objects．ACM Trans．on Graphics (Proc．of SIGGRAPH
+2018)．37，4，Article 103(SCI，CCF A，IF：6．495)
+【4】Ruizhen Hu，Oliver Van Kaick,Bojian Wu,Hui Huang，Ariel Shamir,and Hat
+Zhang．Learning How Objects Function via Co-Analysis of Interactions．ACM Trans．
+on Graphics(Proc．ofSIGGRAPH 2016)．35，4，Article 47(SCI，CCF A，IF：6．495)
+```
+
+[1]是一篇TVCG，期刊的水平，按照[人工智能以及图形图像处理领域CCFA类期刊汇总与个人评价](https://blog.csdn.net/aliexken/article/details/115002540)的说法就是，大佬觉得水，新手来说是神刊。是计算机图形学与多媒体的顶刊。
+
+[2]没有见到。
+
+[3]是一篇TOG，是计算机图形学与多媒体的顶级期刊。
+
+[4]又是一篇TOG，计算机图形学与多媒体的顶级期刊。
+
+## 发表信息
+
+论文发表时间：2019年12月。
+
+## 引用信息
+
+```
+@mastersthesis{吴博剑 2019 基于图像的透明物体重建与渲染 ,
+author={吴博剑},
+title={ 基于图像的透明物体重建与渲染 },
+school={中国科学院大学},
+year={2019},
+type={博士论文},
+month={},
+}
+
+GB/T 7714-2015
+吴博剑. 基于图像的透明物体重建与渲染[D]. 中国科学院大学,2019.
+```
+
+## 论文链接
+
+[万方数据-学位论文-基于图像的透明物体重建与渲染](https://d.wanfangdata.com.cn/thesis/Y3684580)
+
+## 后人对此文章的评价
+
+我认为，这篇文章的研究工作比较扎实，针对透明物体的重建工作研究较为深入。
+
+# 文章内容
+
+## 摘要
+
