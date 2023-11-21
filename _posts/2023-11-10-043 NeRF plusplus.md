@@ -61,7 +61,7 @@ Bachelor of Engineering - BE Electronic Engineering 3.8
 
 
 @ARTICLE{2020arXiv201007492Z,
-       author = {{Zhang}, Kai and {Riegler}, Gernot and {Snavely}, Noah and {Koltun}, Vladlen},
+       author = {\{Zhang\}, Kai and {Riegler}, Gernot and {Snavely}, Noah and {Koltun}, Vladlen},
         title = "{NeRF++: Analyzing and Improving Neural Radiance Fields}",
       journal = {arXiv e-prints},
      keywords = {Computer Science - Computer Vision and Pattern Recognition},
