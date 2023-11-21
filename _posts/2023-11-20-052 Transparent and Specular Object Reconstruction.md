@@ -80,6 +80,10 @@ year = {2010}
 ## 后人对此文章的评价
 
 
+## 介绍
+
+​3-231121. Transparent and Specular Object Reconstruction. 全文20页，涉及到153篇参考文献，主要囊括2010年以前对反光、折射、雾状物体的重建方法。对折射物体而言，主要方法是设计结构化的激光扫描，或者将透明物体置于相同折射率的荧光溶液中，使用断层扫描的方式重建。折射物体一般需要预设折射率信息，做材质的均匀性假设，非均匀介质的重建更加复杂。文章信息量大，在雾状物体重建部分，除了重建烟雾或者火焰之外，甚至涉及到如何重建作为雾状结构的星云。截止2010年，尚没有通用的解决反光物体、折射透明物体的重建方法。
+
 
 # 文章内容
 
@@ -142,3 +146,73 @@ ACM CCS(Association for Computing Machinery, Computing Classification System， 
 - The phase-shifting technique [CLFS07] discussed previously relies on polarization-based removal of surface highlights. 基于偏振移除表面的高光。
 - In [CSL08], Chen et al. improve their separation strat-egy by modulating the low-frequency pattern used for phase shifting with a 2D high frequency pattern that allows for the separation of local direct illumination effects and light contributions due to global light transport [NKGR06]. 注意使用高频分量和低频分量，在设计球谐函数的时候，是可以将这些因素考虑进去的。
 
+### 4. Refractive Surface Acquisition
+
+- The problem of acquiring complete surface descriptions of refractive objects with possibly inhomogeneous material properties is very complex. In its most general form inclusions like air bubbles, cracks or even opaque or specular materials would have to be considered. The image formation for such objects is non-trivial and to date no reconstruction approaches exist for the general problem. Researchers have so far restricted themselves to sub-problems like single surface reconstruction where a well defined surface represents the transition from one medium to the other. Often the refractive index of the object needs to be known. Almost all methods assume that the refractive material is homogeneous. 获取非均匀材质的折射物体的完整表面是非常复杂的。如果考虑最宽泛的物体的话，包括气泡、裂缝、甚至是不透明的或者镜面材质，这些都要考量进去。这些物体的成像是不容易的，现有最新的重建方法并不能够解决这类通用问题。研究者目前都致力于解决一些受限条件下的子问题，比如说重建不同介质之间的交界单表面。一般需要预知折射率的数值。几乎所有的方法都假定折射的材质是均匀齐次的。
+- The acquisition of refractive surfaces is more complex than the corresponding specular surface case because the ray path depends on the refractive index in addition to the dependence on the surface normal. 从畸变中恢复物体形状的方法，对透明物体更加复杂，相比于反光物体而言的话。因为需要考虑到折射率、表面的法向量。
+- In computer vision, the problem of refractive surface reconstruction was introduced by Murase [Mur90, Mur92]. 竟然还有两个能够点的上名字的领域最早期的工作者。
+- A sequence of distorted images due to water movement is recorded by the camera and analysed using optical flow [HS81, LK81]. 使用光流法计算一系列拍摄的图像，图像拍摄水面及水面下方放置的模板图像，分析畸变。
+- undistorted in the sense that refraction is taking place at a planar interface only. 有些时候会考虑折射只发生在介质的交接表面处，而不考虑在非均匀介质中的折射情况。
+- The gradient vectors are then integrated to obtain the final surface up to scale. 梯度向量是如何积分的？
+- The authors lift several restrictions of Murase’s work by employing a stereo setup and using a known background pattern. With this extended setup it is shown that an unknown refractive index can be recovered in conjunction with accurate per-pixel depth and normal estimates. 通过增加已知的背景板信息，能够恢复出折射率和准确的逐像素深度和法向量的估值。
+- The tracking of refracted scene features might be complicated by the fact that refraction results in sometimes severe magnification or minification of the background pattern. Additionally, if the object is not completely transparent, absorption might change the intensity of the observed features, complicating feature tracking. A solution to this problem, an extension to standard optical flow formulations, has been presented by Agarwal et al. [AMKB04]. 折射场景特征会让问题更加复杂，原因是，折射会导致在一些背景模式的扩大或衰减。另外，如果物体并不是完全透明的话，会光线的吸收可能会让观察到的强度衰减。
+- Kutulakos and Steger [KS05, KS07] investigate several applications of direct ray measurements. The authors provide a thorough theoretical analysis of reconstruction possibilities based on pixel-independent ray measurements. They categorize reconstruction problems involving refractive and specular surfaces as pairs <N,M,K>,whereN is the number of view-points that are necessary for reconstruction, M is the number of specular or refractive surface points on a piecewise linear light path and K is the number of calibrated reference points on a ray exitant from the object. Kutulakos and Steger [KS05, KS07] 研究了许多射线测量的应用。他们对重建的可能性进行分析，有基于与像素无关的射线度量。奖重建问题分类，包括折射和镜面的承兑问题。N是视点的数目，M是静光路上的折射、反射的分段数量，K是射线上离开物体的标定的参考点。
+- [MK05], Section 4.1.1, have already been discussed. The authors investigate the tractability of general <N,M,K>-reconstruction algorithms and show that a pixelwise independent reconstruction is not possible for more than two specular or refractive surface intersections, regardless of the number of input views and the number of reference points on each exitant ray. 这里有一项研究表明，如果有超过两次反射或者折射，无论视角有多少，参考点有多少，都无法重建。
+- It is also shown that more than two known points on an exitant ray do not contribute information to the reconstruction problem. 这里所说的exitant ray上的点是什么，也尚不清楚。
+- An example of the refractive index distribution above a gas burner is shown in Figure 10. 还有做气体折射率分布的。
+- separate the direct reflection component from the indirect lighting effects by exploiting the physical properties of light transport, that is, light travels linearly before hitting the object and there is a radial fall-off of the incident irradiance. 能够通过分析，将直接光和间接光分离开。
+- Based on these constraints it is possible to reconstruct very detailed depth and normal maps of refractive objects with complex, inhomogeneous interior, see Figure 11. 三维重建，重建出深度和法向量信息，其实就是早期重建任务的重点了。
+- The surface is initialized with the visual hull. 经常见到这种几何初始化的方法。
+- The measurement process consists of acquiring four differently polarized images by rotating the linear polarizer in front of the camera. 旋转相机前面的偏振子。
+- Under certain circumstances light is not refracted by refractive objects. This is the case if the wavelength of the illumination is sufficiently high, that is, in the case of X-ray illumination, and when the refractive index of the medium surrounding the refractive object is the same as the object’s refractive index. X-ray scanning of refractive objects is straight forward [KTM∗02]. 在一些特定情况下，光并不会被折射物体所折射。当光的波长足够高的时候，也就是说在X射线的照射情况下，当介质和物体的折射率是相同的时候，光不会被折射。折射物体的X射线扫描是直线传播的。
+- Refractive index matching is achieved by mixing water with, usually toxic, chemicals. 如果将玻璃放置在相同折射率的环境中，这一般是放置在有毒的化学液体中。
+- In [TBH06] potassium thiocyanate is used, solutions of which in water can achieve refractive indices of n ≈ 1.55. 通常使用钾硫氰酸盐，它的水溶液能够让折射率达到1.55。
+- If the refractive object is completely transparent, it ideally disappears in a refractive index matched immersing medium. Therefore, it is necessary to dye the surrounding medium in this case. However, if the refractive object is itself absorptive dyeing the surrounding medium can be omitted. The authors acquire 360 images spaced evenly around the object and solve a standard tomographic reconstruction problem. 如果折射的物体是完全透明的，他会消失在折射率匹配的介质中。因此，需要将周围的介质染色。但是，如果折射的物体本身是吸收光的，那么就可以避免将周围的介质染色。
+- A related technique that also tries to avoid the refractive properties of transparent objects is investigated by Eren et al. [EAM∗09]: the infrared spectrum is not refracted by glass objects, therefore using an IR laser instead of visible light allows for laser range scanning of glass objects. The method is termed ‘scanning from heating’ because the glass is heated up by the incident IR radiation which is then recorded using an IR-sensitive camera. 另一种试图规避折射率的方法，是采用红外光扫描。
+- The resolution of this technique is, however, restricted since the wavelength of the incident illumination is much larger than for visible light and thus cannot be focussed as well. 使用红外光扫描的方法精度有限，因为红外光的波长比较长，导致无法准确的聚焦在某个地方。
+- In addition, glass dissipates the heat quite well and blurry impulse responses result. 使用红外党的方法，玻璃会让热量消散，会让激光脉冲的结果模糊。
+
+### 5. Volumetric Phenomena
+
+- Unlike in space carving approaches [KS00] the scene is assumed to be either completely or partially transparent. 体现象中，假定场景是完全透明或者部分透明。
+- Furthermore, all methods presented in this section assume that light rays pass straight through the scene and that refractive effects can be neglected. 体现象中，假设光线沿直线传播，不发生折射。
+
+
+#### 5.1. Tomographic approaches
+
+- 1The light reaching a sensor element is usually a combination of emitted light, and light that is scattered into the direction of the observer. On its way through the volume it is generally subject to attenuation due to out-scatter and extinction. 传播到传感器原件的光，通常是出射光和散射光的组合。通过体的光线通常都遵守衰减率，因为会向外散射或者消失。
+- Integral measurements are usually called projections and the task of recovering an n-dimensional function from its (n –1)dimensional projections is known as tomography. 讲积分测量的任务，以及层析成像的技术。
+
+##### 5.1.1. Fire and smoke
+
+- A collection of Gaussian blobs with varying standard deviation is used as a reconstruction basis for the tomographic problem. The blobs are initially evenly distributed. Their positions and standard deviations are then optimized in an iterative manner. 采用高斯球滴的方法，使用变化的标准差作为重建的基准。使用迭代的方法优化。现在其实很少见到说迭代了，很多都是在说训练。
+- Reconstruction resolution is 1283 (left panel) and an octree-representation with effective resolution of 2563 (right panel). 八叉树的表示方式很早就有人在用了。
+
+
+##### 5.1.3. Biological specimen
+
+#### 5.2. Transparency in multi-view stero
+
+- In this subsection we discuss volumetric reconstruction approaches that are deviating from a classical tomographic reconstruction formulation. Most algorithms can be considered as specialized tomographic approaches though. The distinction is thus not strict. Future research could establish links between the methods presented here and classical tomography approaches, potentially leading to more efficient or more accurate reconstruction algorithms in both domains. 当时主流的技术应该还是层析扫描技术。
+- The authors formulate the image formation in such scenes by using a formulation similar to environment matting approaches [ZWCS99]. Environment matting技术看起来是无法绕过去的一项传统技术。
+- However, smoke as a participating medium exhibits strong global illumination effects such as single and multiple scattering. 烟雾展现出比较强的光照效应，比如一次或者多次散射。
+
+##### 5.3.1 Laser sheet scanning
+
+- In addition to directly measuring volumetric smoke density distributions. 有一种思路，是直接度量烟雾密度分布的。
+- Similar to Hawkins et al. [HED05], the pixel values are interpreted as a measure of smoke density. 烟雾的像素值可以解释为烟雾的密度。
+- a radial basis function (RBF) style interpolation is found to yield adequate results. 使用辐射基函数作为表示的方法。
+- However, because the line of sight stays constant, and the authors assume the smoke to move sufficiently slow for a constant smoke volume assumption, the volume densities are expanded in the dual of the projected basis. 假设烟雾的移动是足够缓慢的，可以假定体雾为常量。
+
+### 6. Conclusions
+
+- Currently there exist approaches that can deal relatively well with different subclasses of objects. However, the algorithms are still very specific and not generally applicable. Furthermore, many techniques require considerable acquisition effort and careful calibration. 处理困难任务的时候，需要使用特殊设计的算法，以及标定方法。
+- Except for X-ray tomography, there are as of yet no commercially available scanners for refractive, specular, subsurface scattering or volumetric objects. 除了X射线层析扫描之外，还没有可以处理反光、透明物体的商用技术。
+- Glass objects, for example, are seldom solid, at least for objects that are interesting from a rendering perspective. 玻璃物体很少是实心的。
+- Especially in the case of refractive objects, it is usually not sufficient to recover the first surface of an object. 重建透明物体的外表面仍然比较困难。
+- While it would be desirable from a computer graphics point of view to acquire such objects, at the moment it is not clear how to achieve this goal. 在当时，仍然很难找到方法来解决透明物体的重建工作。
+- Rendering techniques can handle much more complex objects than can currently be acquired. Apart from the problem of geometry acquisition, surface reflectance properties have to be estimated simultaneously to achieve high quality renderings. 渲染工作比获取物体能做的事情更多。除了获取物体的几何信息，也需要获取物体的反射特性，以得到更好的渲染效果。
+- There exist approaches to capture the surface properties of objects once the geometry is known [LKG∗03, GLL∗04], but the simultaneous acquisition is still challenging even for objects that do not give rise to major global illumination effects [TAL∗07]. 有工作可以在已知几何信息的情况下重建物体的反射信息，但是无法同时重建反射信息和几何信息。
+- Even though they arrive at a theoretical result that shows that for light paths intersecting more then two surfaces of the reflective/refractive type a reconstruction of the surface shape is impossible in principle [KS07], this result only holds for per-pixel independent reconstructions. 即时有一些分析认为，重建多次折射的物体是不可能的，但是这些分析是建立在配个像素独立重建的假设上进行的。
+- Light field cameras, for example, allow for the capture of a high angular resolution while simultaneously spacing view points very closely. This qualitatively new amount of data would be suitable to analyse difficult objects exhibiting global light transport effects as discussed in this report. 亮度场相机，允许获取光脚分辨率，同时保证空间视点比较近。
+- Another promising example, multispectral imaging, could potentially aid in detecting surfaces that are difficult to acquire otherwise, as demonstrated by the infrared range scanning technique of Eren et al. [EAM∗09]. 使用多光谱图像可能有助于获取物体的几何性质。
