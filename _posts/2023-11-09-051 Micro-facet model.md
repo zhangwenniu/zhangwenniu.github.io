@@ -1,7 +1,7 @@
 ---
 layout: mypost
-title: 051 A Reflectance Model for Computer Graphics
-categories: [论文阅读, 反射光模型A Reflectance Model for Computer Graphics, 读完论文]
+title: 043 ANALYZING AND IMPROVINGNEURAL RADIANCE FIELDS
+categories: [论文阅读, NeRF, 读完论文]
 ---
 # 文章信息
 
