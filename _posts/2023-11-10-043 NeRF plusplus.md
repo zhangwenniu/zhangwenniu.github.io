@@ -41,7 +41,7 @@ Bachelor of Engineering - BE Electronic Engineering 3.8
 
 ## 引用信息
 
-```
+```bash
 @article{DBLP:journals/corr/abs-2010-07492,
   author       = {Kai Zhang and
                   Gernot Riegler and
@@ -100,4 +100,4 @@ archivePrefix = {arXiv},
 
 ## 摘要
 
-神经辐射场在新视角合成方面取得令人惊异的结果，一系列拍摄的场景包括360°拍摄的有界场景、前向拍摄有界场景或者无界场景。NeRF让MLP调整学习表示与视角方向无关的不透明度以及依赖视角的颜色量，输入是一系列图像的集合，在新视角上使用体渲染技术采样。在这篇技术报告中，我们首先讨论辐射场和其中的潜在歧义性，也就是所谓的形状-辐射的歧义性（shape-radiance ambiguity），我们一并分析了NeRF在避免这样的歧义性问题中的成功之处。其次，我们解决了一个参数化的问题，包括将NeRF应用到一个360°拍摄物体的场景中，场景是一个大尺度、无界的场景。我们的方法提升了在这个具有挑战性场景中的成像可信性。代码可以在https://github.com/Kai-46/nerfplusplus中查阅。
+神经辐射场在新视角合成方面取得令人惊异的结果，一系列拍摄的场景包括360°拍摄的有界场景、前向拍摄有界场景或者无界场景。NeRF让MLP调整学习表示与视角方向无关的不透明度以及依赖视角的颜色量，输入是一系列图像的集合，在新视角上使用体渲染技术采样。在这篇技术报告中，我们首先讨论辐射场和其中的潜在歧义性，也就是所谓的形状-辐射的歧义性（shape-radiance ambiguity），我们一并分析了NeRF在避免这样的歧义性问题中的成功之处。其次，我们解决了一个参数化的问题，包括将NeRF应用到一个360°拍摄物体的场景中，场景是一个大尺度、无界的场景。我们的方法提升了在这个具有挑战性场景中的成像可信性。代码可以在[https://github.com/Kai-46/nerfplusplus](https://github.com/Kai-46/nerfplusplus)中查阅。
