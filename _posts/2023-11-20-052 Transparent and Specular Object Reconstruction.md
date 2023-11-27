@@ -221,3 +221,44 @@ ACM CCS(Association for Computing Machinery, Computing Classification System， 
 - Even though they arrive at a theoretical result that shows that for light paths intersecting more then two surfaces of the reflective/refractive type a reconstruction of the surface shape is impossible in principle [KS07], this result only holds for per-pixel independent reconstructions. 即时有一些分析认为，重建多次折射的物体是不可能的，但是这些分析是建立在配个像素独立重建的假设上进行的。
 - Light field cameras, for example, allow for the capture of a high angular resolution while simultaneously spacing view points very closely. This qualitatively new amount of data would be suitable to analyse difficult objects exhibiting global light transport effects as discussed in this report. 亮度场相机，允许获取光脚分辨率，同时保证空间视点比较近。
 - Another promising example, multispectral imaging, could potentially aid in detecting surfaces that are difficult to acquire otherwise, as demonstrated by the infrared range scanning technique of Eren et al. [EAM∗09]. 使用多光谱图像可能有助于获取物体的几何性质。
+
+
+
+文章对各个章节的命名如下：
+
+- 1. Introduction
+  - 1.1. Overview of traditional diffuse object acquision and its extensions
+    - 1.1.1. Active structured light scanning
+    - 1.1.2. Passive range sensing
+    - 1.1.3. Photometric methods
+  - 1.2. Definition of scope
+- 2. Specular Surface Acquisition
+  - 2.1. Shape from distortion
+    - 2.1.1. Calibrated patterns
+    - 2.1.2. Theoretical analysis
+    - 2.1.3. Shape from specular flow
+  - 2.2. Shape from specularity
+    - 2.2.1. Direct measurements of highlights
+    - 2.2.2. Surface detail from specularities
+  - 2.3. Direct ray measurements
+- 3. Translucent Objects
+- 4. Refractive Surface Acquisition
+  - 4.1. Shape from distortion
+    - 4.1.1. Water surfaces 
+    - 4.1.2. Glass objects
+  - 4.2. Direct ray measurements
+  - 4.3. Reflectance-based reconstruction
+  - 4.4. Inverse ray-tracing
+  - 4.5. Reduction to tomography
+  - 4.6. Direct sampling
+- 5. Volumetric Phenomena
+  - 5.1. Tomographic approaches
+    - 5.1.1. Fire and smoke
+    - 5.1.2. Astronomical objects
+    - 5.1.3. Biological specimen
+  - 5.2. Transparency in multi-view stereo
+  - 5.3. Direct measurement interpolation
+    - 5.3.1. Laser sheet scanning
+    - 5.3.2. Laser line sacnning
+    - 5.3.3. Arbitrary basis scanning
+- 6. Conclusions
