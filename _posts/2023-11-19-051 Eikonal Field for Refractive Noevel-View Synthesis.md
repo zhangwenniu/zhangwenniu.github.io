@@ -78,6 +78,26 @@ Github的链接：[Github Link](https://github.com/m-bemana/eikonalfield)
 > NeTO的评价：
 > More recently, Bemana et al. [2] leverage NeRF for novel view synthesis of transparent objects and show good performance to render novel views. However, since it targets novel view synthesis rather than reconstruction, it’s difficult to extract reliable geometry from the method. Different from the above methods, we leverage volume rendering to simulate the refractiontracing path for geometry optimization.
 
+
+> OmnimatteRF: Robust Omnimatte with 3D Background Modeling
+> Since then, it has been extended along multiple axes:better appearance modeling (e.g., reflection and refraction) [31, 5, 2, 1], faster optimization [8, 27, 23] and modeling dynamic scenes [38, 17, 10, 19]. 
+> 5是本文
+
+> HyperReel: High-Fidelity 6-DoF Video with Ray-Conditioned Sampling
+> Existing works like Eikonal fields [8] can be considered a special case of this sample warping approach; they use physically derived Eikonal constraints to learn ray-conditional warp fields for refractive objects. Although our sample network is not guaranteed to be physically interpretable, it can handle both reflections and refractions. Further, it is far more efficient at inference time and does not require evaluating costly multi-step ODE solvers during rendering. See Figure 1 and our supplemental materials for additional results and comparisons on challenging view-dependent scenes.
+
+> NeRFrac: Neural Radiance Fields through Refractive Surface
+> Eikonal Fields (EiF) [6] optimizes for a field of 3D-varying IOR and trace light that bends toward the spatial gradients according to the laws of eikonal light transport. The refraction scene it uses, such as a crystal ball, is quite different from our setting, resulting in a bias when using EiF on our data. We show a comparison with this method in the supplementary material.
+>  Despite these extensive advancements of the basic NeRF, refractive scene representation has hardly been explored. Several works[3, 6, 13] do apply a NeRF to refractive scenes but do not capture the physical behavior of light which is essential to accurately represent the scene as we demonstrate.
+> [6]. 6是本文
+
+
+
+> Multi-Space Neural Radiance Fields
+>  Bemana1 et al. [3] capture a dataset consisting of refractive objects, which is composed of four scenes with cameras moving in a large range.
+
+
+
 # 文章内容
 
 ## 摘要
