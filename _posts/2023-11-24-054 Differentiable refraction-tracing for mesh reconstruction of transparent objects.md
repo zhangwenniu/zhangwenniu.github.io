@@ -93,35 +93,19 @@ Additional Key Words and Phrases: 3D reconstruction, transparent objects, differ
 
 ## 介绍
 
-6-231124. Differentiable Refraction-Tracing for Mesh Reconstruction of Transparent Objects.  发表于2020年的SIGGRAPH，后续被ACM TOG录用。文章解决实心透明物体的重建问题。实心透明物体放置在旋转台上，使用预知模式的黑白条带屏幕作为背景，用固定位置的相机拍摄图片。通过环境抠图（Environment matting）方法获得掩膜以及透明物体对背景的畸变效果，利用视舱（Visual Hull）方法得到初始化的网格（mesh）。文章通过渐进式的方法，逐步增加网格的密度。损失函数分为三部分，基于透明物体对光线折射所计算的射线位置与背景板位置的一致性约束，基于预测三维网格在对应视角上投影的剪影与真实剪影的一致性约束，对物体表面相邻顶点间法向量的一致性约束。全部过程是可微的，仅在假设的两次折射光线上对网格顶点优化，假设的玻璃折射率为1.5。
+6-231124. Differentiable Refraction-Tracing for Mesh Reconstruction of Transparent Objects.  发表于2020年的SIGGRAPH，后续被ACM TOG录用。
 
-​8-231126. Differentiable Refraction-Tracing for Mesh Reconstruction of Transparent Objects. 文章使用视舱方法从拍摄图像中提取初始三角网格模型。消融实验表明，前景剪影的约束对最终收敛效果影响最大：面片的投影边界与真实边界做比较，计算梯度时，使边界的负梯度方向指向该边所在中点的物体内外部的相反方向，即内部点梯度指向外部，外部点梯度指向内部，构造时中点梯度的方向指向边界外部，使用内外部符号函数控制反传梯度的方向。在获取数据方面，实心透明物体的真实值是通过喷漆及扫描相机得到的。文章的四个问题，第一是拍摄时候相机拍摄方向水平，导致透明物体水平方向折痕缺少重建视角；二是假设两次折射，限制空腔或中空透明物的重建；三是物体的均匀性假设，要求预知折射率；四是拍摄环境在暗室内，不考虑反光对物体的影响。
+文章解决实心透明物体的重建问题。实心透明物体放置在旋转台上，使用预知模式的黑白条带屏幕作为背景，用固定位置的相机拍摄图片。
 
-## 本文的组织结构
+通过环境抠图（Environment matting）方法获得掩膜以及透明物体对背景的畸变效果，利用视舱（Visual Hull）方法得到初始化的网格（mesh）。文章通过渐进式的方法，逐步增加网格的密度。
 
-- 1 Introduction
-- 2 Related work
-  - 2.1 Environment matting
-  - 2.2 Tranparent surface reconstruction
-  - 2.3 Light path triangulation
-  - 2.4 Differentiable rendering
-- 3 Overview
-- 4 Method
-  - 4.1 Refraction loss
-  - 4.2 Sihouette loss
-  - 4.3 Smoothness loss
-  - 4.4 Coarse-to-fine reconstruction
-- 5 Results and Discussion
-  - 5.1 Acquision
-  - 5.2 Implementation details
-  - 5.3 Experiments with synthetic objects
-  - 5.4 Experiments with real objects
-  - 5.5 Comparisons with state-of-the-art
-  - 5.6 Ablation study
-  - 5.7 Discussion
-- 6 Conclusions
-- Acknowledgements
-- References
+损失函数分为三部分，基于透明物体对光线折射所计算的射线位置与背景板位置的一致性约束，基于预测三维网格在对应视角上投影的剪影与真实剪影的一致性约束，对物体表面相邻顶点间法向量的一致性约束。全部过程是可微的，仅在假设的两次折射光线上对网格顶点优化，假设的玻璃折射率为1.5。
+
+​8-231126. Differentiable Refraction-Tracing for Mesh Reconstruction of Transparent Objects. 文章使用视舱方法从拍摄图像中提取初始三角网格模型。
+
+消融实验表明，前景剪影的约束对最终收敛效果影响最大：面片的投影边界与真实边界做比较，计算梯度时，使边界的负梯度方向指向该边所在中点的物体内外部的相反方向，即内部点梯度指向外部，外部点梯度指向内部，构造时中点梯度的方向指向边界外部，使用内外部符号函数控制反传梯度的方向。
+
+在获取数据方面，实心透明物体的真实值是通过喷漆及扫描相机得到的。文章的四个问题，第一是拍摄时候相机拍摄方向水平，导致透明物体水平方向折痕缺少重建视角；二是假设两次折射，限制空腔或中空透明物的重建；三是物体的均匀性假设，要求预知折射率；四是拍摄环境在暗室内，不考虑反光对物体的影响。
 
 # Key Points
 
@@ -176,10 +160,6 @@ Additional Key Words and Phrases: 3D reconstruction, transparent objects, differ
 - To eliminate the ambiguity, Qian et al. [2017] propose a position-normal consistency based optimization framework to recover front and back surface depth maps. 优化前表面和后表面的深度图，用于消除位置和法向量之间的歧义性。
 
 
-
-
-
-
 - Differently from these methods, we do not employ an irradiance-based loss function that measures the discrepancy between the pixel values of the rendered image and the ground truth.
 - Rather, our refraction loss is based directly on ray-pixel correspondences, which reflect the geometry of the underlying light transport.
 - The geometry of light paths is directly determined by the shape geometry, which is what we seek to recover, compared to the final RGB pixel colors, which are influenced by additional factors, such as the BRDF.
@@ -193,18 +173,3 @@ Additional Key Words and Phrases: 3D reconstruction, transparent objects, differ
 - a Gray-coded background pattern is displayed on the monitor for simultaneously extracting silhouette and estimating ray-pixel correspondences using environment matting. 背景板放在后面，用于同步的提取剪影，并估计射线与像素的对应关系，使用环境抠图的方法。
 - The Gray-coded background is produced by displaying a sequence of 11 images with vertical stripes and 11 images with horizontal stripes (see Fig. 11). Note that, in order to avoid the influence of ambient light, the entire acquisition process is conducted in a dark room, and the background monitor is used as the only light source. 射线编码的背景，使用11张图像（竖条纹）和11张图像（横条纹）。那这样的话，还是72张图像，不就变成72*11=792张图像了吗？
 - Note that, in order to avoid the influence of ambient light, the entire acquisition process is conducted in a dark room, and the background monitor is used as the only light source. 为了避免环境光的影响，整体的拍摄过程都在一个比较暗的房间中进行，背景的监视器用作唯一的光源。
-
-
-## 5.2 Implementation details
-
-## 5.3 Experiments with synthetic objects
-
-## 5.4 Experiments with real objects
-
-## 5.5 Comparisons with state-of-the-art
-
-## 5.6 Ablation study
-
-## 5.7 Discussion
-
-# 6 Conclusions
