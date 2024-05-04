@@ -74,52 +74,6 @@ Jacob Munkberg 1 Jon Hasselgren 1 Tianchang Shen 1,2,3 Jun Gao 1,2,3 Wenzheng Ch
 
 ## 介绍
 
+英伟达做的工作。
 
-
-## 本文的组织结构
-
-- Abstract
-- 1. Introduction
-- 2. Related Work
-  - 2.1. Multi-view 3D Reconstruction
-  - 2.2. BRDF and Lighting Estimation
-- 3. Our Approach
-  - 3.1. Learning Topology
-  - 3.2. Shading Model
-  - 3.3. Image Based Lighting
-- 4. Experiments
-  - 4.1. Scene Editing and Simulation
-  - 4.2. View Interpolation
-    - Synthetic datasets
-    - Real-world datasets
-  - 4.3. Comparing Spherical Gaussians and Split Sum
-- 5. Limitations and Conclusions
-- References
-- 6. Supplemental Materials
-- 7. Novel applications
-  - 7.1. Level-of-detail From Images
-  - 7.2. Appearance-Aware NeRF 3D Model Extractor
-  - 7.3. 3D Model Extraction with Known Lighting
-- 8. Results
-  - 8.1. Scene Editing and Simulation
-  - 8.2. View interpolation
-  - 8.3. Geometry
-  - 8.4. Quality of Segmentation Masks
-  - 8.5. Multi-View Stereo Datasets
-- 9. Implementation
-  - 9.1. Optimization
-  - 9.2. Losses and Regularizers
-    - Image Loss
-    - Light Regularizer
-    - Material Regularizer
-    - Laplacian Regularizer
-    - SDF Regularizer
-  - 9.3. Split Sum Implementation Details
-- 10. Scene Credits
-- 
-
-
-# Key Points
-
-# Abstract 
-
+基于BRDF、符号距离函数做了设计和优化，同时优化面片表面的几何结构以及光度场的估计情况。
