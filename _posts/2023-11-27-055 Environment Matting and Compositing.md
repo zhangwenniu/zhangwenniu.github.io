@@ -80,22 +80,11 @@ numpages = {10}
 
 ```
 
-
-## 论文链接
-
-
-
-
-## 后人对此文章的评价
-
-
 # 文章内容
 
 ## 摘要
 
 > This paper introduces a new process, environment matting,which captures not just a foreground object and its traditional opacity matte from a real-world scene, but also a description of how that object refracts and reflects light, which we call an environment matte. The foreground object can then be placed in a new environment, using environment compositing, where it will refract and reflect light from that scene. Objects captured in this way exhibit not only specular but glossy and translucent effects, as well as selective attenuation and scattering of light according to wavelength. Moreover, the environment compositing process, which can be performed largely with texture mapping operations, is fast enough to run at interactive speeds on a desktop PC. We compare our results to photos of the same objects in real scenes. Applications of this work include the relighting of objects for virtual and augmented reality, more realistic 3D clip art, and interactive lighting design.
-
-> 
 
 ## 介绍
 
@@ -103,30 +92,7 @@ numpages = {10}
 
 ​10-231128. Environment Matting and Compositing. 本文提出透明前景物体的环境抠图方法，提供出透明前景物体如何与环境光作用，并用于将透明物体放置在新环境下的图像合成。图像拍摄由背景及左右两侧共三面的绿色、洋红色条纹格雷码作为环境光拍摄得到，该色彩选定原因是在RGB空间的正交性及拥有相近的亮度。文章假设成像的像素由前景颜色、按比例透光后的背景颜色、从周围环境中反射或折射所得到的颜色，这三部分加和组成。文中主要解决第三部分，即从周围环境中反射或折射得到的颜色的近似方式，该数值由反射比率函数以及环境纹理图的映射求加权乘积和得到。文章同时展示该方法在带颜色香槟、反光平面、透明棱台、不同深度下的放大镜新视角合成的效果。
 
-## 本文的组织结构
-
-- Abstractt
-- 1 Introduction
-  - 1.1 Related work
-  - 1.2 Overview
-- 2 The environment matte
-- 3 Environment matting
-  - 3.1 A coarse estimate of coverage
-  - 3.2 The foreground color and reflectance coefficients
-  - 3.3 The area extents and a refined estimate of coverage
-  - 3.4 Sidedrops
-- 4 Environment compositing
-- 5 Results
-- 6 Depth correction
-- 7 Conclusion
-- 8 Acknowledgements
-- 9 References
-
-# Key Points
-
-# Abstract 
-
-# 1 Introduction
+# 文章的关键内容
 
 ## 1.1 Related work
 
@@ -139,35 +105,11 @@ numpages = {10}
 - By projecting a hierarchy of progressively finer stripe patterns, the required number of images can be reduced to O(log n) [21]. 使用结构化的渐进带状条纹，需要的图片数目可以缩减。
 - Our environment matting approach is based on the hierarchical stripe methods. 本文的环境抠图方法，基于结构带方法。
 
-## 1.2 Overview
-
 # 2 The environment matte
 
 - We begin with the traditional compositing equation and then augment it with a new structure, the environment matte, which captures how light in the environment is refracted and reflected by a foreground element. 从一个从传统的组合方程开始，增强该方程以一个新的结构，环境抠图，这获取环境中的光线是如何被前景元素所折射和反射的。
 - To start, we will assume that the only light reaching the foreground object is light coming from distant parts of the scene. This is essentially the “environment mapping assumption.”  我们假设只有来自远处的光线会到达前景物体。这是基本上的“环境映射假设”。
-- 
-
-
-# 3 Environment matting
-
-## 3.1 A coarse estimate of coverage
-
-## 3.2 The foreground color and reflectance coefficients
 
 ## 3.3 The area extents and a refined estimate of coverage
 
 - This optimization problem still has four degrees of freedom for the unknown rectangle A1: left, right, top, and bottom (l, r, t, b). We can reduce the dimensionality further by using horizontal and vertical stripes for backgrounds. For horizontally striped backgrounds, the area determination is independent of l and r; similarly, for vertically striped backgrounds, the area determination is independent of t and b. 
-
-## 3.4 Sidedrops
-
-# 4 Environment compositing
-
-# 5 Results
-
-# 6 Depth correction
-
-# 7 Conclusion
-
-# 8 Acknowledgements
-
-# 9 References
