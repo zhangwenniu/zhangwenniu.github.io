@@ -13,9 +13,6 @@ SeaThru-NeRF: Neural Radiance Fields in Scattering Media
 
 SeaThru-NeRF: 在散射介质中的神经辐射场
 
-## 作者
-
-
 
 ## 发表信息
 
@@ -67,52 +64,9 @@ Jacob Munkberg 1 Jon Hasselgren 1 Tianchang Shen 1,2,3 Jun Gao 1,2,3 Wenzheng Ch
 
 ## 介绍
 
+关于散射场景，这篇文章做的还不错。观察论文主页给出的实验视频，看到依然存在许多伪影噪声。
 
+在水中散射条件下的新视角合成，如何确定物体光路的改变是一个基本问题。
 
-## 本文的组织结构
-
-- Abstract
-- 1. Introduction
-- 2. Related Work
-  - 2.1. Multi-view 3D Reconstruction
-  - 2.2. BRDF and Lighting Estimation
-- 3. Our Approach
-  - 3.1. Learning Topology
-  - 3.2. Shading Model
-  - 3.3. Image Based Lighting
-- 4. Experiments
-  - 4.1. Scene Editing and Simulation
-  - 4.2. View Interpolation
-    - Synthetic datasets
-    - Real-world datasets
-  - 4.3. Comparing Spherical Gaussians and Split Sum
-- 5. Limitations and Conclusions
-- References
-- 6. Supplemental Materials
-- 7. Novel applications
-  - 7.1. Level-of-detail From Images
-  - 7.2. Appearance-Aware NeRF 3D Model Extractor
-  - 7.3. 3D Model Extraction with Known Lighting
-- 8. Results
-  - 8.1. Scene Editing and Simulation
-  - 8.2. View interpolation
-  - 8.3. Geometry
-  - 8.4. Quality of Segmentation Masks
-  - 8.5. Multi-View Stereo Datasets
-- 9. Implementation
-  - 9.1. Optimization
-  - 9.2. Losses and Regularizers
-    - Image Loss
-    - Light Regularizer
-    - Material Regularizer
-    - Laplacian Regularizer
-    - SDF Regularizer
-  - 9.3. Split Sum Implementation Details
-- 10. Scene Credits
-- 
-
-
-# Key Points
-
-# Abstract 
+另外，在海水中，由于水体流动问题，会带来水体的密度介质不均匀问题，这样就导致光路在传播的过程中将不沿着直线方向传播。按照菲涅尔定理，光线在非均匀介质中会出现弧度的传播方式，具体光路的方向与实时密度有关。
 
