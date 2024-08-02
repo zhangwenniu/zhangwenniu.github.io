@@ -1,0 +1,122 @@
+---
+layout: mypost
+title: 3D Gaussian Splatting使用笔记
+categories: [3DGS]
+---
+
+主体流程参见Github [Gaussian Splatting](https://github.com/graphdeco-inria/gaussian-splatting?tab=readme-ov-file)
+
+1. 安装3D Gaussian Splatting的依赖包。
+
+```
+git clone git@github.com:graphdeco-inria/gaussian-splatting.git --recursive
+cd gaussian-splatting
+conda env create --file environment.yml
+conda activate gaussian_splatting
+```
+
+2. 下载数据集，并传至服务器。
+
+这里示例tant_db数据集[https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/datasets/input/tandt_db.zip](https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/datasets/input/tandt_db.zip)
+
+创建data文件夹，并解压到gaussian-splatting/data目录下
+
+```
+python train.py -s ./data/tandt/train  
+```
+
+3. 得到./output目录下的输出结果。
+
+包含input.ply, cfg_args, cameras.json, iteration_30000/point_cloud.ply, iteration_7000/point_cloud.ply
+
+打开point_cloud.ply文件，发现头部如下：
+
+```
+ply
+format binary_little_endian 1.0
+element vertex 1069396
+property float x
+property float y
+property float z
+property float nx
+property float ny
+property float nz
+property float f_dc_0
+property float f_dc_1
+property float f_dc_2
+property float f_rest_0
+property float f_rest_1
+property float f_rest_2
+property float f_rest_3
+property float f_rest_4
+property float f_rest_5
+property float f_rest_6
+property float f_rest_7
+property float f_rest_8
+property float f_rest_9
+property float f_rest_10
+property float f_rest_11
+property float f_rest_12
+property float f_rest_13
+property float f_rest_14
+property float f_rest_15
+property float f_rest_16
+property float f_rest_17
+property float f_rest_18
+property float f_rest_19
+property float f_rest_20
+property float f_rest_21
+property float f_rest_22
+property float f_rest_23
+property float f_rest_24
+property float f_rest_25
+property float f_rest_26
+property float f_rest_27
+property float f_rest_28
+property float f_rest_29
+property float f_rest_30
+property float f_rest_31
+property float f_rest_32
+property float f_rest_33
+property float f_rest_34
+property float f_rest_35
+property float f_rest_36
+property float f_rest_37
+property float f_rest_38
+property float f_rest_39
+property float f_rest_40
+property float f_rest_41
+property float f_rest_42
+property float f_rest_43
+property float f_rest_44
+property float opacity
+property float scale_0
+property float scale_1
+property float scale_2
+property float rot_0
+property float rot_1
+property float rot_2
+property float rot_3
+end_header
+```
+
+代表每个点所对应的位置、法向量、dc(direct current，直流分量)、球谐函数等系数特征、不透明度、缩放程度、旋转四元数。
+
+4. 使用浏览器的第三方展示[https://jatentaki.github.io/assets/gaussianviewer/index.html](https://jatentaki.github.io/assets/gaussianviewer/index.html)，放入点云iteration_30000/point_cloud.ply，以及相机位姿cameras.json。
+
+![image](website_gs.png)
+
+或者使用3dgs主页上的viewer-for-windows [https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/binaries/viewers.zip](https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/binaries/viewers.zip), 下载到windows之后解压，进入viewrs的文件夹下，使用命令行执行指向已经训练好的模型所在路径。
+
+```
+F:\数据集\GaussianSplatting\viewers\bin>./SIBR_gaussianViewer_app.exe -m F:\数据集\GaussianSplatting\结果\tank\f7997960-c
+```
+
+渲染图像结果，渲染能够到120帧的速度。
+
+![image](sibar_splats.png)
+
+
+使用椭球体表达的时候，加载速度会比较慢，只有10帧左右的渲染速度。
+
+![image](sibar_ellipsiod.png)
