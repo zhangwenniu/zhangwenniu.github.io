@@ -102,6 +102,8 @@ end_header
 
 代表每个点所对应的位置、法向量、dc(direct current，直流分量)、球谐函数等系数特征、不透明度、缩放程度、旋转四元数。
 
+更多参数和源代码注释，可以参见csdn上这位博主的博客。[Gaussian Splatting源码解读补充（一）](https://blog.csdn.net/qaqwqaqwq/article/details/136837906?ydreferer=aHR0cHM6Ly93d3cuYmluZy5jb20v)
+
 4. 使用浏览器的第三方展示[https://jatentaki.github.io/assets/gaussianviewer/index.html](https://jatentaki.github.io/assets/gaussianviewer/index.html)，放入点云iteration_30000/point_cloud.ply，以及相机位姿cameras.json。
 
 ![image](website_gs.png)
