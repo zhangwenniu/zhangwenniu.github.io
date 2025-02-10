@@ -77,11 +77,10 @@ doi: 10.1109/38.126885
 
 ## 介绍
 
-14-231202. A Trip Down the Graphics Pipeline: Pixel Coordinates. 文章发表于1991年的IEEE Computer Graphics and Applications，该文章的写作方式接近博客的写作方式，作者的英文辞藻比较丰富，用到许多比喻含义的词汇，以求使读者更好理解作者的表达意思。作者提出一种将像素为单位的坐标映射到-1及+1之间，文中将宽度映射到-1到+1之间，高度的映射是按照宽高比计算得到的-a到+a区间。文章同时讨论了最后半个像素的映射方式及使用较小的浮点数差额对应于+1的整数像素映射方法。映射后的坐标系空间为标准化设备坐标（Normalized device coordinates, NDC），应该是NDC映射空间的首次提出者。在NeRF等变种问题中，世界坐标有时候也被映射到NDC空间中。
+14-231202. A Trip Down the Graphics Pipeline: Pixel Coordinates. 
 
-## 本文的组织结构
+文章发表于1991年的IEEE Computer Graphics and Applications，该文章的写作方式接近博客的写作方式，作者的英文辞藻比较丰富，用到许多比喻含义的词汇，以求使读者更好理解作者的表达意思。
 
-# Key Points
+作者提出一种将像素为单位的坐标映射到-1及+1之间，文中将宽度映射到-1到+1之间，高度的映射是按照宽高比计算得到的-a到+a区间。
 
-# Abstract 
-
+文章同时讨论了最后半个像素的映射方式及使用较小的浮点数差额对应于+1的整数像素映射方法。映射后的坐标系空间为标准化设备坐标（Normalized device coordinates, NDC），应该是NDC映射空间的首次提出者。在NeRF等变种问题中，世界坐标有时候也被映射到NDC空间中。
