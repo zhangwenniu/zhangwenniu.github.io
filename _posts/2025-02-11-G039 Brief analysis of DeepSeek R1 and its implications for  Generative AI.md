@@ -6,6 +6,15 @@ categories: [DeepSeek]
 
 # 链接
 
+- Arxiv: [DeepSeek R1及其对生成式AI影响的简要分析](https://arxiv.org/abs/2502.02523)
+
+- 发布时间：
+
+[v1] 2025年2月4日 17:45:32 UTC (438 KB)
+[v2] 2025年2月5日 10:47:30 UTC (438 KB)
+[v3] 2025年2月7日 15:02:21 UTC (438 KB)
+
+
 # 原文翻译
 
 DeepSeek R1及其对生成式AI影响的简要分析
