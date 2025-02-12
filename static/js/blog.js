@@ -471,3 +471,60 @@ blog.addLoadEvent(function () {
     })
   }
 })
+
+// 自动生成文章目录
+blog.addLoadEvent(function () {
+  // 仅在文章页面执行
+  if (!document.querySelector('.page-post')) {
+    return
+  }
+
+  // 创建目录容器
+  const tocContainer = document.createElement('div')
+  tocContainer.className = 'toc-container'
+  
+  // 创建目录标题
+  const tocTitle = document.createElement('div')
+  tocTitle.className = 'toc-title'
+  tocTitle.textContent = '目录'
+  tocContainer.appendChild(tocTitle)
+
+  // 创建目录列表
+  const tocList = document.createElement('ul')
+  tocList.className = 'toc-list'
+  
+  // 获取所有标题元素
+  const headings = document.querySelectorAll('.page-post h1, .page-post h2, .page-post h3, .page-post h4, .page-post h5, .page-post h6')
+  
+  // 为每个标题生成目录项
+  headings.forEach((heading, index) => {
+    // 确保标题有id
+    if (!heading.id) {
+      heading.id = 'toc-heading-' + index
+    }
+
+    const level = parseInt(heading.tagName.charAt(1))
+    const listItem = document.createElement('li')
+    listItem.className = 'toc-item toc-level-' + level
+    
+    const link = document.createElement('a')
+    link.href = '#' + heading.id
+    link.textContent = heading.textContent
+    
+    // 点击目录项时滚动到对应位置
+    link.addEventListener('click', (e) => {
+      e.preventDefault()
+      heading.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      history.pushState(null, null, '#' + heading.id)
+    })
+
+    listItem.appendChild(link)
+    tocList.appendChild(listItem)
+  })
+
+  tocContainer.appendChild(tocList)
+
+  // 将目录插入到文章开头
+  const article = document.querySelector('.page-post')
+  article.insertBefore(tocContainer, article.firstChild)
+})
