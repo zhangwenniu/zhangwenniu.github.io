@@ -524,6 +524,8 @@ blog.addLoadEvent(function () {
 
   tocContainer.appendChild(tocList)
 
-  // 将目录添加到body
-  document.body.appendChild(tocContainer)
+  // 将目录添加到合适的容器中
+  // 修改这一行，将目录添加到主要内容区域
+  const container = document.querySelector('.page-post')
+  container.appendChild(tocContainer)
 })

@@ -9,7 +9,7 @@
   border-radius: 4px;
   padding: 15px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  z-index: 1000;
+  z-index: 9999; /* 增加 z-index 确保在最上层 */
   /* 在小屏幕上隐藏 */
   @media screen and (max-width: 1300px) {
     display: none;
