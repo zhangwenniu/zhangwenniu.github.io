@@ -1,12 +1,19 @@
 .toc-container {
-  position: sticky;
-  top: 20px;
-  max-height: calc(100vh - 40px);
+  position: fixed;
+  right: 20px;
+  top: 100px; /* 调整顶部距离 */
+  width: 260px;
+  max-height: calc(100vh - 120px);
   overflow-y: auto;
   background: #f8f9fa;
   border-radius: 4px;
   padding: 15px;
-  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  z-index: 1000;
+  /* 在小屏幕上隐藏 */
+  @media screen and (max-width: 1300px) {
+    display: none;
+  }
 }
 
 .toc-title {
@@ -14,6 +21,8 @@
   font-weight: bold;
   margin-bottom: 10px;
   color: #333;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
 }
 
 .toc-list {
@@ -24,6 +33,7 @@
 
 .toc-item {
   margin: 5px 0;
+  line-height: 1.4;
 }
 
 .toc-item a {
@@ -31,6 +41,8 @@
   text-decoration: none;
   font-size: 0.9em;
   transition: color 0.2s;
+  display: block;
+  padding: 3px 0;
 }
 
 .toc-item a:hover {
@@ -45,19 +57,28 @@
 .toc-level-5 { margin-left: 4em; }
 .toc-level-6 { margin-left: 5em; }
 
+/* 当前阅读位置高亮 */
+.toc-item.active a {
+  color: #4BB596;
+  font-weight: bold;
+}
+
 /* 暗色模式支持 */
 [theme="dark"] .toc-container {
   background: #2d2d2d;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
 
 [theme="dark"] .toc-title {
   color: #fff;
+  border-bottom-color: #444;
 }
 
 [theme="dark"] .toc-item a {
   color: #aaa;
 }
 
-[theme="dark"] .toc-item a:hover {
+[theme="dark"] .toc-item a:hover,
+[theme="dark"] .toc-item.active a {
   color: #4BB596;
 } 

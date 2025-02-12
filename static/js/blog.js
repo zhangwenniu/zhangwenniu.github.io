@@ -524,7 +524,6 @@ blog.addLoadEvent(function () {
 
   tocContainer.appendChild(tocList)
 
-  // 将目录插入到文章开头
-  const article = document.querySelector('.page-post')
-  article.insertBefore(tocContainer, article.firstChild)
+  // 将目录添加到body
+  document.body.appendChild(tocContainer)
 })
