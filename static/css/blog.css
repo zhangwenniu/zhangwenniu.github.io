@@ -9,7 +9,7 @@
   border-radius: 4px;
   padding: 15px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  z-index: 9999; /* 增加 z-index 确保在最上层 */
+  z-index: 999; /* 增加 z-index 确保在最上层 */
   /* 在小屏幕上隐藏 */
   @media screen and (max-width: 1300px) {
     display: none;
@@ -19,6 +19,7 @@
 /* 调整文章内容区域的宽度，为目录留出空间 */
 .page-post {
   margin-right: 280px; /* 目录宽度 + 间距 */
+  max-width: 920px; /* 限制最大宽度 */
 }
 
 /* 在小屏幕上恢复原始布局 */
@@ -28,6 +29,7 @@
   }
   .page-post {
     margin-right: auto;
+    max-width: 100%;
   }
 }
 
