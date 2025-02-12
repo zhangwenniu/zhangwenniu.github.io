@@ -2,6 +2,8 @@
   font-size: 14px;
   line-height: 2;
   word-break: break-all;
+  margin-right: 280px;
+  max-width: 920px;
 }
 .page-post .title {
   font-size: 18px;
@@ -161,4 +163,27 @@
   .page-post .post > * {
     margin: 15px 0;
   }
+}
+@media screen and (max-width: 1300px) {
+  .toc-container {
+    display: none;
+  }
+  .page-post {
+    margin-right: auto;
+    max-width: 100%;
+  }
+}
+
+.toc-container {
+  position: fixed;
+  right: 20px;
+  top: 100px;
+  width: 260px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  background: #f8f9fa;
+  border-radius: 4px;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  z-index: 999;
 }
