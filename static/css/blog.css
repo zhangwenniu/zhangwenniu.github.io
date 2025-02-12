@@ -16,6 +16,21 @@
   }
 }
 
+/* 调整文章内容区域的宽度，为目录留出空间 */
+.page-post {
+  margin-right: 280px; /* 目录宽度 + 间距 */
+}
+
+/* 在小屏幕上恢复原始布局 */
+@media screen and (max-width: 1300px) {
+  .toc-container {
+    display: none;
+  }
+  .page-post {
+    margin-right: auto;
+  }
+}
+
 .toc-title {
   font-size: 1.2em;
   font-weight: bold;
