@@ -524,7 +524,9 @@ blog.addLoadEvent(function () {
 
   tocContainer.appendChild(tocList)
 
-  // 修改这里：将目录插入到 .page-post 元素后面
-  const pagePost = document.querySelector('.page-post')
-  pagePost.parentNode.insertBefore(tocContainer, pagePost.nextSibling)
+  // 将目录插入到 .post 元素之前
+  const postContent = document.querySelector('.page-post .post')
+  if (postContent) {
+    postContent.parentNode.insertBefore(tocContainer, postContent)
+  }
 })
