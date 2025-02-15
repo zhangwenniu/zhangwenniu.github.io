@@ -1,6 +1,6 @@
 ---
 layout: mypost
-title: G040, k011 Real-time Neural Radiance Caching for Path Tracing
+title: k007, G041 BakedSDF Meshing Neural SDFs for Real-Time View Synthesis
 categories: [Neural Radiance Caching]
 ---
 
