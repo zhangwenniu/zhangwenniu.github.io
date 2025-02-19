@@ -1,6 +1,6 @@
 ---
 layout: mypost
-title: SLAM and 3D Semantic Reconstruction Based on the Fusion of Lidar and Monocular Vision
+title: k013 SLAM and 3D Semantic Reconstruction Based on the Fusion of Lidar and Monocular Vision
 categories: [SLAM]
 ---
 

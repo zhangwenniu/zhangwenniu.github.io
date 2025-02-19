@@ -1,6 +1,6 @@
 ---
 layout: mypost
-title: k010-Post-quantum cryptography and the quantum future of cybersecurity
+title: k010 Post-quantum cryptography and the quantum future of cybersecurity
 categories: [Quantum Computing]
 ---
 

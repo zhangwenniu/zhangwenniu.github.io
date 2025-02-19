@@ -1,6 +1,6 @@
 ---
 layout: mypost
-title: G039-Brief analysis of DeepSeek R1 and its implications for  Generative AI
+title: G039 Brief analysis of DeepSeek R1 and its implications for  Generative AI
 categories: [DeepSeek]
 ---
 
