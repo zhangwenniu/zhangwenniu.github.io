@@ -247,3 +247,12 @@
 [theme="dark"] .toc-item a:hover {
   color: #4BB596;
 }
+
+.post-meta {
+  color: #999999;
+  font-size: 12px;
+}
+
+#busuanzi_container_page_pv {
+  display: inline;
+}
