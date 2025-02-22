@@ -217,7 +217,7 @@ $$
 w'(t) = T(t) \left[ \sigma'(r(t)) - \sigma^2(r(t)) \right].
 $$
 
-如果局部最大权重出现在$t = t^*$，则有$\sigma'(r(t^*)) = \sigma^2(r(t^*))$。将NeuS的密度函数代入上述方程，可得：
+如果局部最大权重出现在$t = t^{*}$，则有$\sigma'(r(t^{*})) = \sigma^2(r(t^{*}))$。将NeuS的密度函数代入上述方程，可得：
 
 - 如果$m < 0$，则$f(r(t^*)) = 0$，零等值面达到最大渲染权重。
 - 如果$m > 0$，则$w'(t) > 0$，渲染权重会持续增加，直到触及距离场的局部最小值。因此，距离场的局部最小值达到最大渲染权重。
@@ -240,7 +240,7 @@ $$
 \min_{\pi_1} \sum_{p_i \in M \cup C} f_a(\pi_1(p_i)) + \lambda_1 \sum_{p_i \in M} w(p_i) \|\Delta \pi_1(p_i)\|^2,
 $$
 
-其中$\Delta \pi_1(p_i) = \pi_1(p_i) - \frac{1}{|N(p_i)|} \sum_{p_j \in N(p_i)} \pi_1(p_j)$是投影点$\pi_1(p_i)$的拉普拉斯算子，$C$是$M$的三角形质心集合。$f_a(\pi_1(p_i))$驱动点$p_i$投影到$f_a$的局部最小值。$N(p_i)$表示$p_i \in M$的1环邻域顶点，$w(p_i)$是根据$p_i$相邻三角形面的面积自适应调整的权重。第二项是拉普拉斯约束，防止网格在优化过程中折叠和自相交。
+其中$\Delta \pi_1(p_i) = \pi_1(p_i) - \frac{1}{\lvert N(p_i)\rvert} \sum_{p_j \in N(p_i)} \pi_1(p_j)$是投影点$\pi_1(p_i)$的拉普拉斯算子，$C$是$M$的三角形质心集合。$f_a(\pi_1(p_i))$驱动点$p_i$投影到$f_a$的局部最小值。$N(p_i)$表示$p_i \in M$的1环邻域顶点，$w(p_i)$是根据$p_i$相邻三角形面的面积自适应调整的权重。第二项是拉普拉斯约束，防止网格在优化过程中折叠和自相交。
 
 DCUDF进一步计算映射$\pi_2$，在第二阶段细化$\pi_1(M)$，进一步减少拟合误差。$-→ n_i$表示$\pi_1(M)$的第$i$个三角形面的法向量，其质心被鼓励沿着法向量$-→ n_i$移动，通过惩罚切向位移来防止网格折叠和自相交。第二阶段的损失函数为：
 
@@ -405,7 +405,7 @@ $$
 \alpha = 1 - \exp\left(-\int_{sm}^{+\infty} \frac{e^{-u}}{1 + e^{-u}} \, du\right) = 1 - \frac{e^{-st_0 |\cos(\theta)|}}{1 + e^{sm}}
 $$
 
-由于$m \geq 0$，因此$\alpha \in \left(0, \frac{1 - e^{-st_0 |\cos(\theta)|}}{2}\right]$。如果用$d_0$表示光线起点到表面的距离，则可以将上述结果重写为：
+由于$m \geq 0$，因此$\alpha \in \left(0, \frac{1 - e^{-st_0 \lvert\cos(\theta)\rvert}}{2}\right]$。如果用$d_0$表示光线起点到表面的距离，则可以将上述结果重写为：
 
 $$
 \alpha = \frac{1 - e^{-sd_0}}{1 + e^{sm}} \in \left(0, \frac{1 - e^{-sd_0}}{2}\right]
@@ -419,7 +419,7 @@ $$
 \alpha = 1 - \lim_{t \to +\infty} T(t) = 1 - \exp\left(-\int_{0}^{+\infty} \sigma(r(t)) \, dt\right)
 $$
 
-由于$\sigma(r(t))$在$t > t_0 + \frac{-m}{|\cos(\theta)|}$时为0，因此：
+由于$\sigma(r(t))$在$t > t_0 + \frac{-m}{\lvert\cos(\theta)\rvert}$时为0，因此：
 
 $$
 \alpha = 1 - \exp\left(-\int_{0}^{t_0 + \frac{-m}{|\cos(\theta)|}} \sigma(r(t)) \, dt\right) = 1 - \exp\left(-\int_{0}^{t_0 + \frac{-m}{|\cos(\theta)|}} -s \frac{e^{-sf(r(t))}}{1 + e^{-sf(r(t))}} \cos(\theta) \, dt\right)
@@ -431,7 +431,7 @@ $$
 \alpha = 1 - \exp\left(-\int_{sm}^{st_0 |\cos(\theta)|} \frac{e^{-u}}{1 + e^{-u}} \, du\right) = 1 - \frac{1 + e^{-st_0 |\cos(\theta)|}}{1 + e^{-sm}}
 $$
 
-由于$m < 0$，因此$\alpha \in \left(\frac{1 - e^{-st_0 |\cos(\theta)|}}{2}, 1\right)$。用$d_0$表示光线起点到表面的距离，则可以将上述结果重写为：
+由于$m < 0$，因此$\alpha \in \left(\frac{1 - e^{-st_0 \lvert\cos(\theta)\rvert}}{2}, 1\right)$。用$d_0$表示光线起点到表面的距离，则可以将上述结果重写为：
 
 $$
 \alpha = 1 - \frac{1 + e^{-sd_0}}{1 + e^{-sm}} \in \left(\frac{1 - e^{-sd_0}}{2}, 1\right)
