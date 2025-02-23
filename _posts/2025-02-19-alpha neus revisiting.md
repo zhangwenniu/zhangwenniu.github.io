@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: From Transparent to Opaque, Rethinking Neural Implicit Surfaces with α-NeuS
-categories: [透明]
+categories: [透明, SDF, UDF]
 ---
 
 

@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: k007, G041 BakedSDF Meshing Neural SDFs for Real-Time View Synthesis
-categories: [Neural Radiance Caching]
+categories: [SDF]
 ---
 
 # 链接

@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: 056 Extracting Triangular 3D Models, Materials, and Lighting From Images
-categories: [论文阅读, 重建, 读完论文]
+categories: [表面重建]
 ---
 
 

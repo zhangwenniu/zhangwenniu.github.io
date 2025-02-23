@@ -1,7 +1,7 @@
 ---
 layout: mypost
-title: 043 ANALYZING AND IMPROVINGNEURAL RADIANCE FIELDS
-categories: [论文阅读, NeRF, 读完论文]
+title: 053 A Reflectance Model for Computer Graphics
+categories: [反射]
 ---
 
 
@@ -27,7 +27,7 @@ and Kenneth E. Torrance, Cornell University
 
 这篇文章能下载到两种版本，一种是Computer Graphics的，分两栏：[https://dl.acm.org/doi/pdf/10.1145/965161.806819](https://dl.acm.org/doi/pdf/10.1145/965161.806819). Page: [https://dl.acm.org/doi/abs/10.1145/965161.806819](https://dl.acm.org/doi/abs/10.1145/965161.806819)
 
-```
+```bibtex
 @article{10.1145/965161.806819,
 author = {Cook, Robert L. and Torrance, Kenneth E.},
 title = {A Reflectance Model for Computer Graphics},

@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: 039 Geometry-consistent Neural Shape Representation with Implicit Displacement Fields
-categories: [论文阅读, Mesh重建, 在读论文]
+categories: [SDF]
 ---
 
 # Geometry-consistent Neural Shape Representation with Implicit Displacement Fields
@@ -26,7 +26,7 @@ categories: [论文阅读, Mesh重建, 在读论文]
 
 代码：[yifita/idf: implicit displacement field (github.com)](https://github.com/yifita/idf)
 
-论文：[[2106.05187\] Geometry-Consistent Neural Shape Representation with Implicit Displacement Fields (arxiv.org)](https://arxiv.org/abs/2106.05187)
+论文：[2106.05187\] Geometry-Consistent Neural Shape Representation with Implicit Displacement Fields (arxiv.org)](https://arxiv.org/abs/2106.05187)
 
 论文在arxiv上有三个版本，第一个版本发表于2021年6月9号，第二个版本发表于2021年6月18日，第三个版本发表于2022年2月2日。
 

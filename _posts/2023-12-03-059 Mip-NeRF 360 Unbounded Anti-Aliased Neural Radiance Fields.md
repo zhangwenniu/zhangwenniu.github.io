@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: 058 Mip-NeRF 360 Unbounded Anti-Aliased Neural Radiance Fields
-categories: [论文阅读, NeRF, 读完论文]
+categories: [NeRF]
 ---
 
 

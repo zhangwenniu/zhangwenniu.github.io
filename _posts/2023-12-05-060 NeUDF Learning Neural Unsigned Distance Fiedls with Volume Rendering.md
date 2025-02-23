@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: 060 NeUDF Learning Neural Unsigned Distance Fields with Volume Rendering
-categories: [论文阅读, 表面重建, 读完论文]
+categories: [UDF, 表面重建]
 ---
 
 

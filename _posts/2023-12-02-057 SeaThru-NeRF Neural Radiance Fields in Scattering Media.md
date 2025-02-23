@@ -1,7 +1,7 @@
 ---
 layout: mypost
-title: 057 SeaThru-NeRF：Neural Radiance Fields in Scattering Media
-categories: [论文阅读, NeRF, 读完论文]
+title: 057 SeaThru-NeRF, Neural Radiance Fields in Scattering Media
+categories: [NeRF, 水下]
 ---
 
 

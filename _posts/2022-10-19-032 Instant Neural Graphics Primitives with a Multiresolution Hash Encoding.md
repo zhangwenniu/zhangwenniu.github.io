@@ -1,7 +1,7 @@
 ---
 layout: mypost
-title: Instant Neural Graphics Primitives with a Multiresolution Hash Encoding
-categories: [论文阅读, NeRF]
+title: 032 Instant Neural Graphics Primitives with a Multiresolution Hash Encoding
+categories: [NeRF]
 ---
 
 - [标题](#标题)
@@ -11,6 +11,7 @@ categories: [论文阅读, NeRF]
 - [方法](#方法)
 
 # 标题
+
 Instant Neural Graphics Primitives with a Multiresolution Hash Encoding
 
 SIGGRAPH, 2022, Best Paper

@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: 077 Dynamic 3D Gaussian Fields for Urban Areas
-categories: [论文, 自动驾驶, 3DGS]
+categories: [自动驾驶, 3DGS]
 ---
 
 

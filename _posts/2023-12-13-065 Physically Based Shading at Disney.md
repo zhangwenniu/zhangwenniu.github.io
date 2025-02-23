@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: 065 Physically Based Shading at Disney
-categories: [论文阅读, 读完论文]
+categories: [图形学, PBS]
 ---
 
 

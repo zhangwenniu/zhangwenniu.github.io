@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: Design Space for Graph Neural Networks
-categories: [论文阅读, GNN]
+categories: [GNN]
 ---
 
 - [标题](#标题)

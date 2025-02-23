@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: 014 Pixel2Mesh - Generating 3D Mesh Models from Single RGB Images
-categories: [论文阅读, GNN, Mesh重建, 已读论文]
+categories: [GNN]
 ---
 
 - [标题](#标题)

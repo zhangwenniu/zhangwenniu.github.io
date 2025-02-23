@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: 054 Differentiable refraction-tracing for mesh reconstruction of transparent objects
-categories: [论文阅读, 透明重建, 读完论文]
+categories: [透明]
 ---
 
 

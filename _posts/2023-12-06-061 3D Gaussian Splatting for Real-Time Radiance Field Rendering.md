@@ -1,7 +1,7 @@
 ---
 layout: mypost
-title: 060 NeUDF Learning Neural Unsigned Distance Fields with Volume Rendering
-categories: [论文阅读, 表面重建, 读完论文]
+title: 061 3D Gaussian Splatting for Real-Time Radiance Field Rendering
+categories: [3DGS]
 ---
 
 

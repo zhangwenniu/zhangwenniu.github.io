@@ -1,7 +1,7 @@
 ---
 layout: mypost
-title: 035 Nerual 3D Reconstruction of Transparent Objects
-categories: [论文阅读, 透明物体, 已读论文]
+title: 035 Through the Looking Glass, Nerual 3D Reconstruction of Transparent Objects
+categories: [透明]
 ---
 
 # Through the Looking Glass: Neural 3D Reconstruction of Transparent Shapes

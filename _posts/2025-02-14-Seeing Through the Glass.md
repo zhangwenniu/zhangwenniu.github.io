@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: G009, k012 Seeing Through the Glass, Neural 3D Reconstruction of Object Inside a Transparent Container
-categories: [透明物体]
+categories: [透明, SDF]
 ---
 
 # 链接

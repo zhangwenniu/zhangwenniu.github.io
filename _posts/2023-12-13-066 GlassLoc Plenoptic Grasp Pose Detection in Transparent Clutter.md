@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: 066 GlassLoc, Plenoptic Grasp Pose Detection in Transparent Clutter
-categories: [论文阅读, 读完论文]
+categories: [透明, 抓取]
 ---
 
 

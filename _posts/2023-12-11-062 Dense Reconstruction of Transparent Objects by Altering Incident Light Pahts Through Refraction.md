@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: 062 Dense Reconstruction of Transparent Objects by Altering Incident Light Paths Through Refraction
-categories: [论文阅读, 表面重建, 读完论文]
+categories: [透明, 表面重建]
 ---
 
 

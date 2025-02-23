@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: 058 A trip down the graphics pipeline pixel coordinates
-categories: [论文阅读, 读完论文]
+categories: [图形学]
 ---
 
 

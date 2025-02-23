@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: 063 NeReF Neural Refractive Field for Fluid Surface Reconstruction and Rendering
-categories: [论文阅读, 表面重建, 读完论文]
+categories: [透明, 表面重建]
 ---
 
 

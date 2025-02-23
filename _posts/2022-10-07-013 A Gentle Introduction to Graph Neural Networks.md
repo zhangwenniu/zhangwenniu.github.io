@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: 013 A Gentle Introduction to Graph Neural Networks
-categories: [论文阅读, GNN, 已读论文]
+categories: [GNN]
 ---
 
 - [标题](#标题)

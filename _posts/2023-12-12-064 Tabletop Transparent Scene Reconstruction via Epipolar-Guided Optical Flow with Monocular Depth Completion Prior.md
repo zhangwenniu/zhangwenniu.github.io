@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: 064 Tabletop Transparent Scene Reconstruction via Epipolar-Guided Optical Flow with Monocular Depth Completion Prior
-categories: [论文阅读, 表面重建, 读完论文]
+categories: [透明, 点云重建]
 ---
 
 

@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: 078 Scaffold-GS, Structured 3D Gaussians for View-Adaptive Rendering
-categories: [论文, 3DGS]
+categories: [3DGS]
 ---
 
 

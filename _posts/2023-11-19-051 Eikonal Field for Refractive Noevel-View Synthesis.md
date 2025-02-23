@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: 051 Eikonal Fields for Refractive Novel-View Synthesis
-categories: [论文阅读, NeRF, 读完论文]
+categories: [NeRF, 透明]
 ---
 
 

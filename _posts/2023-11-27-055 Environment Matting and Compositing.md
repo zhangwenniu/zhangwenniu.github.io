@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: 055, G044 Environment Matting and Compositing
-categories: [论文阅读, 透明重建, 读完论文]
+categories: [透明]
 ---
 
 
