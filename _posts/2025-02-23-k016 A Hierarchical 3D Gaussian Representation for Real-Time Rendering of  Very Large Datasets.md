@@ -1,6 +1,6 @@
 ---
 layout: mypost
-title: A Hierarchical 3D Gaussian Representation for Real-Time Rendering of Very Large Datasets
+title: k016 A Hierarchical 3D Gaussian Representation for Real-Time Rendering of Very Large Datasets
 categories: [3DGS, 大场景]
 ---
 
@@ -267,7 +267,7 @@ $$
 w_i' = o_i \sqrt{|\Sigma_i'|} \quad (8)
 $$
 
-在实际应用中，由于高斯分布的二维协方差矩阵的行列式的平方根与对应三维椭球体的（投影）表面积成正比，我们计算每个椭球体的表面积$S_i$，而不是$\sqrt{|\Sigma_i'|}$。
+在实际应用中，由于高斯分布的二维协方差矩阵的行列式的平方根与对应三维椭球体的（投影）表面积成正比，我们计算每个椭球体的表面积$S_i$，而不是$\sqrt{\vert\Sigma_i'\vert}$。
 
 我们还可以使用相同的权重对合并节点的球谐系数进行加权平均：
 
