@@ -4,6 +4,7 @@ title: 066 GlassLoc, Plenoptic Grasp Pose Detection in Transparent Clutter
 categories: [透明, 抓取]
 ---
 
+如果有研究透明物体抓取的研究者，可以通过邮箱zhangwenniu@163.com联系我，我目前创建了一个透明物体抓取的研究者交流群，欢迎感兴趣的研究者加入。
 
 # 文章信息
 
@@ -11,35 +12,9 @@ categories: [透明, 抓取]
 
 GlassLoc: Plenoptic Grasp Pose Detection in Transparent Clutter
 
-
 ## 作者
 
 Zheming Zhou, Tianyang Pan, Shiyu Wu, Haonan Chang, Odest Chadwicke, Jenkins
-
-
-## 发表信息
-
-
-
-## 引用信息
-
-
-
-## 论文链接
-
-
-## 后人对此文章的评价
-
-
-# 文章内容
-
-## 摘要
-
-> 
-
-## 介绍
-
-
 
 ## 本文的组织结构
 

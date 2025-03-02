@@ -15,30 +15,6 @@ Physically Based Shading at Disney
 
 by Brent Burley, Walt Disney Animation Studios
 
-## 发表信息
-
-
-
-## 引用信息
-
-
-
-## 论文链接
-
-
-## 后人对此文章的评价
-
-
-# 文章内容
-
-## 摘要
-
-> 
-
-## 介绍
-
-
-
 ## 本文的组织结构
 
 

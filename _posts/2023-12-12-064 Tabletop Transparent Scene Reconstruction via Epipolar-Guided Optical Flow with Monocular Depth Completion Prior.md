@@ -4,6 +4,7 @@ title: 064 Tabletop Transparent Scene Reconstruction via Epipolar-Guided Optical
 categories: [透明, 点云重建]
 ---
 
+如果有研究透明场景3D重建的研究者，可以通过邮箱zhangwenniu@163.com联系我，我目前创建了一个透明场景3D重建的研究者交流群，欢迎感兴趣的研究者加入。
 
 # 文章信息
 

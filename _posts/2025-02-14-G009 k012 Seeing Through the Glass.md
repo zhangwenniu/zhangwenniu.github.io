@@ -4,6 +4,8 @@ title: G009, k012 Seeing Through the Glass, Neural 3D Reconstruction of Object I
 categories: [透明, SDF]
 ---
 
+如果有研究透明场景3D重建的研究者，可以通过邮箱zhangwenniu@163.com联系我，我目前创建了一个透明场景3D重建的研究者交流群，欢迎感兴趣的研究者加入。
+
 # 链接
 
 - Arxiv: [Seeing Through the Glass](https://arxiv.org/abs/2303.13805)
