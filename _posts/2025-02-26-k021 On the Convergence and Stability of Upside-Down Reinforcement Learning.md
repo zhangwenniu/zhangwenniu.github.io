@@ -90,7 +90,7 @@ categories: [强化学习]
 
 - **转移核**：扩展的转移核 $ \bar{\lambda} $ 定义了在扩展状态空间中的转移概率。例如：
   $$
-  \bar{\lambda}((s', h-1, g) \mid (s, h, g), a) = \lambda(s' \mid s, a),
+  \bar{\lambda}((s', h-1, g)  \mid  (s, h, g), a) = \lambda(s'  \mid  s, a),
   $$
   其中 $ \lambda $ 是原始MDP的转移核。
 
@@ -254,7 +254,7 @@ ODT将RL视为序列建模问题，使用Transformer架构来预测动作。ODT�
 
 - **策略更新公式**：
   $$
-  \pi_{n+1} = \arg\max_{\pi} \mathbb{E}_{\sigma \sim d_{\pi_n} \Sigma} \log \pi(a_{\sigma_0} \mid s_{\sigma_0}, l(\sigma), \rho(s_{\sigma_{l(\sigma)}}))
+  \pi_{n+1} = \arg\max_{\pi} \mathbb{E}_{\sigma \sim d_{\pi_n} \Sigma} \log \pi(a_{\sigma_0}  \mid  s_{\sigma_0}, l(\sigma), \rho(s_{\sigma_{l(\sigma)}}))
   $$
   这个公式表示新策略 $ \pi_{n+1} $ 是通过最大化采样段的对数似然来更新的。
 
@@ -283,39 +283,39 @@ eUDRL递归通常在整个段空间上进行。本节将展示在尾段（traili
 
 1. **在整个段空间 $ Seg $ 上进行递归**：
    $$
-   \pi_{n+1}(a \mid s, h, g) = P(A_\Sigma^0 = a \mid S_\Sigma^0 = s, l(\Sigma) = h, \rho(S_\Sigma^h) = g; \pi_n)
+   \pi_{n+1}(a  \mid  s, h, g) = P(A_\Sigma^0 = a  \mid  S_\Sigma^0 = s, l(\Sigma) = h, \rho(S_\Sigma^h) = g; \pi_n)
    $$
    $$
-   \propto \sum_{h' \geq h, g' \in G} P(\rho(S^h) = g \mid A^0 = a, H^0 = h', G^0 = g', S^0 = s; \pi_n)
+   \propto \sum_{h' \geq h, g' \in G} P(\rho(S^h) = g  \mid  A^0 = a, H^0 = h', G^0 = g', S^0 = s; \pi_n)
    $$
    $$
-   \cdot \pi_n(a \mid s, h', g') P(H_\Sigma^0 = h', G_\Sigma^0 = g' \mid S_\Sigma^0 = s, l(\Sigma) = h; \pi_n)
+   \cdot \pi_n(a  \mid  s, h', g') P(H_\Sigma^0 = h', G_\Sigma^0 = g'  \mid  S_\Sigma^0 = s, l(\Sigma) = h; \pi_n)
    $$
 
 2. **在尾段空间 $ Seg_{trail} $ 上进行递归**：
    $$
-   \pi_{trail, n+1}(a \mid s, h, g) = P(A_\Sigma^0 = a \mid S_\Sigma^0 = s, l(\Sigma) = h, \rho(S_\Sigma^h) = g, l(\Sigma) = H_\Sigma^0; \pi_{trail, n})
+   \pi_{trail, n+1}(a  \mid  s, h, g) = P(A_\Sigma^0 = a  \mid  S_\Sigma^0 = s, l(\Sigma) = h, \rho(S_\Sigma^h) = g, l(\Sigma) = H_\Sigma^0; \pi_{trail, n})
    $$
    $$
-   \propto \sum_{g' \in G} P(\rho(S^h) = g \mid A^0 = a, H^0 = h, G^0 = g', S^0 = s; \pi_{trail, n})
+   \propto \sum_{g' \in G} P(\rho(S^h) = g  \mid  A^0 = a, H^0 = h, G^0 = g', S^0 = s; \pi_{trail, n})
    $$
    $$
-   \cdot \pi_{trail, n}(a \mid s, h, g') P(H_\Sigma^0 = h, G_\Sigma^0 = g' \mid S_\Sigma^0 = s, l(\Sigma) = h; \pi_{trail, n})
+   \cdot \pi_{trail, n}(a  \mid  s, h, g') P(H_\Sigma^0 = h, G_\Sigma^0 = g'  \mid  S_\Sigma^0 = s, l(\Sigma) = h; \pi_{trail, n})
    $$
 
 3. **在对角线段空间 $ Seg_{diag} $ 上进行递归**：
    $$
-   \pi_{diag, n+1}(a \mid s, h, g) = P(A_\Sigma^0 = a \mid S_\Sigma^0 = s, l(\Sigma) = h, \rho(S_\Sigma^h) = g, \rho(S_\Sigma^h) = G_\Sigma^0, l(\Sigma) = H_\Sigma^0; \pi_{diag, n})
+   \pi_{diag, n+1}(a  \mid  s, h, g) = P(A_\Sigma^0 = a  \mid  S_\Sigma^0 = s, l(\Sigma) = h, \rho(S_\Sigma^h) = g, \rho(S_\Sigma^h) = G_\Sigma^0, l(\Sigma) = H_\Sigma^0; \pi_{diag, n})
    $$
    $$
-   \propto P(\rho(S^h) = g \mid A^0 = a, H^0 = h, G^0 = g, S^0 = s; \pi_{diag, n})
+   \propto P(\rho(S^h) = g  \mid  A^0 = a, H^0 = h, G^0 = g, S^0 = s; \pi_{diag, n})
    $$
    $$
-   \cdot \pi_{diag, n}(a \mid s, h, g) P(H_\Sigma^0 = h, G_\Sigma^0 = g \mid S_\Sigma^0 = s, l(\Sigma) = h; \pi_{diag, n})
+   \cdot \pi_{diag, n}(a  \mid  s, h, g) P(H_\Sigma^0 = h, G_\Sigma^0 = g  \mid  S_\Sigma^0 = s, l(\Sigma) = h; \pi_{diag, n})
    $$
    此外，策略可以表示为Q函数的形式：
    $$
-   \pi_{diag, n+1}(a \mid s, h, g) \propto Q^{\pi_{diag, n}}((s, h, g), a) \pi_{diag, n}(a \mid s, h, g)
+   \pi_{diag, n+1}(a  \mid  s, h, g) \propto Q^{\pi_{diag, n}}((s, h, g), a) \pi_{diag, n}(a  \mid  s, h, g)
    $$
 
 #### 公式的意义
@@ -328,11 +328,11 @@ eUDRL递归通常在整个段空间上进行。本节将展示在尾段（traili
 
 奖励加权回归（RWR）是一种RL算法，它通过在当前策略下生成一批轨迹，并使用监督学习来拟合新策略，但动作的贡献由轨迹回报加权。RWR的更新公式为：
 $$
-\pi_{n+1}(a \mid s) \propto Q(s, a) \pi_n(a \mid s)
+\pi_{n+1}(a  \mid  s) \propto Q(s, a) \pi_n(a  \mid  s)
 $$
 在CE的上下文中，这可以表示为：
 $$
-\pi_{n+1}(a \mid s, h, g) \propto Q^{\pi_n}((s, h, g), a) \pi_n(a \mid s, h, g)
+\pi_{n+1}(a  \mid  s, h, g) \propto Q^{\pi_n}((s, h, g), a) \pi_n(a  \mid  s, h, g)
 $$
 根据引理3的第3点，这对应于eUDRL在对角线段空间 $ Seg_{diag} $ 上的更新规则。换句话说，在这种特殊情况下，eUDRL变成了RWR。然而，与一般的eUDRL不同，RWR的递归总是收敛到最优策略。
 
@@ -349,13 +349,13 @@ eUDRL的实现中使用了优先级重放缓冲区，其中初始目标或回报
 
 ### 4.1 兼容的MDP族和状态支持的稳定性
 
-设 $ M $ 是一个给定的MDP，$ \bar{M} $ 是其命令扩展（CE）。给定一个状态和动作，可以将转移核 $ \lambda(\cdot \mid s, a) $ 视为概率单纯形 $ \Delta^S $ 中的一个向量，即可以写成 $ \lambda \in (\Delta^S)^{S \times A} \subset \mathbb{R}^{S \times S \times A} $。我们研究 $ M $ 和 $ \bar{M} $ 的性质（如eUDRL生成的策略和值）如何依赖于 $ \lambda $。为了我们的目的，只需研究 $ \lambda $ 的变化对这些性质的影响，而MDP的其他部分保持不变。为此，我们定义了兼容的MDP族。
+设 $ M $ 是一个给定的MDP，$ \bar{M} $ 是其命令扩展（CE）。给定一个状态和动作，可以将转移核 $ \lambda(\cdot  \mid  s, a) $ 视为概率单纯形 $ \Delta^S $ 中的一个向量，即可以写成 $ \lambda \in (\Delta^S)^{S \times A} \subset \mathbb{R}^{S \times S \times A} $。我们研究 $ M $ 和 $ \bar{M} $ 的性质（如eUDRL生成的策略和值）如何依赖于 $ \lambda $。为了我们的目的，只需研究 $ \lambda $ 的变化对这些性质的影响，而MDP的其他部分保持不变。为此，我们定义了兼容的MDP族。
 
-**定义4（兼容的MDP族）**：设 $ \lambda_0 $ 是一个给定的转移核，$ M = (S, A, \lambda_0, \mu, r) $ 是相应的MDP，其CE为 $ \bar{M} = (\bar{S}, A, \bar{\lambda}_0, \bar{\mu}, \bar{r}, \rho) $。记 $ \{M_\lambda = (S, A, \lambda, \mu, r) \mid \lambda \in (\Delta^S)^{S \times A}\} $ 为转移核属于与 $ \lambda_0 $ 相同的单纯形积 $ (\Delta^S)^{S \times A} $ 的MDP族。类似地，记 $ \{\bar{M}_\lambda = (\bar{S}, A, \bar{\lambda}, \bar{\mu}, \bar{r}, \rho) \mid \lambda \in (\Delta^S)^{S \times A}\} $ 为相应的CE族。我们称任何通过上述构造得到的MDP族对为兼容族。
+**定义4（兼容的MDP族）**：设 $ \lambda_0 $ 是一个给定的转移核，$ M = (S, A, \lambda_0, \mu, r) $ 是相应的MDP，其CE为 $ \bar{M} = (\bar{S}, A, \bar{\lambda}_0, \bar{\mu}, \bar{r}, \rho) $。记 $ \{M_\lambda = (S, A, \lambda, \mu, r)  \mid  \lambda \in (\Delta^S)^{S \times A}\} $ 为转移核属于与 $ \lambda_0 $ 相同的单纯形积 $ (\Delta^S)^{S \times A} $ 的MDP族。类似地，记 $ \{\bar{M}_\lambda = (\bar{S}, A, \bar{\lambda}, \bar{\mu}, \bar{r}, \rho)  \mid  \lambda \in (\Delta^S)^{S \times A}\} $ 为相应的CE族。我们称任何通过上述构造得到的MDP族对为兼容族。
 
 从现在起，我们保留下标 $ \lambda $ 来指代来自给定兼容族的MDP $ M_\lambda $ 或 $ \bar{M}_\lambda $ 的量。我们偶尔会加上下标 $ \lambda $ 来强调某个量（如策略族）与MDP族相关联。
 
-**定义5**：设 $ \{M_\lambda \mid \lambda \in (\Delta^S)^{S \times A}\} $ 和 $ \{\bar{M}_\lambda \mid \lambda \in (\Delta^S)^{S \times A}\} $ 是兼容族。
+**定义5**：设 $ \{M_\lambda  \mid  \lambda \in (\Delta^S)^{S \times A}\} $ 和 $ \{\bar{M}_\lambda  \mid  \lambda \in (\Delta^S)^{S \times A}\} $ 是兼容族。
 
 1. **eUDRL递归中的分子和分母**：对于所有 $ a \in A $ 和 $ (s, h, g) \in \bar{S}^T $，定义分子 $ \text{num}_{\lambda, \pi}(a, s, h, g) $ 和分母 $ \text{den}_{\lambda, \pi}(s, h, g) $ 为：
    $$
@@ -379,9 +379,9 @@ eUDRL的实现中使用了优先级重放缓冲区，其中初始目标或回报
 
 利用上述定义的分子和分母，eUDRL递归（2.8）可以写成：
 $$
-\pi_{n+1}(a \mid s, h, g) = \frac{\text{num}_{\lambda, \pi_n}(a, s, h, g)}{\text{den}_{\lambda, \pi_n}(s, h, g)} \quad \text{对于} \, (s, h, g) \in \text{supp} \, \text{den}_{\lambda, \pi_n}
+\pi_{n+1}(a  \mid  s, h, g) = \frac{\text{num}_{\lambda, \pi_n}(a, s, h, g)}{\text{den}_{\lambda, \pi_n}(s, h, g)} \quad \text{对于} \, (s, h, g) \in \text{supp} \, \text{den}_{\lambda, \pi_n}
 $$
-其中我们设 $ \pi_{n+1}(a \mid s, h, g) = \frac{1}{\midA\mid} $ 在 $ \text{supp} \, \text{den}_{\lambda, \pi_n} $ 之外。
+其中我们设 $ \pi_{n+1}(a  \mid  s, h, g) = \frac{1}{ \mid A \mid } $ 在 $ \text{supp} \, \text{den}_{\lambda, \pi_n} $ 之外。
 
 状态访问分布限制在瞬态状态，因为这是学习策略影响CE演变的状态集。所有被访问状态的集合等于 $ \nu_{\lambda, \pi} $ 的支持集。支持集可以简写为：
 $$
@@ -390,7 +390,7 @@ $$
 
 虽然从递归方程中很明显 $ \pi_n $ 在 $ n > 1 $ 时依赖于 $ \lambda $，但我们假设初始策略 $ \pi_0 $ 在MDP族中是常数。注意，“关键状态” $ \bar{S}_{\lambda_0} $ 的定义依赖于通过集合 $ (\Delta^S)^{S \times A} $ 指定的族。 $ \bar{S}_{\lambda_0} $ 的定义动机在于，我们讨论的非平凡行为发生在这些状态集上。事实上，选择的状态集交集确保了以下标准：i）命令实际上可以被满足（通过 $ P_{\lambda_0}(S_\Sigma^0 = s, l(\Sigma) = h, \rho(S_\Sigma^h) = g; \pi_0) > 0 $ 在 $ \text{supp} \, \text{den}_{\lambda_0, \pi_0} $ 上），ii）关键状态具有非零访问概率（在 $ \text{supp} \, \nu_{\lambda_0, \pi_0} $ 上）。鉴于这些点，检查公式（2.2）可以得出，给定固定核 $ \lambda_0 $，在 $ \bar{S}_{\lambda_0} $ 之外的状态对目标达成目标没有贡献。我们将在第6节中严格讨论，其他状态的策略和值与目标达成目标的连续性无关。
 
-**引理6（$ \bar{S}_{\lambda_0} $ 的稳定性）**：设 $ \{M_\lambda \mid \lambda \in (\Delta^S)^{S \times A}\} $ 和 $ \{\bar{M}_\lambda \mid \lambda \in (\Delta^S)^{S \times A}\} $ 是兼容族。设 $ (\pi_{n, \lambda})_{n \geq 0} $ 是由转移核 $ \lambda \in (\Delta^S)^{S \times A} $ 和初始策略 $ \pi_0 $（不依赖于 $ \lambda $）生成的策略序列。固定一个确定性转移核 $ \lambda_0 \in (\Delta^S)^{S \times A} $，则对于所有初始条件 $ \pi_0 > 0 $，有：
+**引理6（$ \bar{S}_{\lambda_0} $ 的稳定性）**：设 $ \{M_\lambda  \mid  \lambda \in (\Delta^S)^{S \times A}\} $ 和 $ \{\bar{M}_\lambda  \mid  \lambda \in (\Delta^S)^{S \times A}\} $ 是兼容族。设 $ (\pi_{n, \lambda})_{n \geq 0} $ 是由转移核 $ \lambda \in (\Delta^S)^{S \times A} $ 和初始策略 $ \pi_0 $（不依赖于 $ \lambda $）生成的策略序列。固定一个确定性转移核 $ \lambda_0 \in (\Delta^S)^{S \times A} $，则对于所有初始条件 $ \pi_0 > 0 $，有：
 1. 对于所有 $ n \geq 0 $ 和所有 $ \lambda \in U_2(\lambda_0) $，我们有：
    $$
    \text{supp} \, \text{num}_{\lambda_0, \pi_0} \cap (A \times \text{supp} \, \nu_{\lambda_0, \pi_0}) \subset \text{supp} \, \text{num}_{\lambda, \pi_n} \cap (A \times \text{supp} \, \nu_{\lambda, \pi_n})
@@ -409,7 +409,7 @@ $$
    $$
    对于所有 $ (s, h, g) \in \bar{S}_{\lambda_0} $。
 
-4. 对于所有 $ (a, s, h, g) \in \text{supp} \, \text{num}_{\lambda_0, \pi_0} \cap (A \times \text{supp} \, \nu_{\lambda_0, \pi_0}) $，$ h > 1 $，存在 $ s' \in S $ 使得 $ \lambda_0(s' \mid s, a) > 0 $ 且 $ (s', h - 1, g) \in \bar{S}_{\lambda_0} $。
+4. 对于所有 $ (a, s, h, g) \in \text{supp} \, \text{num}_{\lambda_0, \pi_0} \cap (A \times \text{supp} \, \nu_{\lambda_0, \pi_0}) $，$ h > 1 $，存在 $ s' \in S $ 使得 $ \lambda_0(s'  \mid  s, a) > 0 $ 且 $ (s', h - 1, g) \in \bar{S}_{\lambda_0} $。
 
 5. 对于所有 $ (a, s, h, g) \notin \text{supp} \, \text{num}_{\lambda_0, \pi_0} $ 且 $ (s, h, g) \in \text{supp} \, \text{den}_{\lambda_0, \pi_0} $，我们有对于任何策略 $ \pi $，$ Q_\pi^{\lambda_0}((s, h, g), a) = 0 $。
 
@@ -417,24 +417,24 @@ $$
 $$
 \forall \lambda \in U_2(\lambda_0) : \text{supp} \, \lambda_0 \subset \text{supp} \, \lambda
 $$
-这意味着通过核 $ \lambda_0 $ 可达的任何状态也可以通过 $ \lambda $ 达到。由于 $ \lambda_0 $ 是确定性的，存在唯一的 $ s' $ 使得 $ 1 = \lambda_0(s' \mid s, a) $。只需证明 $ \lambda(s' \mid s, a) $ 是非零的。我们有：
+这意味着通过核 $ \lambda_0 $ 可达的任何状态也可以通过 $ \lambda $ 达到。由于 $ \lambda_0 $ 是确定性的，存在唯一的 $ s' $ 使得 $ 1 = \lambda_0(s'  \mid  s, a) $。只需证明 $ \lambda(s'  \mid  s, a) $ 是非零的。我们有：
 $$
-2 > \\mid\lambda(\cdot \mid s, a) - \lambda_0(\cdot \mid s, a)\\mid_1 = \mid\lambda(s' \mid s, a) - \lambda_0(s' \mid s, a)\mid + \sum_{s'' \neq s'} \mid\lambda(s'' \mid s, a) - \lambda_0(s'' \mid s, a)\mid
+2 > \ \mid \lambda(\cdot  \mid  s, a) - \lambda_0(\cdot  \mid  s, a)\ \mid _1 =  \mid \lambda(s'  \mid  s, a) - \lambda_0(s'  \mid  s, a) \mid  + \sum_{s'' \neq s'}  \mid \lambda(s''  \mid  s, a) - \lambda_0(s''  \mid  s, a) \mid 
 $$
 $$
-= 1 - \lambda(s' \mid s, a) + \sum_{s'' \neq s'} \lambda(s'' \mid s, a) = 2(1 - \lambda(s' \mid s, a))
+= 1 - \lambda(s'  \mid  s, a) + \sum_{s'' \neq s'} \lambda(s''  \mid  s, a) = 2(1 - \lambda(s'  \mid  s, a))
 $$
-这等价于 $ \lambda(s' \mid s, a) > 0 $。
+这等价于 $ \lambda(s'  \mid  s, a) > 0 $。
 
 1. 假设 $ (a, s, h, g) \in \text{supp} \, \text{num}_{\lambda_0, \pi_0} \cap (A \times \text{supp} \, \nu_{\lambda_0, \pi_0}) $，则存在一个轨迹 $ \tau' = ((s'_0, H', g'), a'_0, (s'_1, H' - 1, g'), a'_1, \ldots) $ 使得 $ P_{\lambda_0}(T = \tau'; \pi_0) > 0 $，并且对于某个 $ t' \leq N - h $，我们有 $ s'_{t'} = s $，$ a'_{t'} = a $，$ H' - t' \geq h $ 且 $ \rho(s'_{t' + h}) = g $。我们声称存在一个轨迹 $ \tau = ((s_0, H, g), a_0, (s_1, H - 1, g), \ldots) $ 和 $ t \leq N $ 使得 $ P_{\lambda_0}(T = \tau; \pi_0) > 0 $，并且 $ s_t = s $，$ a_t = a $，$ h = H - t $ 且 $ \rho(s_{t + h}) = g $。存在一个轨迹的前缀 $ ((s_0, H, g), a_0, \ldots, (s_t, H - t, g)) $ 使得 $ P_{\lambda_0}(T = \tau; \pi_0) > 0 $，因为 $ (s_t, H - t, g) = (s, h, g) \in \bar{S}_{\lambda_0} \subset \text{supp} \, \nu_{\lambda_0, \pi_0} $。对于轨迹的后缀，我们取 $ \tau' $ 的后缀（从 $ t' $ 开始），并调整地平线和目标组件，使其与 $ \tau $ 在 $ t $ 处的组件一致。整个轨迹仍然具有正概率（在 $ \lambda_0, \pi_0 $ 下），即：
    $$
-   P_{\lambda_0}(A_t = a_t, \bar{S}_{t+1} = (s_{t+1}, H - t + 1, g), A_{t+1} = a_{t+1}, \ldots \mid \bar{S}_t = (s_t, H - t, g); \pi_0) > 0
+   P_{\lambda_0}(A_t = a_t, \bar{S}_{t+1} = (s_{t+1}, H - t + 1, g), A_{t+1} = a_{t+1}, \ldots  \mid  \bar{S}_t = (s_t, H - t, g); \pi_0) > 0
    $$
-   因为我们保留了原始MDP状态组件，并且可以使用 $ \lambda_0(s'_{t' + i + 1} \mid s'_{t' + i}, a'_{t' + i}) $，$ 0 \leq i \leq h - 1 $ 和 $ \pi_0 > 0 $。这证明了 $ \tau $ 的存在。利用包含关系（4.2），我们有 $ P_\lambda(T = \tau; \pi_0) > 0 $ 对于所有 $ \lambda \in U_\delta(\lambda_0) $。假设 $ \lambda \in U_\delta(\lambda_0) $ 固定，我们通过归纳法证明：
+   因为我们保留了原始MDP状态组件，并且可以使用 $ \lambda_0(s'_{t' + i + 1}  \mid  s'_{t' + i}, a'_{t' + i}) $，$ 0 \leq i \leq h - 1 $ 和 $ \pi_0 > 0 $。这证明了 $ \tau $ 的存在。利用包含关系（4.2），我们有 $ P_\lambda(T = \tau; \pi_0) > 0 $ 对于所有 $ \lambda \in U_\delta(\lambda_0) $。假设 $ \lambda \in U_\delta(\lambda_0) $ 固定，我们通过归纳法证明：
    $$
    P_\lambda(T = \tau; \pi_n) > 0
    $$
-   对于 $ n = 0 $ 的情况已经建立。假设它对 $ n \geq 0 $ 成立。由于轨迹 $ \tau $ 的概率是正的（在 $ \lambda, \pi_n $ 下），我们得到 $ \forall i : P_\lambda(A_\Sigma^0 = a_i, S_\Sigma^0 = s_i, l(\Sigma) = H - i, \rho(S_\Sigma^{H - i}) = g; \pi_n) > 0 $。因此，$ \pi_{n+1}(a_i \mid s_i, H - i, g) = P_\lambda(A_\Sigma^0 = a_i \mid S_\Sigma^0 = s_i, l(\Sigma) = H - i, \rho(S_\Sigma^{H - i}) = g; \pi_n) > 0 $ 对于所有 $ i < H $。由于转移核 $ \lambda $ 和初始分布 $ \mu $ 保持不变，$ P_\lambda(T = \tau; \pi_{n+1}) > 0 $ 跟随。从（4.3）可以得出 $ \text{num}_{\lambda, \pi_n}(a, s, h, g) > 0 $ 和 $ \nu_{\lambda, \pi_n}(s, h, g) > 0 $，并且我们看到 $ P_\lambda(A_\Sigma^0 = a, S_\Sigma^0 = s, l(\Sigma) = h, \rho(S_\Sigma^h) = g, H_\Sigma^0 = h, G_\Sigma^0 = g; \pi_n) > 0 $。这完成了包含关系的证明。为了在 $ \lambda = \lambda_0 $ 时建立等式，只需证明 $ \text{supp} \, \text{num}_{\lambda_0, \pi_n} \subset \text{supp} \, \text{num}_{\lambda_0, \pi_0} $ 和 $ \text{supp} \, \nu_{\lambda_0, \pi_n} \subset \text{supp} \, \nu_{\lambda_0, \pi_0} $。但由于假设 $ \pi_0 $ 具有最大支持，这跟随而来。
+   对于 $ n = 0 $ 的情况已经建立。假设它对 $ n \geq 0 $ 成立。由于轨迹 $ \tau $ 的概率是正的（在 $ \lambda, \pi_n $ 下），我们得到 $ \forall i : P_\lambda(A_\Sigma^0 = a_i, S_\Sigma^0 = s_i, l(\Sigma) = H - i, \rho(S_\Sigma^{H - i}) = g; \pi_n) > 0 $。因此，$ \pi_{n+1}(a_i  \mid  s_i, H - i, g) = P_\lambda(A_\Sigma^0 = a_i  \mid  S_\Sigma^0 = s_i, l(\Sigma) = H - i, \rho(S_\Sigma^{H - i}) = g; \pi_n) > 0 $ 对于所有 $ i < H $。由于转移核 $ \lambda $ 和初始分布 $ \mu $ 保持不变，$ P_\lambda(T = \tau; \pi_{n+1}) > 0 $ 跟随。从（4.3）可以得出 $ \text{num}_{\lambda, \pi_n}(a, s, h, g) > 0 $ 和 $ \nu_{\lambda, \pi_n}(s, h, g) > 0 $，并且我们看到 $ P_\lambda(A_\Sigma^0 = a, S_\Sigma^0 = s, l(\Sigma) = h, \rho(S_\Sigma^h) = g, H_\Sigma^0 = h, G_\Sigma^0 = g; \pi_n) > 0 $。这完成了包含关系的证明。为了在 $ \lambda = \lambda_0 $ 时建立等式，只需证明 $ \text{supp} \, \text{num}_{\lambda_0, \pi_n} \subset \text{supp} \, \text{num}_{\lambda_0, \pi_0} $ 和 $ \text{supp} \, \nu_{\lambda_0, \pi_n} \subset \text{supp} \, \nu_{\lambda_0, \pi_0} $。但由于假设 $ \pi_0 $ 具有最大支持，这跟随而来。
 
 2. 这立即从第1点和对于任何 $ \lambda $：
    $$
@@ -445,7 +445,7 @@ $$
 
 4. 这立即从第1点的证明中构造的轨迹 $ \tau $ 的存在性得出。
 
-5. 为了矛盾，假设 $ Q_\pi^{\lambda_0}((s, h, g), a) > 0 $ 对于某个 $ \pi $。由 $ \pi_0 $ 的最大支持性，我们有 $ Q_{\pi_0}^{\lambda_0}((s, h, g), a) > 0 $。从 $ (s, h, g) \in \text{supp} \, \text{den}_{\lambda_0, \pi_0} $ 和第2点的等价性，我们推导出存在一个轨迹 $ \tau' $ 具有正概率（在 $ \lambda_0, \pi_0 $ 下），如第1点所述。我们只需要它的前缀 $ P_{\lambda_0}(S_0 = s'_0, H_0 = H', G_0 = g', \ldots, S_{t'} = s, H_{t'} = h', G_{t'} = g'; \pi_0) > 0 $，$ h' \geq h $。由于 $ 0 < Q_{\pi_0}^{\lambda_0}((s, h, g), a) = P_{\lambda_0}(\rho(S_h) = g \mid S_0 = s, H_0 = h, G_0 = g, A_0 = a; \pi_0) $，我们有 $ P_{\lambda_0}(\rho(S_{t' + h}) = g \mid S_{t'} = s, H_{t'} = h', G_{t'} = g', A_{t'} = a; \pi_0) > 0 $，其中我们使用了 $ \pi_0 $ 的支持忽略地平线和目标组件。同样地，$ \pi_0(a \mid s, h', g') > 0 $。将这些结合起来，我们得出存在一个轨迹 $ ((s'_0, H', g'), \ldots, (s, h', g'), a, \ldots, (s_{t' + h}, h' - h, g'), \ldots) $ 使得 $ \rho(s_{t' + h}) = g $ 且具有正概率（在 $ \lambda_0, \pi_0 $ 下），这证明了 $ \text{num}_{\lambda_0, \pi_0}(a, s, h, g) > 0 $ 并与我们的假设矛盾。
+5. 为了矛盾，假设 $ Q_\pi^{\lambda_0}((s, h, g), a) > 0 $ 对于某个 $ \pi $。由 $ \pi_0 $ 的最大支持性，我们有 $ Q_{\pi_0}^{\lambda_0}((s, h, g), a) > 0 $。从 $ (s, h, g) \in \text{supp} \, \text{den}_{\lambda_0, \pi_0} $ 和第2点的等价性，我们推导出存在一个轨迹 $ \tau' $ 具有正概率（在 $ \lambda_0, \pi_0 $ 下），如第1点所述。我们只需要它的前缀 $ P_{\lambda_0}(S_0 = s'_0, H_0 = H', G_0 = g', \ldots, S_{t'} = s, H_{t'} = h', G_{t'} = g'; \pi_0) > 0 $，$ h' \geq h $。由于 $ 0 < Q_{\pi_0}^{\lambda_0}((s, h, g), a) = P_{\lambda_0}(\rho(S_h) = g  \mid  S_0 = s, H_0 = h, G_0 = g, A_0 = a; \pi_0) $，我们有 $ P_{\lambda_0}(\rho(S_{t' + h}) = g  \mid  S_{t'} = s, H_{t'} = h', G_{t'} = g', A_{t'} = a; \pi_0) > 0 $，其中我们使用了 $ \pi_0 $ 的支持忽略地平线和目标组件。同样地，$ \pi_0(a  \mid  s, h', g') > 0 $。将这些结合起来，我们得出存在一个轨迹 $ ((s'_0, H', g'), \ldots, (s, h', g'), a, \ldots, (s_{t' + h}, h' - h, g'), \ldots) $ 使得 $ \rho(s_{t' + h}) = g $ 且具有正概率（在 $ \lambda_0, \pi_0 $ 下），这证明了 $ \text{num}_{\lambda_0, \pi_0}(a, s, h, g) > 0 $ 并与我们的假设矛盾。
 
 ### 4.2 在段子空间中的支持稳定性
 
@@ -453,10 +453,10 @@ $$
 
 设 $ \text{num}_{\text{trail}/\text{diag}}^{\lambda, \pi} $ 和 $ \text{den}_{\text{trail}/\text{diag}}^{\lambda, \pi} $ 分别表示eUDRL递归在 $ Seg_{trail} $ 和 $ Seg_{diag} $ 上的分子和分母。这些量通过引入定义相应段子空间的条件来修改。例如，对于所有 $ a \in A $ 和 $ (s, h, g) \in \bar{S}^T $，我们设：
 $$
-\text{num}_{\text{diag}}^{\lambda, \pi}(a, s, h, g) := P_\lambda(A_\Sigma^0 = a, S_\Sigma^0 = s, l(\Sigma) = h, S_\Sigma^h = g \mid l(\Sigma) = H_\Sigma^0, \rho(S_\Sigma^{l(\Sigma)}) = G_\Sigma^0; \pi)
+\text{num}_{\text{diag}}^{\lambda, \pi}(a, s, h, g) := P_\lambda(A_\Sigma^0 = a, S_\Sigma^0 = s, l(\Sigma) = h, S_\Sigma^h = g  \mid  l(\Sigma) = H_\Sigma^0, \rho(S_\Sigma^{l(\Sigma)}) = G_\Sigma^0; \pi)
 $$
 $$
-\text{den}_{\text{diag}}^{\lambda, \pi}(s, h, g) := P_\lambda(S_\Sigma^0 = s, l(\Sigma) = h, S_\Sigma^h = g \mid l(\Sigma) = H_\Sigma^0, \rho(S_\Sigma^{l(\Sigma)}) = G_\Sigma^0; \pi)
+\text{den}_{\text{diag}}^{\lambda, \pi}(s, h, g) := P_\lambda(S_\Sigma^0 = s, l(\Sigma) = h, S_\Sigma^h = g  \mid  l(\Sigma) = H_\Sigma^0, \rho(S_\Sigma^{l(\Sigma)}) = G_\Sigma^0; \pi)
 $$
 
 eUDRL递归在 $ Seg_{trail} $ 和 $ Seg_{diag} $ 上的形式与公式（4.1）相同，只是将 $ \pi_n $ 改为 $ \pi_{\text{diag}/\text{trail}, n} $，$ \text{num} $ 改为 $ \text{num}_{\text{diag}/\text{trail}} $，$ \text{den} $ 改为 $ \text{den}_{\text{diag}/\text{trail}} $。
@@ -471,7 +471,7 @@ $$
 $$
 \bar{S}_{\lambda_0} = \text{supp} \, \text{den}_{\lambda_0, \pi_0} \cap \text{supp} \, \nu_{\lambda_0, \pi_0} = \text{supp} \, \text{den}_{\text{diag}/\text{trail}}^{\lambda_0, \pi_0} \cap \text{supp} \, \nu_{\lambda_0, \pi_0}
 $$
-换句话说，集合 $ \bar{S}_{\lambda_0} $ 和其状态-动作变体 $ \text{num}_{\lambda_0, \pi_0} \cap (A \times \text{supp} \, \nu_{\lambda_0, \pi_0}) $ 保持不变。要证明 $ P_\lambda(T = \tau; \pi_{\text{diag}/\text{trail}, n}) > 0 $，只需意识到用于证明 $ \pi_{n+1}(a_i \mid s_i, H - i, g) > 0 $ 的段是对角线段，即 $ \pi_{\text{diag}/\text{trail}, n+1}(a_i \mid s_i, H - i, g) > 0 $。第1点和第2、3、4点的其余部分类似。在第5点的证明中，我们利用了我们从对角线/尾部段开始的事实来证明 $ \text{num}_{\text{diag}/\text{trail}}^{\lambda_0, \pi_0}(a, s, h, g) > 0 $ 并得出矛盾。
+换句话说，集合 $ \bar{S}_{\lambda_0} $ 和其状态-动作变体 $ \text{num}_{\lambda_0, \pi_0} \cap (A \times \text{supp} \, \nu_{\lambda_0, \pi_0}) $ 保持不变。要证明 $ P_\lambda(T = \tau; \pi_{\text{diag}/\text{trail}, n}) > 0 $，只需意识到用于证明 $ \pi_{n+1}(a_i  \mid  s_i, H - i, g) > 0 $ 的段是对角线段，即 $ \pi_{\text{diag}/\text{trail}, n+1}(a_i  \mid  s_i, H - i, g) > 0 $。第1点和第2、3、4点的其余部分类似。在第5点的证明中，我们利用了我们从对角线/尾部段开始的事实来证明 $ \text{num}_{\text{diag}/\text{trail}}^{\lambda_0, \pi_0}(a, s, h, g) > 0 $ 并得出矛盾。
 
 
 ## 5. 确定性核的最优策略的收敛性
@@ -482,7 +482,7 @@ $$
 
 本节的目标是确定由具有给定确定性转移核的MDP生成的CE的最优动作集。我们首先定义最优动作的概念。
 
-**定义8（最优动作）**：设 $ M = (S, A, \lambda, \mu, r) $ 是一个MDP。如果存在一个策略 $ \pi $，使得 $ \pi(a\mids) > 0 $ 并且 $ \pi $ 在状态 $ s $ 中达到最大（最优）值，则动作 $ a \in A $ 在状态 $ s \in S $ 中被称为最优的。我们用 $ O(s) $ 表示状态 $ s $ 中的最优动作集。
+**定义8（最优动作）**：设 $ M = (S, A, \lambda, \mu, r) $ 是一个MDP。如果存在一个策略 $ \pi $，使得 $ \pi(a \mid s) > 0 $ 并且 $ \pi $ 在状态 $ s $ 中达到最大（最优）值，则动作 $ a \in A $ 在状态 $ s \in S $ 中被称为最优的。我们用 $ O(s) $ 表示状态 $ s $ 中的最优动作集。
 
 需要注意的是，由于CE是MDP的一个特例，这一定义包括了CE中的最优动作。因此，在CE的上下文中，任何最大化实现预期命令概率的动作都是最优的。
 
@@ -490,24 +490,24 @@ $$
 
 引理9识别了确定性核的一般CE算法的最优动作集，但没有特别提到eUDRL。需要注意的是，这里涉及的量与段空间 $ Seg $ 相关，而 $ Seg $ 可以在不使用eUDRL的情况下构造。在后续的连续性讨论中，我们将研究在某个固定的确定性核 $ \lambda_0 $ 附近改变 $ \lambda $ 的影响。我们将省略 $ O_{\lambda_0}(\bar{s}) $ 的索引，用 $ O(\bar{s}) $ 表示在固定的 $ \lambda_0 $ 下的最优动作（我们不会研究核变化时的 $ O_{\lambda}(\bar{s}) $）。
 
-**证明**：我们从反向推论开始。固定一个状态 $ \bar{s} \in \text{supp} \, \text{den}_{\lambda_0, \pi_0} $ 和一个动作 $ a \in O(\bar{s}) $。由于 $ \text{num}_{\lambda_0, \pi_0}(a, \bar{s}) > 0 $，存在一个在 $ \pi_0 $ 下具有正概率的轨迹 $ \tau' = ((s_0, H', g'), a_0, (s_1, H' - 1, g'), a_1, \ldots) $，其中 $ s_t = s $，$ a_t = a $，$ \rho(s_{t+h}) = g $，且 $ t + h \leq H' $。此外，由于 $ \lambda_0 $ 是确定性的，对于 $ i < H' $，有 $ \lambda_0(s_{i+1} \mid s_i, a_i) = 1 $。由于 $ Q((s_{t+h-1}, 1, g), a_{t+h-1}) = \sum_{s' \in \rho^{-1}(\{g\})} \lambda_0(s' \mid s_{t+h-1}, a_{t+h-1}) = \lambda_0(s_{t+h} \mid s_{t+h-1}, a_{t+h-1}) = 1 $ 是最大值，因此 $ a_{t+h-1} $ 在 $ (s_{t+h-1}, 1, g) $ 中是最优的。因此，$ \pi^*(a_{t+h-1} \mid s_{t+h-1}, 1, g) = 1 $ 是该状态下的最优策略。此外，
+**证明**：我们从反向推论开始。固定一个状态 $ \bar{s} \in \text{supp} \, \text{den}_{\lambda_0, \pi_0} $ 和一个动作 $ a \in O(\bar{s}) $。由于 $ \text{num}_{\lambda_0, \pi_0}(a, \bar{s}) > 0 $，存在一个在 $ \pi_0 $ 下具有正概率的轨迹 $ \tau' = ((s_0, H', g'), a_0, (s_1, H' - 1, g'), a_1, \ldots) $，其中 $ s_t = s $，$ a_t = a $，$ \rho(s_{t+h}) = g $，且 $ t + h \leq H' $。此外，由于 $ \lambda_0 $ 是确定性的，对于 $ i < H' $，有 $ \lambda_0(s_{i+1}  \mid  s_i, a_i) = 1 $。由于 $ Q((s_{t+h-1}, 1, g), a_{t+h-1}) = \sum_{s' \in \rho^{-1}(\{g\})} \lambda_0(s'  \mid  s_{t+h-1}, a_{t+h-1}) = \lambda_0(s_{t+h}  \mid  s_{t+h-1}, a_{t+h-1}) = 1 $ 是最大值，因此 $ a_{t+h-1} $ 在 $ (s_{t+h-1}, 1, g) $ 中是最优的。因此，$ \pi^*(a_{t+h-1}  \mid  s_{t+h-1}, 1, g) = 1 $ 是该状态下的最优策略。此外，
 $$
-V_{\pi^*}(s_{t+h-1}, 1, g) = \sum_{a \in A} Q((s_{t+h-1}, 1, g), a) \pi^*(a \mid s_{t+h-1}, 1, g) = Q((s_{t+h-1}, 1, g), a_{t+h-1}) \pi^*(a_{t+h-1} \mid s_{t+h-1}, 1, g) = 1,
+V_{\pi^*}(s_{t+h-1}, 1, g) = \sum_{a \in A} Q((s_{t+h-1}, 1, g), a) \pi^*(a  \mid  s_{t+h-1}, 1, g) = Q((s_{t+h-1}, 1, g), a_{t+h-1}) \pi^*(a_{t+h-1}  \mid  s_{t+h-1}, 1, g) = 1,
 $$
 并且
 $$
-Q_{\pi^*}(s_{t+h-2}, 2, g, a_{t+h-2}) = \sum_{s' \in S} V_{\pi^*}(s', 1, g) \lambda_0(s' \mid s_{t+h-2}, a_{t+h-2}) = V_{\pi^*}(s_{t+h-1}, 1, g) \lambda_0(s_{t+h-1} \mid s_{t+h-2}, a_{t+h-2}) = 1,
+Q_{\pi^*}(s_{t+h-2}, 2, g, a_{t+h-2}) = \sum_{s' \in S} V_{\pi^*}(s', 1, g) \lambda_0(s'  \mid  s_{t+h-2}, a_{t+h-2}) = V_{\pi^*}(s_{t+h-1}, 1, g) \lambda_0(s_{t+h-1}  \mid  s_{t+h-2}, a_{t+h-2}) = 1,
 $$
 这再次实现了最大可能值。因此，$ a_{t+h-2} $ 在 $ (s_{t+h-2}, 2, g) $ 中是最优的。重复这一过程 $ h $ 次，可以得出 $ Q_{\pi^*}(s_t, h, g, a_t) = 1 $，$ a_t $ 在 $ (s_t, h, g) $ 中是最优的，且值为 $ V_{\pi^*}(s_t, h, g) = 1 $。
 
-对于正向推论，设 $ (s, h, g) \in \text{supp} \, \text{den}_{\lambda_0, \pi_0} $，假设 $ a $ 在 $ (s, h, g) $ 中是最优的。按照上述反向推论的证明过程，我们可以观察到 $ (s, h, g) $ 实现了最大值 1。由于 $ a $ 是最优的，存在一个策略 $ \pi^* $，在状态 $ s $ 下，通过动作 $ a $ 在 $ h $ 步内达到目标 $ g $。由于 $ \pi_0 > 0 $，可以得出 $ \pi_0 $ 也在状态 $ s $ 下，通过动作 $ a $ 在 $ h $ 步内达到目标 $ g $，即 $ P_{\lambda_0}(\rho(S_h) = g, A_0 = a \mid S_0 = s, H_0 = h, G_0 = g; \pi_0) > 0 $。由于 $ (s, h, g) \in \text{supp} \, \text{den}_{\lambda_0, \pi_0} $，我们可以类似地在引理6的第1点的证明中找到一个轨迹 $ \tau' = ((s'_0, H', g'), \ldots, (s, h', g'), \ldots) $，其中 $ h' \geq h $，在 $ \lambda_0 $ 和 $ \pi_0 $ 下具有正概率。因此，$ P_{\lambda_0}(\rho(S_h) = g, A_0 = a \mid S_0 = s, H_0 = h', G_0 = g'; \pi_0) > 0 $。结合 $ \tau' $ 的适当前缀，我们可以得出存在一个轨迹，证明 $ \text{num}_{\lambda_0, \pi_0}(a, s, h, g) > 0 $。
+对于正向推论，设 $ (s, h, g) \in \text{supp} \, \text{den}_{\lambda_0, \pi_0} $，假设 $ a $ 在 $ (s, h, g) $ 中是最优的。按照上述反向推论的证明过程，我们可以观察到 $ (s, h, g) $ 实现了最大值 1。由于 $ a $ 是最优的，存在一个策略 $ \pi^* $，在状态 $ s $ 下，通过动作 $ a $ 在 $ h $ 步内达到目标 $ g $。由于 $ \pi_0 > 0 $，可以得出 $ \pi_0 $ 也在状态 $ s $ 下，通过动作 $ a $ 在 $ h $ 步内达到目标 $ g $，即 $ P_{\lambda_0}(\rho(S_h) = g, A_0 = a  \mid  S_0 = s, H_0 = h, G_0 = g; \pi_0) > 0 $。由于 $ (s, h, g) \in \text{supp} \, \text{den}_{\lambda_0, \pi_0} $，我们可以类似地在引理6的第1点的证明中找到一个轨迹 $ \tau' = ((s'_0, H', g'), \ldots, (s, h', g'), \ldots) $，其中 $ h' \geq h $，在 $ \lambda_0 $ 和 $ \pi_0 $ 下具有正概率。因此，$ P_{\lambda_0}(\rho(S_h) = g, A_0 = a  \mid  S_0 = s, H_0 = h', G_0 = g'; \pi_0) > 0 $。结合 $ \tau' $ 的适当前缀，我们可以得出存在一个轨迹，证明 $ \text{num}_{\lambda_0, \pi_0}(a, s, h, g) > 0 $。
 
 ### 5.2 在所有段空间中的eUDRL的收敛性
 
 在以下引理中，我们利用最优动作的概念来证明，如果转移核是确定性的，eUDRL生成的策略 $ (\pi_n)_{n \geq 1} $ 是最优的。
 
 **引理10（确定性转移核的eUDRL策略的最优性）**：设 $ \lambda_0 $ 是一个给定的确定性转移核，$ M = (S, A, \lambda_0, \mu, r) $ 是相应的MDP，其CE为 $ \bar{M} = (\bar{S}, A, \bar{\lambda}_0, \bar{\mu}, \bar{r}, \rho) $。假设 $ \pi_0 > 0 $，令 $ (\pi_n)_{n \geq 0} $ 是由 $ \pi_0 $ 和 $ \lambda_0 $ 生成的eUDRL迭代的策略序列。则有：
-1. 对于所有 $ n \geq 1 $ 和所有 $ \bar{s} \in \bar{S}_{\lambda_0} $，$ \pi_{n+1}(\cdot \mid \bar{s}) $ 的支持集与最优动作集 $ O(\bar{s}) $ 相同。特别是，策略 $ \pi_n $ 在 $ \bar{S}_{\lambda_0} $ 上是最优的。
+1. 对于所有 $ n \geq 1 $ 和所有 $ \bar{s} \in \bar{S}_{\lambda_0} $，$ \pi_{n+1}(\cdot  \mid  \bar{s}) $ 的支持集与最优动作集 $ O(\bar{s}) $ 相同。特别是，策略 $ \pi_n $ 在 $ \bar{S}_{\lambda_0} $ 上是最优的。
 2. 对于所有 $ n \geq 1 $ 和所有 $ \bar{s} \in \bar{S}_{\lambda_0} $，值是最大的，即
 $$
 V_{\pi_n}(\bar{s}) = 1.
@@ -520,15 +520,15 @@ $$
 **证明**：
 1. 设 $ n \geq 0 $，$ (s, h, g) \in \bar{S}_{\lambda_0} (= \text{supp} \, \text{den}_{\lambda_0, \pi_n} \cap \text{supp} \, \nu_{\lambda_0, \pi_n}) $。我们有 $ a \in O(s, h, g) $ 当且仅当 $ \text{num}_{\lambda_0, \pi_0}(a, s, h, g) > 0 $。根据引理6的第1点，这等价于 $ \text{num}_{\lambda_0, \pi_n}(a, s, h, g) > 0 $，因此
 $$
-\pi_{n+1}(a \mid s, h, g) = \frac{\text{num}_{\lambda_0, \pi_n}(a, s, h, g)}{\text{den}_{\lambda_0, \pi_n}(s, h, g)} > 0 \quad \text{当且仅当 } a \in O(s, h, g).
+\pi_{n+1}(a  \mid  s, h, g) = \frac{\text{num}_{\lambda_0, \pi_n}(a, s, h, g)}{\text{den}_{\lambda_0, \pi_n}(s, h, g)} > 0 \quad \text{当且仅当 } a \in O(s, h, g).
 $$
-因此，$ \pi_{n+1}(\cdot \mid s, h, g) $ 的支持集与最优动作集相同。
+因此，$ \pi_{n+1}(\cdot  \mid  s, h, g) $ 的支持集与最优动作集相同。
 
 2. 设 $ n \geq 1 $，$ (s, h, g) \in \bar{S}_{\lambda_0} \subset \text{supp} \, \text{den}_{\lambda_0, \pi_0} $。与引理9的证明类似，$ V^*(s, h, g) = 1 $，从第1点可知，$ \pi_n $ 在 $ \bar{S}_{\lambda_0} $ 上是最优的。因此，$ V_{\pi_n}(s, h, g) = 1 $。
 
-3. 设 $ n \geq 1 $，$ (s, h, g) \in \bar{S}_{\lambda_0} $。首先假设 $ a \in O(s, h, g) $。根据引理6的第4点，存在 $ s' \in S $ 使得 $ \lambda_0(s' \mid s, a) = 1 $ 且 $ (s', h - 1, g) \in \bar{S}_{\lambda_0} $。根据第2点，$ V_{\pi_n}(s', h - 1, g) = 1 $，因此
+3. 设 $ n \geq 1 $，$ (s, h, g) \in \bar{S}_{\lambda_0} $。首先假设 $ a \in O(s, h, g) $。根据引理6的第4点，存在 $ s' \in S $ 使得 $ \lambda_0(s'  \mid  s, a) = 1 $ 且 $ (s', h - 1, g) \in \bar{S}_{\lambda_0} $。根据第2点，$ V_{\pi_n}(s', h - 1, g) = 1 $，因此
 $$
-Q_{\pi_n}((s, h, g), a) = \sum_{s'' \in S} V_{\pi_n}(s'', h - 1, g) \lambda_0(s'' \mid s, a) = 1.
+Q_{\pi_n}((s, h, g), a) = \sum_{s'' \in S} V_{\pi_n}(s'', h - 1, g) \lambda_0(s''  \mid  s, a) = 1.
 $$
 如果 $ a \notin O(s, h, g) $，则根据引理6的第5点，结论成立。
 
@@ -560,13 +560,13 @@ $$
 **公式内容及意义**：
 - **公式（6.1）**：
   $$
-  \pi_{n+1}(a\mids, h, g) = \frac{u(a)}{\sum_{a' \in A} u(a')}
+  \pi_{n+1}(a \mid s, h, g) = \frac{u(a)}{\sum_{a' \in A} u(a')}
   $$
   其中，
   $$
-  u(a) = \sum_{h' \ge h, g' \in G} P_\lambda(\rho(S_h) = g \mid A_0 = a, S_0, H_0 = h', G_0 = g', l(\Sigma) = h; \pi_n) \cdot \pi_n(a\mids, h', g') \cdot P_\lambda(H_0 = h', G_0 = g' \mid S_0, l(\Sigma) = h; \pi_n)
+  u(a) = \sum_{h' \ge h, g' \in G} P_\lambda(\rho(S_h) = g  \mid  A_0 = a, S_0, H_0 = h', G_0 = g', l(\Sigma) = h; \pi_n) \cdot \pi_n(a \mid s, h', g') \cdot P_\lambda(H_0 = h', G_0 = g'  \mid  S_0, l(\Sigma) = h; \pi_n)
   $$
-  这个公式描述了eUDRL策略更新的递归关系，$u(a)$表示在给定状态下选择动作$a$的得分，而$\pi_{n+1}(a\mids, h, g)$是根据这些得分归一化后的策略。
+  这个公式描述了eUDRL策略更新的递归关系，$u(a)$表示在给定状态下选择动作$a$的得分，而$\pi_{n+1}(a \mid s, h, g)$是根据这些得分归一化后的策略。
 
 
 #### 6.2 eUDRL策略的相对连续性及相关值的连续性
@@ -581,9 +581,9 @@ $$
 
 **公式内容及意义**：
 - **定理16（相对连续性）**：
-  1. 对于所有$\bar{s} \in \bar{S}_{\lambda_0}$，策略$\pi_{n,\lambda}(\cdot\mid\bar{s})$在$\lambda_0$处相对于$O(\bar{s})$是相对连续的。
+  1. 对于所有$\bar{s} \in \bar{S}_{\lambda_0}$，策略$\pi_{n,\lambda}(\cdot \mid \bar{s})$在$\lambda_0$处相对于$O(\bar{s})$是相对连续的。
   2. 对于所有$\bar{s} \in \bar{S}_{\lambda_0}$和所有动作$a \in A$，值函数$Q^{\pi_{n,\lambda}}(\bar{s}, a)$和$V^{\pi_{n,\lambda}}(\bar{s})$在$\lambda_0$处是连续的。
-  3. 存在一个序列的邻域$(U_{\delta_n}(\lambda_0))_{n \ge 0}$，使得对于所有$n \ge 0$，策略$\pi_{n,\lambda}(a\mid\bar{s})$在$(a, \bar{s}, \lambda) \in (\text{supp num}_{\lambda_0,\pi_0} \cap (A \times \text{supp } \nu_{\lambda_0,\pi_0})) \times U_{\delta_n}(\lambda_0)$上与0保持距离。
+  3. 存在一个序列的邻域$(U_{\delta_n}(\lambda_0))_{n \ge 0}$，使得对于所有$n \ge 0$，策略$\pi_{n,\lambda}(a \mid \bar{s})$在$(a, \bar{s}, \lambda) \in (\text{supp num}_{\lambda_0,\pi_0} \cap (A \times \text{supp } \nu_{\lambda_0,\pi_0})) \times U_{\delta_n}(\lambda_0)$上与0保持距离。
 
 
 #### 6.3 将连续性结果扩展到其他片段子空间
@@ -618,7 +618,7 @@ $$
 - **推论19（近最优行为）**：
   对于任意固定的$n$和所有$\epsilon > 0$，存在$\delta > 0$，使得当$\lambda \in U_\delta(\lambda_0)$时，
   $$
-  \midJ^{\pi_{n,\lambda}}_\lambda - J^{\pi^*}_{\lambda_0}\mid < \epsilon
+   \mid J^{\pi_{n,\lambda}}_\lambda - J^{\pi^*}_{\lambda_0} \mid  < \epsilon
   $$
   这表明在确定性转移核的邻域内，eUDRL生成的策略的目标达成目标函数接近最优值。
 
@@ -658,14 +658,14 @@ $$
 2. **引理21（动作值函数的连续性）**：在相对连续性假设下，证明了动作值函数$Q^\pi_{\lambda}$在商拓扑下的连续性。
    - **公式内容**：
      $$
-     \midQ^\pi_{\lambda}(\bar{s}, a) - Q^*_{{\lambda_0}}(\bar{s}, a)\mid \leq \\mid\lambda(\cdot\mids, a) - \lambda_0(\cdot\mids, a)\\mid_1 + \max_{\bar{s}' \in \bar{S}_{\lambda_0}, a' \in O(\bar{s}')} \midQ^\pi_{\lambda}(\bar{s}', a') - Q^*_{{\lambda_0}}(\bar{s}', a')\mid.
+      \mid Q^\pi_{\lambda}(\bar{s}, a) - Q^*_{{\lambda_0}}(\bar{s}, a) \mid  \leq \ \mid \lambda(\cdot \mid s, a) - \lambda_0(\cdot \mid s, a)\ \mid _1 + \max_{\bar{s}' \in \bar{S}_{\lambda_0}, a' \in O(\bar{s}')}  \mid Q^\pi_{\lambda}(\bar{s}', a') - Q^*_{{\lambda_0}}(\bar{s}', a') \mid .
      $$
    - **意义**：该引理为后续证明提供了动作值函数的递归估计。
 
 3. **引理22（访问概率的下界）**：证明了在初始分布支持集包含$\bar{S}_{\lambda_0}$的情况下，状态访问概率有正的下界。
    - **公式内容**：
      $$
-     P_{\lambda}(H_{\Sigma_0} = h, G_{\Sigma_0} = g \mid S_{\Sigma_0} = s, l(\Sigma) = h; \pi) > \alpha,
+     P_{\lambda}(H_{\Sigma_0} = h, G_{\Sigma_0} = g  \mid  S_{\Sigma_0} = s, l(\Sigma) = h; \pi) > \alpha,
      $$
      其中$\alpha = \frac{2}{N(N + 1)} \min_{\bar{s} \in \bar{S}_{\lambda_0}} \bar{\mu}(\bar{s}) > 0$。
    - **意义**：该引理为后续分析提供了访问概率的正下界，确保了策略递归的稳定性。
@@ -681,7 +681,7 @@ $$
 1. **定理25（策略积累点集的相对连续性）**：当初始分布的支持集包含$\bar{S}_{\lambda_0}$时，证明了eUDRL生成的策略积累点集在确定性转移核附近的相对连续性。
    - **公式内容**：
      $$
-     \liminf_{n \to \infty} \pi_{n,\lambda}(O(\bar{s})\mid\bar{s}) \geq x^*(\gamma),
+     \liminf_{n \to \infty} \pi_{n,\lambda}(O(\bar{s}) \mid \bar{s}) \geq x^*(\gamma),
      $$
      其中$x^*(\gamma) = 1 - \gamma$，且$\gamma = \frac{\tilde{\beta}}{(1 - \beta)\alpha} < 1$。
    - **意义**：该定理表明，随着迭代次数的增加，策略在最优动作上的概率接近1，且这一性质在确定性转移核附近是连续的。
@@ -711,17 +711,17 @@ $$
    - **公式内容**：
      - 策略估计：
        $$
-       \limsup_{n \to \infty} \max_{\bar{s} \in \bar{S}_{\lambda_0}} 2(1 - \pi_{n,\lambda}(O(\bar{s})\mid\bar{s})) \leq \kappa_N,
+       \limsup_{n \to \infty} \max_{\bar{s} \in \bar{S}_{\lambda_0}} 2(1 - \pi_{n,\lambda}(O(\bar{s}) \mid \bar{s})) \leq \kappa_N,
        $$
        其中$\kappa_N = 2(1 - x^*(\gamma_N))$。
      - 动作值函数估计：
        $$
-       \limsup_{n \to \infty} \max_{\bar{s} \in \bar{S}_{\lambda_0}, a \in A} \midQ^{\pi_{n,\lambda}}_{\lambda}(\bar{s}, a) - Q^*_{{\lambda_0}}(\bar{s}, a)\mid \leq \beta_N,
+       \limsup_{n \to \infty} \max_{\bar{s} \in \bar{S}_{\lambda_0}, a \in A}  \mid Q^{\pi_{n,\lambda}}_{\lambda}(\bar{s}, a) - Q^*_{{\lambda_0}}(\bar{s}, a) \mid  \leq \beta_N,
        $$
        其中$\beta_N$是关于$\delta$的函数。
      - 目标达成目标函数估计：
        $$
-       \limsup_{n \to \infty} \midJ^{\pi_{n,\lambda}}_{\lambda} - J^*_{{\lambda_0}}\mid \leq \frac{N\delta}{2} + \beta_N + \kappa_N.
+       \limsup_{n \to \infty}  \mid J^{\pi_{n,\lambda}}_{\lambda} - J^*_{{\lambda_0}} \mid  \leq \frac{N\delta}{2} + \beta_N + \kappa_N.
        $$
    - **意义**：这些估计表明，随着转移核接近确定性转移核，eUDRL生成的策略和值函数的误差趋于0，从而证明了其相对连续性。
 
@@ -762,7 +762,7 @@ $$
 #### Theorem 31
 假设$\lambda_0$是确定性核，且在$\bar{S}_{\lambda_0}$上最优策略唯一，则对于任意初始策略$\pi_0 > 0$，存在$\delta \in (0, 2)$，使得对于所有$\lambda \in U_\delta(\lambda_0)$（即$\lambda$与$\lambda_0$的距离小于$\delta$），有：
 $$
-\liminf_{n \to \infty} \pi_{n, \lambda}(O(\bar{s})\mid\bar{s}) \geq x_u(b)
+\liminf_{n \to \infty} \pi_{n, \lambda}(O(\bar{s}) \mid \bar{s}) \geq x_u(b)
 $$
 其中$b = \frac{\delta^{N} 2^{N + 1}}{4(1 - \delta/2)^{2N} \min_{\bar{s} \in \text{supp} \bar{\mu}} \bar{\mu}(\bar{s})}$，且$x_u(b) \to 1$当$\delta \to 0$。
 
@@ -770,10 +770,10 @@ $$
 
 #### Corollary 33
 在Theorem 31的条件下，定义$\delta_0$为方程$b(\delta) = b_0$的唯一解，其中$b_0 = \frac{1}{2N} \left( \frac{2N-1}{2N} \right)^{2N-1}$。则存在两个连续的严格单调函数$x_l(\delta)$和$x_u(\delta)$，满足以下性质：
-1. $\liminf_{n \to \infty} \pi_{n, \lambda}(O(\bar{s})\mid\bar{s}) \geq x_u(\delta) \to 1$，当$\delta \to 0$。
-2. $\limsup_{n \to \infty} \midV_{\pi_n}^\lambda(\bar{s}) - V^*_{\lambda_0}(\bar{s})\mid \leq 1 - (1 - \frac{\delta}{2})^N x_u^N(\delta)$。
-3. $\limsup_{n \to \infty} \midJ_{\pi_n}^\lambda - J^*_{\lambda_0}\mid \leq \frac{N \delta}{2} + (1 - (1 - \frac{\delta}{2})^N x_u^N(\delta))$。
-4. 存在一个序列$(\pi^*_{\lambda_0, n})$，使得对于所有$n$，有$\\mid\pi_{n, \lambda}(\cdot\mid\bar{s}) - \pi^*_{\lambda_0, n}(\cdot\mid\bar{s})\\mid_1 \leq 2(1 - h_b^n(x_0))$，其中$x_0 = \min_{\bar{s} \in \bar{S}_{\lambda_0}} \pi_0(O(\bar{s})\mid\bar{s})$。
+1. $\liminf_{n \to \infty} \pi_{n, \lambda}(O(\bar{s}) \mid \bar{s}) \geq x_u(\delta) \to 1$，当$\delta \to 0$。
+2. $\limsup_{n \to \infty}  \mid V_{\pi_n}^\lambda(\bar{s}) - V^*_{\lambda_0}(\bar{s}) \mid  \leq 1 - (1 - \frac{\delta}{2})^N x_u^N(\delta)$。
+3. $\limsup_{n \to \infty}  \mid J_{\pi_n}^\lambda - J^*_{\lambda_0} \mid  \leq \frac{N \delta}{2} + (1 - (1 - \frac{\delta}{2})^N x_u^N(\delta))$。
+4. 存在一个序列$(\pi^*_{\lambda_0, n})$，使得对于所有$n$，有$\ \mid \pi_{n, \lambda}(\cdot \mid \bar{s}) - \pi^*_{\lambda_0, n}(\cdot \mid \bar{s})\ \mid _1 \leq 2(1 - h_b^n(x_0))$，其中$x_0 = \min_{\bar{s} \in \bar{S}_{\lambda_0}} \pi_0(O(\bar{s}) \mid \bar{s})$。
 
 **意义**：提供了策略、值函数和目标达成目标的误差上界估计，并展示了这些误差随着$\delta$的减小而趋近于零。
 
@@ -805,9 +805,9 @@ $$
 #### $\epsilon$-eUDRL的定义
 正则化后的eUDRL（$\epsilon$-eUDRL）的迭代公式为：
 $$
-\pi_{n+1, \epsilon}(a\mids, h, g) = (1 - \epsilon) \frac{\text{num}_{\lambda, \pi_n, \epsilon}(a, s, h, g)}{\text{den}_{\lambda, \pi_n, \epsilon}(s, h, g)} + \epsilon \frac{1}{\midA\mid}
+\pi_{n+1, \epsilon}(a \mid s, h, g) = (1 - \epsilon) \frac{\text{num}_{\lambda, \pi_n, \epsilon}(a, s, h, g)}{\text{den}_{\lambda, \pi_n, \epsilon}(s, h, g)} + \epsilon \frac{1}{ \mid A \mid }
 $$
-其中，$\epsilon \in (0, 1)$是正则化参数，且当$(s, h, g) \notin \text{supp} \, \text{den}_{\lambda, \pi_n, \epsilon}$时，$\pi_{n+1, \epsilon}(a\mids, h, g) = \frac{1}{\midA\mid}$。
+其中，$\epsilon \in (0, 1)$是正则化参数，且当$(s, h, g) \notin \text{supp} \, \text{den}_{\lambda, \pi_n, \epsilon}$时，$\pi_{n+1, \epsilon}(a \mid s, h, g) = \frac{1}{ \mid A \mid }$。
 
 **意义**：通过引入正则化，确保了策略在所有状态下都有非零的概率，从而简化了连续性证明。
 
@@ -817,7 +817,7 @@ $$
 #### Lemma 41 ($\epsilon$-eUDRL版本的Lemma 10)
 描述了$\epsilon$-eUDRL在确定性转移核$\lambda_0$下的行为。定义最优策略集合为：
 $$
-\Pi^*_{\lambda_0, \epsilon} = \left\{ (1 - \epsilon)\pi^*_{\lambda_0} + \epsilon \frac{1}{\midA\mid} \mid \pi^*_{\lambda_0} \text{是} \lambda_0 \text{在} \bar{S}_{\lambda_0} \text{上的最优策略} \right\}
+\Pi^*_{\lambda_0, \epsilon} = \left\{ (1 - \epsilon)\pi^*_{\lambda_0} + \epsilon \frac{1}{ \mid A \mid } \mid \pi^*_{\lambda_0} \text{是} \lambda_0 \text{在} \bar{S}_{\lambda_0} \text{上的最优策略} \right\}
 $$
 该引理断言$\epsilon$-eUDRL的累积点包含在$\Pi^*_{\lambda_0, \epsilon}$中。
 
@@ -826,7 +826,7 @@ $$
 #### Lemma 42 ($\epsilon$-eUDRL版本的Lemma 22)
 提供了状态访问概率的下界：
 $$
-\alpha(\delta, \epsilon) = \frac{2}{N(N-1)} \left( \min_{\bar{s} \in \bar{S}_{\lambda_0}} \bar{\mu}(\bar{s}) \right) \left( \frac{\epsilon}{\midA\mid} \right)^N \left( 1 - \frac{\delta}{2} \right)^N
+\alpha(\delta, \epsilon) = \frac{2}{N(N-1)} \left( \min_{\bar{s} \in \bar{S}_{\lambda_0}} \bar{\mu}(\bar{s}) \right) \left( \frac{\epsilon}{ \mid A \mid } \right)^N \left( 1 - \frac{\delta}{2} \right)^N
 $$
 
 **意义**：正则化确保了状态访问概率的下界，从而支持了连续性分析。
@@ -835,31 +835,31 @@ $$
 假设$\{M_\lambda\}$和$\{\bar{M}_\lambda\}$是兼容族，$\lambda_0$是确定性核，$(\pi_{n, \lambda, \epsilon})_{n \geq 0}$是由$\epsilon$-eUDRL生成的策略序列，初始条件为$\pi_0 > 0$，转移核为$\lambda$，正则化参数为$\epsilon \in (0, 1)$。则对于所有$\pi_0 > 0$，以下结论成立：
 1. **累积点的相对连续性**：设$L(\pi_0, \lambda, \epsilon)$表示$(\pi_{n, \lambda, \epsilon})_{n \geq 0}$的累积点集合，则任意函数$u: (\pi_0, \lambda, \epsilon) \mapsto u(\pi_0, \lambda, \epsilon) \in L(\pi_0, \lambda, \epsilon)$在$\lambda_0$和$\epsilon_0$处相对于$\bar{S}_{\lambda_0}$是相对连续的，即：
    $$
-   [u(\pi_0, \lambda, \epsilon_0)](·\mid\bar{s}) \xrightarrow{O(\bar{s})} \pi^*_{\lambda_0, \epsilon_0}(·\mid\bar{s}) \quad \text{当} \quad \lambda \to \lambda_0
+   [u(\pi_0, \lambda, \epsilon_0)](· \mid \bar{s}) \xrightarrow{O(\bar{s})} \pi^*_{\lambda_0, \epsilon_0}(· \mid \bar{s}) \quad \text{当} \quad \lambda \to \lambda_0
    $$
 2. **累积点的误差估计**：设$\alpha(\delta, \epsilon)$如Lemma 42所述，$\beta, \tilde{\beta}, \epsilon \in (0, 1)$满足$1 > \gamma + \epsilon$，其中$\gamma = \tilde{\beta} \frac{((1-\epsilon)N - \beta)}{\alpha(\delta, \epsilon)}$，且
    $$
-   U_\delta(\lambda_0) = \left\{ \lambda \mid \max_{(s,a) \in S \times A} \\mid \lambda(·\mids, a) - \lambda_0(·\mids, a) \\mid_1 < \delta \right\}
+   U_\delta(\lambda_0) = \left\{ \lambda \mid \max_{(s,a) \in S \times A} \ \mid  \lambda(· \mid s, a) - \lambda_0(· \mid s, a) \ \mid _1 < \delta \right\}
    $$
    则存在$\delta > 0$，使得对于所有$\lambda \in U_\delta(\lambda_0)$和所有$\bar{s} \in \bar{S}_{\lambda_0}$，有：
    $$
-   \liminf_{n} \pi_{n, \lambda, \epsilon}(O(\bar{s})\mid\bar{s}) \geq x^*(\gamma, \epsilon, \midO(\bar{s})\mid)
+   \liminf_{n} \pi_{n, \lambda, \epsilon}(O(\bar{s}) \mid \bar{s}) \geq x^*(\gamma, \epsilon,  \mid O(\bar{s}) \mid )
    $$
-   其中$x^*(\gamma, \epsilon, \midO(\bar{s})\mid)$在$(\beta, \tilde{\beta}, \alpha, \epsilon) \to (0, 0, \alpha(0, \epsilon_0), \epsilon_0)$时趋近于$1 - \epsilon_0 \left(1 - \frac{\midO(\bar{s})\mid}{\midA\mid}\right)$。
+   其中$x^*(\gamma, \epsilon,  \mid O(\bar{s}) \mid )$在$(\beta, \tilde{\beta}, \alpha, \epsilon) \to (0, 0, \alpha(0, \epsilon_0), \epsilon_0)$时趋近于$1 - \epsilon_0 \left(1 - \frac{ \mid O(\bar{s}) \mid }{ \mid A \mid }\right)$。
 
 **意义**：证明了在确定性核附近，$\epsilon$-eUDRL生成策略的累积点是相对连续的，并提供了累积点的误差估计。
 
 #### Corollary 36 ($\epsilon$-eUDRL累积点的估计)
 在Theorem 34的条件下，假设$\delta \in (0, 1)$，定义：
 $$
-\alpha = \frac{2}{N(N-1)} \left( \min_{\bar{s} \in \bar{S}_{\lambda_0}} \bar{\mu}(\bar{s}) \right) \left( \frac{\epsilon}{\midA\mid} \right)^N \left( 1 - \frac{\delta}{2} \right)^N
+\alpha = \frac{2}{N(N-1)} \left( \min_{\bar{s} \in \bar{S}_{\lambda_0}} \bar{\mu}(\bar{s}) \right) \left( \frac{\epsilon}{ \mid A \mid } \right)^N \left( 1 - \frac{\delta}{2} \right)^N
 $$
 $$
-\tilde{\beta} = \frac{N \delta}{2}, \quad x^*(\gamma, \epsilon, M) = \frac{\hat{x}^* + \sqrt{(\hat{x}^*)^2 + 4 \gamma \epsilon M / \midA\mid}}{2}
+\tilde{\beta} = \frac{N \delta}{2}, \quad x^*(\gamma, \epsilon, M) = \frac{\hat{x}^* + \sqrt{(\hat{x}^*)^2 + 4 \gamma \epsilon M /  \mid A \mid }}{2}
 $$
 
 
-定义量$\tilde{\beta}=\frac{N\delta}{2}$，$x^{*}(\gamma,\epsilon,M)=\frac{\hat{x}^{*}+\sqrt{(\hat{x}^{*})^{2}+\frac{4\gamma\epsilon M}{\mid\mathcal{A}\mid}}}{2}$，其中$\hat{x}^{*}=1 - \epsilon(1-\frac{M}{\mathcal{A}})-\gamma$（参见引理45）。对于时间范围$h$，$1\leq h\leq N$ ，有：
+定义量$\tilde{\beta}=\frac{N\delta}{2}$，$x^{*}(\gamma,\epsilon,M)=\frac{\hat{x}^{*}+\sqrt{(\hat{x}^{*})^{2}+\frac{4\gamma\epsilon M}{ \mid \mathcal{A} \mid }}}{2}$，其中$\hat{x}^{*}=1 - \epsilon(1-\frac{M}{\mathcal{A}})-\gamma$（参见引理45）。对于时间范围$h$，$1\leq h\leq N$ ，有：
 $$
 \beta_{h}=
 \begin{cases}
@@ -871,7 +871,7 @@ $$
 \gamma_{h}=\frac{\tilde{\beta}}{((1 - \epsilon)^{N}-\beta_{h})\alpha},
 $$
 $$
-\kappa_{h}=\underset{\bar{s}=(s,h',g)\in\tilde{\mathcal{S}}_{\lambda_{0}},h' = h}{\max}2\left(1-\epsilon\left(1-\frac{\mid\mathcal{O}(\bar{s})\mid}{\mid\mathcal{A}\mid}\right)-x^{*}(\gamma_{h},\epsilon,\mathcal{O}(\bar{s}))\right).
+\kappa_{h}=\underset{\bar{s}=(s,h',g)\in\tilde{\mathcal{S}}_{\lambda_{0}},h' = h}{\max}2\left(1-\epsilon\left(1-\frac{ \mid \mathcal{O}(\bar{s}) \mid }{ \mid \mathcal{A} \mid }\right)-x^{*}(\gamma_{h},\epsilon,\mathcal{O}(\bar{s}))\right).
 $$ 
 
 
@@ -879,22 +879,22 @@ $$
 
 假设$\beta_h, \gamma_h \in (0, 1)$且$1 > \gamma_h + \epsilon$，注意到$\beta_h, \kappa_h, \gamma_h$随$h$增加而增加，并且在$\delta \to 0$时趋近于0。则对于所有$\lambda \in U_\delta(\lambda_0)$和所有$\pi_0 > 0$，以下结论成立：
 1. $$
-   \limsup_{n} \max_{\bar{s} \in \bar{S}_{\lambda_0}} \left\mid 1 - \epsilon \left(1 - \frac{\midO(\bar{s})\mid}{\midA\mid}\right) - \pi_{n, \epsilon}(O(\bar{s})\mid\bar{s}) \right\mid \leq \kappa_N
+   \limsup_{n} \max_{\bar{s} \in \bar{S}_{\lambda_0}} \left \mid  1 - \epsilon \left(1 - \frac{ \mid O(\bar{s}) \mid }{ \mid A \mid }\right) - \pi_{n, \epsilon}(O(\bar{s}) \mid \bar{s}) \right \mid  \leq \kappa_N
    $$
 2. $$
-   (\exists (\pi^*_{n, \epsilon}), \pi^*_{n, \epsilon} \in \Pi^*_{\lambda_0, \epsilon}) : \limsup_{n} \max_{\bar{s}, a \in \bar{S}_{\lambda_0} \times A} \midQ_{\pi_{n, \epsilon}}^\lambda(\bar{s}, a) - Q_{\pi^*_{n, \epsilon}}^{\lambda_0}(\bar{s}, a)\mid \leq \beta_N
+   (\exists (\pi^*_{n, \epsilon}), \pi^*_{n, \epsilon} \in \Pi^*_{\lambda_0, \epsilon}) : \limsup_{n} \max_{\bar{s}, a \in \bar{S}_{\lambda_0} \times A}  \mid Q_{\pi_{n, \epsilon}}^\lambda(\bar{s}, a) - Q_{\pi^*_{n, \epsilon}}^{\lambda_0}(\bar{s}, a) \mid  \leq \beta_N
    $$
 3. $$
-   (\exists (\pi^*_{n, \epsilon}), \pi^*_{n, \epsilon} \in \Pi^*_{\lambda_0, \epsilon}) : \limsup_{n} \max_{\bar{s} \in \bar{S}_{\lambda_0}} \midV_{\pi_{n, \epsilon}}^\lambda(\bar{s}) - V_{\pi^*_{n, \epsilon}}^{\lambda_0}(\bar{s})\mid \leq \beta_N + \kappa_N
+   (\exists (\pi^*_{n, \epsilon}), \pi^*_{n, \epsilon} \in \Pi^*_{\lambda_0, \epsilon}) : \limsup_{n} \max_{\bar{s} \in \bar{S}_{\lambda_0}}  \mid V_{\pi_{n, \epsilon}}^\lambda(\bar{s}) - V_{\pi^*_{n, \epsilon}}^{\lambda_0}(\bar{s}) \mid  \leq \beta_N + \kappa_N
    $$
 4. $$
-   (\exists (\pi^*_{n, \epsilon}), \pi^*_{n, \epsilon} \in \Pi^*_{\lambda_0, \epsilon}) : \limsup_{n} \midJ_{\pi_{n, \epsilon}}^\lambda - J_{\pi^*_{n, \epsilon}}^{\lambda_0}\mid \leq \frac{N \delta}{2} + \beta_N + \kappa_N
+   (\exists (\pi^*_{n, \epsilon}), \pi^*_{n, \epsilon} \in \Pi^*_{\lambda_0, \epsilon}) : \limsup_{n}  \mid J_{\pi_{n, \epsilon}}^\lambda - J_{\pi^*_{n, \epsilon}}^{\lambda_0} \mid  \leq \frac{N \delta}{2} + \beta_N + \kappa_N
    $$
 5. 对于所有$\epsilon' > 0$，存在$n_0$和$(\pi^*_{n, \epsilon})_{n \geq 0}$，$\pi^*_{n, \epsilon} \in \Pi^*_{\lambda_0, \epsilon}$，使得对于所有$n \geq n_0$和所有$\bar{s} \in \bar{S}_{\lambda_0}$，有：
    $$
-   \\mid\pi_{n, \epsilon}(·\mid\bar{s}) - \pi^*_{n, \epsilon}(·\mid\bar{s})\\mid_1 \leq 2 \left(1 - \epsilon \left(1 - \frac{\midO(\bar{s})\mid}{\midA\mid}\right) - z^{(n-n_0)}_{\gamma', \epsilon, \midO(\bar{s})\mid}(x_0)\right)
+   \ \mid \pi_{n, \epsilon}(· \mid \bar{s}) - \pi^*_{n, \epsilon}(· \mid \bar{s})\ \mid _1 \leq 2 \left(1 - \epsilon \left(1 - \frac{ \mid O(\bar{s}) \mid }{ \mid A \mid }\right) - z^{(n-n_0)}_{\gamma', \epsilon,  \mid O(\bar{s}) \mid }(x_0)\right)
    $$
-   其中$x_0 = \epsilon \frac{\midO(\bar{s})\mid}{\midA\mid}$，$\beta' > \beta_N + \epsilon'$，且$\epsilon'$满足$1 > \gamma' + \epsilon'$，$\gamma' = \tilde{\beta} \frac{((1-\epsilon)N - \beta')}{\alpha} > 0$。
+   其中$x_0 = \epsilon \frac{ \mid O(\bar{s}) \mid }{ \mid A \mid }$，$\beta' > \beta_N + \epsilon'$，且$\epsilon'$满足$1 > \gamma' + \epsilon'$，$\gamma' = \tilde{\beta} \frac{((1-\epsilon)N - \beta')}{\alpha} > 0$。
 
 **意义**：提供了$\epsilon$-eUDRL生成策略、值函数和目标达成目标的误差估计，并展示了这些误差随$\delta \to 0$而趋近于零。
 
@@ -945,7 +945,7 @@ $$
 #### 片段分布的概率计算
 片段分布的概率可以分解为：
 $$
-P(\Sigma = \sigma; \pi) = c^{-1} \left( \prod_{i=1}^{l(\sigma)} \lambda(s^\sigma_i \mid a^\sigma_{i-1}, s^\sigma_{i-1}) \right) \left( \prod_{i=0}^{l(\sigma)-1} \pi(a^\sigma_i \mid \bar{s}^\sigma_i) \right) P(S_t = s^\sigma_0, H_t = h^\sigma_0, G_t = g^\sigma_0; \pi)
+P(\Sigma = \sigma; \pi) = c^{-1} \left( \prod_{i=1}^{l(\sigma)} \lambda(s^\sigma_i  \mid  a^\sigma_{i-1}, s^\sigma_{i-1}) \right) \left( \prod_{i=0}^{l(\sigma)-1} \pi(a^\sigma_i  \mid  \bar{s}^\sigma_i) \right) P(S_t = s^\sigma_0, H_t = h^\sigma_0, G_t = g^\sigma_0; \pi)
 $$
 
 #### 归一化常数$c$的界限
@@ -970,7 +970,7 @@ $$
 #### 示例1：目标达成目标的不连续性
 考虑一个具有三个状态和三个动作的MDP，其扩展环境（CE）的初始分布固定初始剩余时间为1，目标分布为$P(G_0 = 0) = P(G_0 = 2) = \frac{1}{2}$。定义参数化的转移核$\lambda_\alpha$：
 $$
-\lambda_\alpha(g\mida) = \begin{cases}
+\lambda_\alpha(g \mid a) = \begin{cases}
 1 - \alpha & \text{if } g = 0, a = 0 \\
 \alpha/4 & \text{if } g = 1, a = 0 \\
 3\alpha/4 & \text{if } g = 2, a = 0 \\
@@ -989,7 +989,7 @@ $$
 #### 示例2：策略的不连续性
 考虑与示例1相同的MDP，但初始目标分布为均匀分布。定义新的参数化转移核：
 $$
-\lambda_\alpha(g\mida) = \begin{cases}
+\lambda_\alpha(g \mid a) = \begin{cases}
 1 - \alpha & \text{if } g = 0, a = 0 \\
 \alpha & \text{if } g = 1, a = 0 \\
 0 & \text{if } g = 2, a = 0 \\
@@ -1033,14 +1033,14 @@ $$
 
 #### **2. Lemma 38（eUDRL策略和值的连续性）**
 **内容**：对于兼容的MDP族$\{M_λ : λ ∈ (∆S)^{S×A}\}$和$\{\overline{M}_λ : λ ∈ (∆S)^{S×A}\}$，假设$(π_n,λ), π_0 ∈ (∆A)^S$是由eUDRL生成的策略序列，且$λ_0 > 0$是内点$λ_0 ∈ ((∆S)^{S×A})^\circ$。则对于所有$n ≥ 0$：
-1. 对于所有$\bar{s} = (s, h, g) ∈ \overline{S}_T$，策略$π_{n+1,λ}(·\mid\bar{s})$在$λ_0$处关于$λ$是连续的。
+1. 对于所有$\bar{s} = (s, h, g) ∈ \overline{S}_T$，策略$π_{n+1,λ}(· \mid \bar{s})$在$λ_0$处关于$λ$是连续的。
 2. 对于所有$\bar{s} = (s, h, g) ∈ \overline{S}_T$，值函数$V_{π_n}^λ(\bar{s})$和$Q_{π_n}^λ(\bar{s}, ·)$在$λ_0$处关于$λ$是连续的。此外，目标达成目标$J_{π_n}^λ$在$λ_0$处关于$λ$也是连续的。
 **证明思路**：
 - **归纳法**：
   - **基础情况（$n = 0$）**：$π_0$是关于$λ$的常数，因此在$λ_0$处连续。
   - **归纳假设**：假设对于$n ≥ 0$，结论成立，证明对于$n+1$也成立。
-    - 若$\bar{s} \notin \text{supp den}_{λ_0,π_n}$，则根据引理37，$\bar{s} \notin \text{supp den}_{λ,π_n}$对于所有$λ ∈ U_δ(λ_0)$。因此，$π_{n+1,λ}(·\mid\bar{s}) = \frac{1}{\midA\mid}$，从而在$λ_0$处连续。
-    - 若$\bar{s} ∈ \text{supp den}_{λ_0,π_n}$，则对于所有$λ ∈ U_δ(λ_0)$，有$\bar{s} ∈ \text{supp den}_{λ,π_n}$。此时，$π_{n+1,λ}(a\mid\bar{s}) = \frac{\text{num}_{λ,π_n}(\bar{s}, a)}{\text{den}_{λ,π_n}(\bar{s})}$。根据引理12，$\text{num}_{λ,π_n}(\bar{s}, ·)$和$\text{den}_{λ,π_n}(\bar{s})$在$(λ, π_n)$上是连续的，且根据归纳假设，$π_{n,λ}(·\mid\bar{s}')$在$λ_0$处关于$λ$是连续的。因此，$π_{n+1,λ}(a\mid\bar{s})$在$λ_0$处关于$λ$是连续的。
+    - 若$\bar{s} \notin \text{supp den}_{λ_0,π_n}$，则根据引理37，$\bar{s} \notin \text{supp den}_{λ,π_n}$对于所有$λ ∈ U_δ(λ_0)$。因此，$π_{n+1,λ}(· \mid \bar{s}) = \frac{1}{ \mid A \mid }$，从而在$λ_0$处连续。
+    - 若$\bar{s} ∈ \text{supp den}_{λ_0,π_n}$，则对于所有$λ ∈ U_δ(λ_0)$，有$\bar{s} ∈ \text{supp den}_{λ,π_n}$。此时，$π_{n+1,λ}(a \mid \bar{s}) = \frac{\text{num}_{λ,π_n}(\bar{s}, a)}{\text{den}_{λ,π_n}(\bar{s})}$。根据引理12，$\text{num}_{λ,π_n}(\bar{s}, ·)$和$\text{den}_{λ,π_n}(\bar{s})$在$(λ, π_n)$上是连续的，且根据归纳假设，$π_{n,λ}(· \mid \bar{s}')$在$λ_0$处关于$λ$是连续的。因此，$π_{n+1,λ}(a \mid \bar{s})$在$λ_0$处关于$λ$是连续的。
 - **值函数的连续性**：对于$n > 0$，固定$\bar{s} ∈ \overline{S}_T$，值函数$V_{π_n}^λ(\bar{s})$和$Q_{π_n}^λ(\bar{s}, a)$在$(λ, π_n)$上是连续的（根据引理12）。由于$π_{n,λ}$在$λ_0$处关于$λ$是连续的，因此$V_{π_n}^λ(\bar{s})$和$Q_{π_n}^λ(\bar{s}, a)$在$λ_0$处关于$λ$是连续的。目标达成目标$J_{π_n}^λ$在$λ_0$处关于$λ$的连续性则由值函数$V_{π_n}^λ(\bar{s})$的连续性推导而来。
 **意义**：该引理证明了在所有转移核的内点处，eUDRL生成的策略和值函数是连续的，这为eUDRL在这些点的稳定性提供了理论支持。
 
@@ -1101,7 +1101,7 @@ $$
 - 对于确定性转移核$\lambda_0$，由ϵ-eUDRL迭代生成的策略序列$(\pi_{n,\epsilon})_{n \geq 0}$满足：
   1. 对所有$n \geq 0$，策略$\pi_{n+1,\epsilon}$在$\bar{S}_{\lambda_0}$上具有形式：
      $$
-     \pi_{n+1,\epsilon} = (1 - \epsilon)\pi^*_n + \frac{\epsilon}{\midA\mid}
+     \pi_{n+1,\epsilon} = (1 - \epsilon)\pi^*_n + \frac{\epsilon}{ \mid A \mid }
      $$
      其中$\pi^*_n$是基于“num/den”比率定义的最优策略。
   2. 对所有$n \geq 1$和所有$\bar{s} = (s, h, g) \in \bar{S}_{\lambda_0}$，值函数满足：
@@ -1122,11 +1122,11 @@ $$
 **内容**：
 - 对于确定性转移核$\lambda_0$，由ϵ-eUDRL迭代生成的策略序列$(\pi_{n,\lambda,\epsilon})_{n \geq 0}$，对所有$n > 0$、所有$\bar{s} = (s, h, g) \in \bar{S}_{\lambda_0}$和所有$\lambda \in U_2(\lambda_0)$，访问概率满足：
   $$
-  P_\lambda(H^\Sigma_0 = h, G^\Sigma_0 = g \mid S^\Sigma_0 = s, l(\Sigma) = h; \pi_{n,\epsilon}) \geq \alpha(\delta, \epsilon)
+  P_\lambda(H^\Sigma_0 = h, G^\Sigma_0 = g  \mid  S^\Sigma_0 = s, l(\Sigma) = h; \pi_{n,\epsilon}) \geq \alpha(\delta, \epsilon)
   $$
   其中
   $$
-  \alpha(\delta, \epsilon) = \frac{2}{N(N + 1)} \left( \min_{\bar{s}' \in \text{supp} \bar{\mu}} \bar{\mu}(\bar{s}') \right) \left( \frac{\epsilon}{\midA\mid} \right)^N \left( 1 - \frac{\delta}{2} \right)^N > 0
+  \alpha(\delta, \epsilon) = \frac{2}{N(N + 1)} \left( \min_{\bar{s}' \in \text{supp} \bar{\mu}} \bar{\mu}(\bar{s}') \right) \left( \frac{\epsilon}{ \mid A \mid } \right)^N \left( 1 - \frac{\delta}{2} \right)^N > 0
   $$
 
 **意义**：
@@ -1135,13 +1135,13 @@ $$
 
 #### Lemma 44 (ϵ-eUDRL的连续性)
 **内容**：
-- 对于确定性转移核$\lambda_0$，如果策略$\pi_\epsilon$与$\Pi^*_{\lambda_0,\epsilon}$足够接近，且$\lambda$与$\lambda_0$足够接近，则动作值函数$Q^{\pi_\epsilon}_\lambda$与$\{Q^{\pi^*_\epsilon}_{\lambda_0} \mid \pi^*_\epsilon \in \Pi^*_{\lambda_0,\epsilon}\}$足够接近。具体而言，对所有$\epsilon' > 0$，存在$\delta > 0$，使得当$\lambda \in U_\delta(\lambda_0)$且
+- 对于确定性转移核$\lambda_0$，如果策略$\pi_\epsilon$与$\Pi^*_{\lambda_0,\epsilon}$足够接近，且$\lambda$与$\lambda_0$足够接近，则动作值函数$Q^{\pi_\epsilon}_\lambda$与$\{Q^{\pi^*_\epsilon}_{\lambda_0}  \mid  \pi^*_\epsilon \in \Pi^*_{\lambda_0,\epsilon}\}$足够接近。具体而言，对所有$\epsilon' > 0$，存在$\delta > 0$，使得当$\lambda \in U_\delta(\lambda_0)$且
   $$
-  2(1 - \epsilon(1 - \frac{\midO(\bar{s})\mid}{\midA\mid}) - \pi_\epsilon(O(\bar{s})\mid\bar{s})) < \delta
+  2(1 - \epsilon(1 - \frac{ \mid O(\bar{s}) \mid }{ \mid A \mid }) - \pi_\epsilon(O(\bar{s}) \mid \bar{s})) < \delta
   $$
   时，有
   $$
-  \midQ^{\pi_\epsilon}_\lambda(\bar{s}, \cdot) - Q^{\pi^*_\epsilon}_{\lambda_0}(\bar{s}, \cdot)\mid < \epsilon'
+   \mid Q^{\pi_\epsilon}_\lambda(\bar{s}, \cdot) - Q^{\pi^*_\epsilon}_{\lambda_0}(\bar{s}, \cdot) \mid  < \epsilon'
   $$
   其中$\pi^*_\epsilon \in \Pi^*_{\lambda_0,\epsilon}$。
 
@@ -1156,16 +1156,16 @@ $$
 - 对于确定性转移核$\lambda_0$，由ϵ-eUDRL迭代生成的策略序列$(\pi_{n,\lambda,\epsilon})_{n \geq 0}$，满足以下性质：
   1. 对所有初始条件$\pi_0 > 0$，累积点集合$L(\pi_0, \lambda, \epsilon)$中的任意函数$u(\pi_0, \lambda, \epsilon)$在$\lambda$和$\epsilon$上是相对连续的，即
      $$
-     [u(\pi_0, \lambda, \epsilon_0)](\cdot\mid\bar{s}) \xrightarrow{\text{O}(\bar{s})} \pi^*_{\lambda_0,\epsilon_0}(\cdot\mid\bar{s}) \quad \text{当} \ \lambda \to \lambda_0
+     [u(\pi_0, \lambda, \epsilon_0)](\cdot \mid \bar{s}) \xrightarrow{\text{O}(\bar{s})} \pi^*_{\lambda_0,\epsilon_0}(\cdot \mid \bar{s}) \quad \text{当} \ \lambda \to \lambda_0
      $$
   2. 对所有$\bar{s} \in \bar{S}_{\lambda_0}$，有
      $$
-     \liminf_{n} \pi_{n,\lambda,\epsilon}(O(\bar{s})\mid\bar{s}) \geq x^*(\gamma, \epsilon, \midO(\bar
-{s})\mid)
+     \liminf_{n} \pi_{n,\lambda,\epsilon}(O(\bar{s}) \mid \bar{s}) \geq x^*(\gamma, \epsilon,  \mid O(\bar
+{s}) \mid )
      $$
-     其中$x^*(\gamma, \epsilon, \midO(\bar{s})\mid)$是引理45中的不动点，并且
+     其中$x^*(\gamma, \epsilon,  \mid O(\bar{s}) \mid )$是引理45中的不动点，并且
      $$
-     x^*(\gamma, \epsilon, \midO(\bar{s})\mid) \to 1 - \epsilon_0 \left(1 - \frac{\midO(\bar{s})\mid}{\midA\mid}\right) \quad \text{当} \ (\beta, \tilde{\beta}, \alpha, \epsilon) \to (0, 0, \alpha(0, \epsilon_0), \epsilon_0)
+     x^*(\gamma, \epsilon,  \mid O(\bar{s}) \mid ) \to 1 - \epsilon_0 \left(1 - \frac{ \mid O(\bar{s}) \mid }{ \mid A \mid }\right) \quad \text{当} \ (\beta, \tilde{\beta}, \alpha, \epsilon) \to (0, 0, \alpha(0, \epsilon_0), \epsilon_0)
      $$
 
 **意义**：
@@ -1186,9 +1186,9 @@ $$
 #### Corollary 48 (累积点位置的估计)
 **内容**：
 - 在定理34的条件下，假设$\delta \in (0, 1)$，定义以下参数：
-  - $\alpha = \frac{2}{N(N - 1)} \left( \min_{\bar{s} \in \bar{S}_{\lambda_0}} \bar{\mu}(\bar{s}) \right) \left( \frac{\epsilon}{\midA\mid} \right)^N \left( 1 - \frac{\delta}{2} \right)^N$
+  - $\alpha = \frac{2}{N(N - 1)} \left( \min_{\bar{s} \in \bar{S}_{\lambda_0}} \bar{\mu}(\bar{s}) \right) \left( \frac{\epsilon}{ \mid A \mid } \right)^N \left( 1 - \frac{\delta}{2} \right)^N$
   - $\tilde{\beta} = \frac{N\delta}{2}$
-  - $x^*(\gamma, \epsilon, M) = \frac{\hat{x}^* + \sqrt{(\hat{x}^*)^2 + 4\gamma\epsilon M}}{2}$，其中$\hat{x}^* = 1 - \epsilon(1 - \frac{M}{\midA\mid}) - \gamma$
+  - $x^*(\gamma, \epsilon, M) = \frac{\hat{x}^* + \sqrt{(\hat{x}^*)^2 + 4\gamma\epsilon M}}{2}$，其中$\hat{x}^* = 1 - \epsilon(1 - \frac{M}{ \mid A \mid }) - \gamma$
   - 对于地平线$h$，$1 \leq h \leq N$，定义
     $$
     \beta_h =
@@ -1201,30 +1201,30 @@ $$
     \gamma_h = \tilde{\beta} \left( \frac{(1 - \epsilon)^N - \beta_h}{\alpha} \right)
     $$
     $$
-    \kappa_h = \max_{\bar{s} = (s, h', g) \in \bar{S}_{\lambda_0}, h' = h} 2 \left( 1 - \epsilon \left(1 - \frac{\midO(\bar{s})\mid}{\midA\mid}\right) - x^*(\gamma_h, \epsilon, O(\bar{s})) \right)
+    \kappa_h = \max_{\bar{s} = (s, h', g) \in \bar{S}_{\lambda_0}, h' = h} 2 \left( 1 - \epsilon \left(1 - \frac{ \mid O(\bar{s}) \mid }{ \mid A \mid }\right) - x^*(\gamma_h, \epsilon, O(\bar{s})) \right)
     $$
 
   在这些条件下，对所有$\lambda \in U_\delta(\lambda_0)$和所有$\pi_0 > 0$，有以下结论：
   1. $$
-     \limsup_{n} \max_{\bar{s} \in \bar{S}_{\lambda_0}} 2 \left( 1 - \epsilon \left(1 - \frac{\midO(\bar{s})\mid}{\midA\mid}\right) - \pi_{n,\epsilon}(O(\bar{s})\mid\bar{s}) \right) \leq \kappa_N
+     \limsup_{n} \max_{\bar{s} \in \bar{S}_{\lambda_0}} 2 \left( 1 - \epsilon \left(1 - \frac{ \mid O(\bar{s}) \mid }{ \mid A \mid }\right) - \pi_{n,\epsilon}(O(\bar{s}) \mid \bar{s}) \right) \leq \kappa_N
      $$
   2. 存在$(\pi^*_n, \epsilon)$，$\pi^*_n, \epsilon \in \Pi^*_{\lambda_0, \epsilon}$，使得
      $$
-     \limsup_{n} \max_{\bar{s}, a \in \bar{S}_{\lambda_0} \times A} \midQ^{\pi_{n,\epsilon}}_\lambda(\bar{s}, a) - Q^{\pi^*_n, \epsilon}_{\lambda_0}(\bar{s}, a)\mid \leq \beta_N
+     \limsup_{n} \max_{\bar{s}, a \in \bar{S}_{\lambda_0} \times A}  \mid Q^{\pi_{n,\epsilon}}_\lambda(\bar{s}, a) - Q^{\pi^*_n, \epsilon}_{\lambda_0}(\bar{s}, a) \mid  \leq \beta_N
      $$
   3. 存在$(\pi^*_n, \epsilon)$，$\pi^*_n, \epsilon \in \Pi^*_{\lambda_0, \epsilon}$，使得
      $$
-     \limsup_{n} \max_{\bar{s} \in \bar{S}_{\lambda_0}} \midV^{\pi_{n,\epsilon}}_\lambda(\bar{s}) - V^{\pi^*_n, \epsilon}_{\lambda_0}(\bar{s})\mid \leq \beta_N + \kappa_N
+     \limsup_{n} \max_{\bar{s} \in \bar{S}_{\lambda_0}}  \mid V^{\pi_{n,\epsilon}}_\lambda(\bar{s}) - V^{\pi^*_n, \epsilon}_{\lambda_0}(\bar{s}) \mid  \leq \beta_N + \kappa_N
      $$
   4. 存在$(\pi^*_n, \epsilon)$，$\pi^*_n, \epsilon \in \Pi^*_{\lambda_0, \epsilon}$，使得
      $$
-     \limsup_{n} \midJ^{\pi_{n,\epsilon}}_\lambda - J^{\pi^*_n, \epsilon}_{\lambda_0}\mid \leq \frac{N\delta}{2} + \beta_N + \kappa_N
+     \limsup_{n}  \mid J^{\pi_{n,\epsilon}}_\lambda - J^{\pi^*_n, \epsilon}_{\lambda_0} \mid  \leq \frac{N\delta}{2} + \beta_N + \kappa_N
      $$
   5. 对所有$\epsilon' > 0$，存在$n_0$和$(\pi^*_n, \epsilon)_{n \geq 0}$，$\pi^*_n, \epsilon \in \Pi^*_{\lambda_0, \epsilon}$，使得对所有$n \geq n_0$和所有$\bar{s} \in \bar{S}_{\lambda_0}$，有
      $$
-     \\mid\pi_{n,\epsilon}(\cdot\mid\bar{s}) - \pi^*_n, \epsilon(\cdot\mid\bar{s})\\mid_1 \leq 2 \left( 1 - \epsilon \left(1 - \frac{\midO(\bar{s})\mid}{\midA\mid}\right) - z^{(n - n_0)}_{\gamma', \epsilon, \midO(\bar{s})\mid}(x_0) \right)
+     \ \mid \pi_{n,\epsilon}(\cdot \mid \bar{s}) - \pi^*_n, \epsilon(\cdot \mid \bar{s})\ \mid _1 \leq 2 \left( 1 - \epsilon \left(1 - \frac{ \mid O(\bar{s}) \mid }{ \mid A \mid }\right) - z^{(n - n_0)}_{\gamma', \epsilon,  \mid O(\bar{s}) \mid }(x_0) \right)
      $$
-     其中$x_0 = \frac{\epsilon\midO(\bar{s})\mid}{\midA\mid}$，$\beta' > \beta_N + \epsilon'$，且$\epsilon'$满足$1 > \gamma' + \epsilon'$，$\gamma' = \tilde{\beta} \left( \frac{(1 - \epsilon)^N - \beta'}{\alpha} \right) > 0$。
+     其中$x_0 = \frac{\epsilon \mid O(\bar{s}) \mid }{ \mid A \mid }$，$\beta' > \beta_N + \epsilon'$，且$\epsilon'$满足$1 > \gamma' + \epsilon'$，$\gamma' = \tilde{\beta} \left( \frac{(1 - \epsilon)^N - \beta'}{\alpha} \right) > 0$。
 
 **意义**：
 - 该推论提供了ϵ-eUDRL算法生成的策略序列的累积点位置的估计，表明在确定性转移核附近，策略序列的值函数、动作值函数和策略本身都能收敛到接近最优策略的值，进一步验证了算法的收敛性和稳定性。
@@ -1260,10 +1260,10 @@ arXiv:2502.05672v1 [stat.ML] 2025年2月8日
 
 ## 1 引言
 
-强化学习（RL）算法旨在学习在与环境交互时选择最优动作的策略。环境不会揭示最优动作，而是为采取更好的动作提供更高的奖励。这与监督学习（SL）形成直接对比，后者为每个输入提供正确的输出以供学习。尽管如此，仍有一系列算法被提出，试图使用纯监督学习技术解决强化学习任务。上下颠倒强化学习（UDRL）通过将期望的回报/目标映射到动作，将动作预测作为一个监督学习问题来解决，从而颠覆了传统的RL过程[^Schmidhuber2019^][^Srivastava2019^]。目标条件监督学习（GCSL）利用目标信息指导模型的学习过程[^Ghosh2021^]，在线决策变换器（ODT）则利用变换器架构对整个轨迹进行建模，将过去的状体、动作和奖励视为序列，以预测最优动作[^Zheng2022^]。实验表明，这些算法不仅由于依赖于SL而具有惊人的简单性和可扩展性，而且在几个RL基准测试中也能取得良好的结果（例如Vizdoom[^Kempka2016^]、机器人操作[^Ahn2020^]和运动控制[^Fu2020^]）。然而，它们的理论理解仅限于启发式方法和对限制性特殊情况的研究。通过严格分析收敛性和稳定性，本研究开始为通过SL或序列建模解决RL问题的算法奠定理论基础。我们的研究由以下两个问题引导：1）假设给出了底层马尔可夫环境的明确模型（转移核），UDRL、GCSL和ODT的收敛性如何？在无限资源的极限下，典型的感兴趣对象（如策略、状态和动作值）的行为如何？2）在环境模型存在扰动或误差的情况下，这些量的稳定性如何？确保算法能够可靠地识别最优解并在不同条件下保持稳定的保证是它们在现实世界系统中实际部署的基础[^Bertsekas1996^][^Nocedal2006^]。在建立一些基本背景后，值得注意的是，UDRL、GCSL和ODT是非常相似的算法。尽管架构细节有所不同，但它们的核心是关于学习代理获取信息的共同理念。它们都专注于直接根据轨迹中的奖励信号预测动作，而不是学习值函数。关键的共同要素是将奖励、观察和规划范围解释为从其中计算代理命令的任务定义输入。然后通过SL更新代理的行动规则（策略），将之前的轨迹观察和命令映射到动作中，完成学习过程。更正式地说，假设一个遵循某种行动规则$\pi_{\text{old}}$的学习代理收集了一系列轨迹样本。给定一个从状态-动作对$(s, a)$开始、长度为$h$且目标$g$是从段的特征（如状态和奖励的序列）计算得出的轨迹段，可以认为动作$a$对于从$s$在$h$步内实现$g$是有用的。那么，将$(h, g)$解释为代理的命令，并使用SL将新的行动规则$\pi_{\text{new}}$拟合到分布$a\mids, h, g$中是合理的，
+强化学习（RL）算法旨在学习在与环境交互时选择最优动作的策略。环境不会揭示最优动作，而是为采取更好的动作提供更高的奖励。这与监督学习（SL）形成直接对比，后者为每个输入提供正确的输出以供学习。尽管如此，仍有一系列算法被提出，试图使用纯监督学习技术解决强化学习任务。上下颠倒强化学习（UDRL）通过将期望的回报/目标映射到动作，将动作预测作为一个监督学习问题来解决，从而颠覆了传统的RL过程[^Schmidhuber2019^][^Srivastava2019^]。目标条件监督学习（GCSL）利用目标信息指导模型的学习过程[^Ghosh2021^]，在线决策变换器（ODT）则利用变换器架构对整个轨迹进行建模，将过去的状体、动作和奖励视为序列，以预测最优动作[^Zheng2022^]。实验表明，这些算法不仅由于依赖于SL而具有惊人的简单性和可扩展性，而且在几个RL基准测试中也能取得良好的结果（例如Vizdoom[^Kempka2016^]、机器人操作[^Ahn2020^]和运动控制[^Fu2020^]）。然而，它们的理论理解仅限于启发式方法和对限制性特殊情况的研究。通过严格分析收敛性和稳定性，本研究开始为通过SL或序列建模解决RL问题的算法奠定理论基础。我们的研究由以下两个问题引导：1）假设给出了底层马尔可夫环境的明确模型（转移核），UDRL、GCSL和ODT的收敛性如何？在无限资源的极限下，典型的感兴趣对象（如策略、状态和动作值）的行为如何？2）在环境模型存在扰动或误差的情况下，这些量的稳定性如何？确保算法能够可靠地识别最优解并在不同条件下保持稳定的保证是它们在现实世界系统中实际部署的基础[^Bertsekas1996^][^Nocedal2006^]。在建立一些基本背景后，值得注意的是，UDRL、GCSL和ODT是非常相似的算法。尽管架构细节有所不同，但它们的核心是关于学习代理获取信息的共同理念。它们都专注于直接根据轨迹中的奖励信号预测动作，而不是学习值函数。关键的共同要素是将奖励、观察和规划范围解释为从其中计算代理命令的任务定义输入。然后通过SL更新代理的行动规则（策略），将之前的轨迹观察和命令映射到动作中，完成学习过程。更正式地说，假设一个遵循某种行动规则$\pi_{\text{old}}$的学习代理收集了一系列轨迹样本。给定一个从状态-动作对$(s, a)$开始、长度为$h$且目标$g$是从段的特征（如状态和奖励的序列）计算得出的轨迹段，可以认为动作$a$对于从$s$在$h$步内实现$g$是有用的。那么，将$(h, g)$解释为代理的命令，并使用SL将新的行动规则$\pi_{\text{new}}$拟合到分布$a \mid s, h, g$中是合理的，
 
 $$
-\pi_{\text{new}} = \arg\max_{\pi} \mathbb{E}[\text{loss}(\pi(a\mids, h, g))],
+\pi_{\text{new}} = \arg\max_{\pi} \mathbb{E}[\text{loss}(\pi(a \mid s, h, g))],
 $$
 
 其中$\text{loss}$是适当的损失函数，期望是在轨迹样本中的所有段上计算的。通过将$\pi_{\text{old}}$替换为$\pi_{\text{new}}$，从$\pi_{\text{old}}$中采样新的轨迹，计算实现的范围和目标$(h, g)$，最后使用这些信息更新$\pi_{\text{new}}$，学习过程迭代进行。我们在episodic UDRL（eUDRL）的框架内对UDRL、GCSL和ODT算法进行了分析，eUDRL具有目标结构的特定形式。具体来说，eUDRL假设对段的终止状态应用目标映射$\rho$来评估目标是否达成，即$g = \rho(s)$。GCSL可以被视为eUDRL的一个稍微受限的版本，因为它只关注状态到达任务，并且使用固定的范围。决策变换器（DT）本质上对应于针对离线RL的eUDRL的一次迭代[^Chen2021^]，ODT可以被视为具有熵正则化的eUDRL的一种形式；详见背景部分2的详细信息。与标准RL策略不同，后者根据给定状态定义代理的动作概率，“策略”$\pi_{\text{old}}$和$\pi_{\text{new}}$还根据命令$(h, g)$对这些概率进行条件化。这导致了命令扩展（参见定义1）的形式主义，这是马尔可夫决策过程的一个特殊类别，其中命令被包含为状态的一部分，$\bar{s} = (s, h, g)$。在技术方面，本文开发了命令扩展的数学，为通过SL探索RL提供了坚实的基础。
@@ -1294,13 +1294,13 @@ eUDRL（特别是UDRL、GCSL和DT）在非确定性环境中的不稳定性已�
 
 ### **2.1 马尔可夫决策过程**
 
-马尔可夫决策过程（MDPs）是用于不确定动态环境中序贯决策问题的数学框架[^Puterman2014^]。形式上，MDP是一个五元组$M = (S, A, \lambda, \mu, R)$，其中$S$是允许状态的集合，$A$是可能动作的集合，转移概率核$\lambda$定义了在给定状态下采取动作后进入新状态的概率，初始状态的分布为$\mu$，通过这种转移获得的奖励为$R$（随机的）。在MDP中，代理与环境在一系列时间步$t$中进行迭代交互（我们为随机变量添加下标$t$以强调它们属于特定时间点）。设随机变量$S_t: \Omega \to S$描述MDP的状态，随机变量$A_t: \Omega \to A$描述代理选择的动作。从初始状态分布$\mu(s) = P(S_0 = s)$开始，代理在MDP的每一步中观察当前状态$s \in S$，并根据策略$\pi(a\mids) = P(A_t = a\midS_t = s)$选择相应动作$a \in A$，随后环境根据概率$\lambda(s'\mids, a) = P(S_{t+1} = s'\midS_t = s, A_t = a)$转移到$s'$。如果对于每个$s, a \in S \times A$，转移核$\lambda(\cdot\mids, a)$是确定性的，即存在一个状态$s'_{s,a}$使得$\lambda(s'_{s,a}\mids, a) = 1$，则称转移核$\lambda$是确定性的。类似地，如果对于每个$s \in S$，策略$\pi(\cdot\mids)$是确定性的，则称策略$\pi$是确定性的。连续的状态-动作转移序列通常被称为MDP的轨迹。在本文中，我们始终假设奖励是确定性的，即奖励由$R_{t+1}(S_{t+1}, S_t, A_t) = r(S_{t+1}, S_t, A_t)$给出，其中$r$是一个确定性函数。从时间$t$开始的回报$G_t = \sum_{k \in \mathbb{N}_0} R_{t+k+1}$是整个MDP剧集期间累积的奖励，我们不对未来奖励进行折扣。遵循策略$\pi$的代理的性能可以通过状态值函数$V^\pi(s) = \mathbb{E}[G_t \mid S_t = s; \pi]$和动作值函数$Q^\pi(s, a) = \mathbb{E}[G_t \mid S_t = s, A_t = a; \pi]$来衡量。存在唯一的最优状态值函数$V^* = \max_\pi V^\pi$和唯一的最优动作值函数$Q^* = \max_\pi Q^\pi$，其中最大化是在所有策略的集合上进行的。一个策略$\pi^*$，如果$V^{\pi^*} = V^*$，则必然也有$Q^{\pi^*} = Q^*$，被称为最优的。在接下来的内容中，我们将使用符号$\pi$、$V^\pi$、$Q^\pi$来表示命令扩展类型的MDP
+马尔可夫决策过程（MDPs）是用于不确定动态环境中序贯决策问题的数学框架[^Puterman2014^]。形式上，MDP是一个五元组$M = (S, A, \lambda, \mu, R)$，其中$S$是允许状态的集合，$A$是可能动作的集合，转移概率核$\lambda$定义了在给定状态下采取动作后进入新状态的概率，初始状态的分布为$\mu$，通过这种转移获得的奖励为$R$（随机的）。在MDP中，代理与环境在一系列时间步$t$中进行迭代交互（我们为随机变量添加下标$t$以强调它们属于特定时间点）。设随机变量$S_t: \Omega \to S$描述MDP的状态，随机变量$A_t: \Omega \to A$描述代理选择的动作。从初始状态分布$\mu(s) = P(S_0 = s)$开始，代理在MDP的每一步中观察当前状态$s \in S$，并根据策略$\pi(a \mid s) = P(A_t = a \mid S_t = s)$选择相应动作$a \in A$，随后环境根据概率$\lambda(s' \mid s, a) = P(S_{t+1} = s' \mid S_t = s, A_t = a)$转移到$s'$。如果对于每个$s, a \in S \times A$，转移核$\lambda(\cdot \mid s, a)$是确定性的，即存在一个状态$s'_{s,a}$使得$\lambda(s'_{s,a} \mid s, a) = 1$，则称转移核$\lambda$是确定性的。类似地，如果对于每个$s \in S$，策略$\pi(\cdot \mid s)$是确定性的，则称策略$\pi$是确定性的。连续的状态-动作转移序列通常被称为MDP的轨迹。在本文中，我们始终假设奖励是确定性的，即奖励由$R_{t+1}(S_{t+1}, S_t, A_t) = r(S_{t+1}, S_t, A_t)$给出，其中$r$是一个确定性函数。从时间$t$开始的回报$G_t = \sum_{k \in \mathbb{N}_0} R_{t+k+1}$是整个MDP剧集期间累积的奖励，我们不对未来奖励进行折扣。遵循策略$\pi$的代理的性能可以通过状态值函数$V^\pi(s) = \mathbb{E}[G_t  \mid  S_t = s; \pi]$和动作值函数$Q^\pi(s, a) = \mathbb{E}[G_t  \mid  S_t = s, A_t = a; \pi]$来衡量。存在唯一的最优状态值函数$V^* = \max_\pi V^\pi$和唯一的最优动作值函数$Q^* = \max_\pi Q^\pi$，其中最大化是在所有策略的集合上进行的。一个策略$\pi^*$，如果$V^{\pi^*} = V^*$，则必然也有$Q^{\pi^*} = Q^*$，被称为最优的。在接下来的内容中，我们将使用符号$\pi$、$V^\pi$、$Q^\pi$来表示命令扩展类型的MDP
 的相应量。
 
 
 ### **2.2 命令扩展类型的马尔可夫决策过程**
 
-eUDRL训练过程的目标是使代理更好地执行命令。在eUDRL中，命令以“目标”和“范围”的形式提供给代理。目标指定了代理需要达到的状态，而范围指定了何时需要达到该状态。目标映射$\rho: S \to G$将用于评估命令的目标是否在命令的范围内达成，即如果$\rho(s)$等于命令指定的目标，则认为目标已达成。目标映射的值域$G$是所有可能目标的集合，无论这些目标是否在特定轨迹中达成。由于目标映射$\rho$定义在整个状态空间$S$上，因此在范围到达时，每个状态$s$都对应一个有效的目标$\rho(s)$。然而，这个目标可能不是所选命令指定的目标。目标映射的引入允许我们在统一的形式化框架内研究典型的eUDRL任务：状态到达任务可以通过$G = S$、$\rho = \text{id}_S$（$S$上的恒等映射）来覆盖，而与原始MDP $M$相关的回报目标可以通过扩展状态，增加一个累积奖励的组件，并定义$\rho$为该组件的投影来覆盖。除了MDP状态外，eUDRL代理还接收一个额外的命令输入。设随机变量$G_t: \Omega \to G$描述eUDRL代理的目标，随机变量$H_t: \Omega \to \bar{N}_0 = \{0, 1, \dots, N\}$，$N \geq 1$，描述剩余范围。可以将eUDRL代理视为在扩展状态空间中运行的普通代理，该扩展状态空间通过命令扩展。在这种情况下，需要提供一个关于目标和范围的初始分布$P(H_0 = h, G_0 = g \mid S_0 = s)$，并且随着扩展MDP的每次转移，剩余范围减少1，直到范围达到0。此时，扩展MDP进入吸收状态（见下文定义），不再发生进一步的演变。如果在范围变为0时达到指定目标，则会获得奖励。总结如下，我们给出命令扩展的定义：
+eUDRL训练过程的目标是使代理更好地执行命令。在eUDRL中，命令以“目标”和“范围”的形式提供给代理。目标指定了代理需要达到的状态，而范围指定了何时需要达到该状态。目标映射$\rho: S \to G$将用于评估命令的目标是否在命令的范围内达成，即如果$\rho(s)$等于命令指定的目标，则认为目标已达成。目标映射的值域$G$是所有可能目标的集合，无论这些目标是否在特定轨迹中达成。由于目标映射$\rho$定义在整个状态空间$S$上，因此在范围到达时，每个状态$s$都对应一个有效的目标$\rho(s)$。然而，这个目标可能不是所选命令指定的目标。目标映射的引入允许我们在统一的形式化框架内研究典型的eUDRL任务：状态到达任务可以通过$G = S$、$\rho = \text{id}_S$（$S$上的恒等映射）来覆盖，而与原始MDP $M$相关的回报目标可以通过扩展状态，增加一个累积奖励的组件，并定义$\rho$为该组件的投影来覆盖。除了MDP状态外，eUDRL代理还接收一个额外的命令输入。设随机变量$G_t: \Omega \to G$描述eUDRL代理的目标，随机变量$H_t: \Omega \to \bar{N}_0 = \{0, 1, \dots, N\}$，$N \geq 1$，描述剩余范围。可以将eUDRL代理视为在扩展状态空间中运行的普通代理，该扩展状态空间通过命令扩展。在这种情况下，需要提供一个关于目标和范围的初始分布$P(H_0 = h, G_0 = g  \mid  S_0 = s)$，并且随着扩展MDP的每次转移，剩余范围减少1，直到范围达到0。此时，扩展MDP进入吸收状态（见下文定义），不再发生进一步的演变。如果在范围变为0时达到指定目标，则会获得奖励。总结如下，我们给出命令扩展的定义：
 
 **定义1（命令扩展）** 一个马尔可夫决策过程$M = (S, A, \lambda, \mu, r)$的命令扩展（CE）是一个形式为$\bar{M} = (\bar{S}, A, \bar{\lambda}, \bar{\mu}, \bar{r}, \rho)$的马尔可夫决策过程，其中：
 
@@ -1308,14 +1308,14 @@ eUDRL训练过程的目标是使代理更好地执行命令。在eUDRL中，命�
 - 扩展状态空间是$\bar{S} = S \times \bar{N}_0 \times G$，扩展状态是一个三元组$\bar{s} = (s, h, g) \in \bar{S}$，由原始MDP状态$s$和命令$(g, h)$组成。
 - 扩展MDP的初始分布由命令分布和$M$的初始分布的乘积给出
 $$
-\bar{\mu}(\bar{s}) = P(H_0 = h, G_0 = g \mid S_0 = s)\mu(s).
+\bar{\mu}(\bar{s}) = P(H_0 = h, G_0 = g  \mid  S_0 = s)\mu(s).
 $$
 - 转移核$\bar{\lambda}$对所有$(s, h, g) \in \bar{S}$，所有$s' \in S$和$a \in A$定义为
 $$
-\bar{\lambda}((s', h - 1, g) \mid (s, h, g), a) = \lambda(s' \mid s, a) \quad \text{如果 } h > 0,
+\bar{\lambda}((s', h - 1, g)  \mid  (s, h, g), a) = \lambda(s'  \mid  s, a) \quad \text{如果 } h > 0,
 $$
 $$
-\bar{\lambda}((s', h, g) \mid (s, h, g), a) = \delta_{ss'} \quad \text{如果 } h = 0.
+\bar{\lambda}((s', h, g)  \mid  (s, h, g), a) = \delta_{ss'} \quad \text{如果 } h = 0.
 $$
 - 奖励函数$\bar{r}$对所有$\bar{s}' = (s', h', g') \in \bar{S}$，$\bar{s} = (s, h, g) \in \bar{S}$和所有$a \in A$定义为
 $$
@@ -1329,16 +1329,16 @@ $$
 
 在随后的讨论中，我们几乎完全围绕扩展MDP的策略展开，而不是原始MDP的策略。为了简洁，我们保留符号$\pi$（而不是$\bar{\pi}$）用于CE代理的策略。奖励的定义旨在引导代理实现预期的命令。选择二元奖励函数允许我们将期望奖励值解释为概率。总结如下，状态和动作值函数的计算结果是，对于所有$(s, h, g) \in \bar{S}$，$h > 1$，以及所有动作$a \in A$，
 $$
-Q^\pi((s, h, g), a) = \mathbb{P} \left[ \rho(S_{t+h}) = g \middle\mid S_t = s, H_t = h, G_t = g, A_t = a; \pi \right],
+Q^\pi((s, h, g), a) = \mathbb{P} \left[ \rho(S_{t+h}) = g \middle \mid  S_t = s, H_t = h, G_t = g, A_t = a; \pi \right],
 $$
 $$
-V^\pi(s, h, g) = \mathbb{P} \left[ \rho(S_{t+h}) = g \middle\mid S_t = s, H_t = h, G_t = g; \pi \right]. \quad (2.1)
+V^\pi(s, h, g) = \mathbb{P} \left[ \rho(S_{t+h}) = g \middle \mid  S_t = s, H_t = h, G_t = g; \pi \right]. \quad (2.1)
 $$
 有了这些状态和动作值函数，CE可以被解释为普通的有限范围RL问题。可以选择各种保证收敛到最优策略的算法，例如Sutton和Barto[^Sutton2018^]的专著。然而，本研究致力于研究eUDRL算法，它不仅仅是应用于CE类型的MDP的普通RL算法。相反，eUDRL是通过一个特定的迭代过程在CE上定义的（涉及轨迹采样、监督学习和策略更新），详见第2.4节的详细描述，尽管具有一些方便的特性，但并不能保证总是收敛到最优解。在eUDRL的研究中，使用Ghosh等人[^Ghosh2021^]的目标到达目标将非常方便，它源自CE值函数，可以写为
 $$
 J^\pi = \sum_{\bar{s} \in \bar{S}} \bar{\mu}(\bar{s}) V^\pi(\bar{s}). \quad (2.2)
 $$
-存在唯一的最优目标到达目标$J^* = \max_\pi J^\pi$，其中最大化是在所有策略的集合上进行的。很容易看出，对于任何最优策略$\pi^*$，都有$J^{\pi^*} = J^*$。为了方便起见，我们引入了CE的吸收状态的单独符号。回顾一下，对于MDP $M$，如果一旦达到吸收状态，底层过程总是保持在这个状态，即对于所有状态$s, s'$和动作$a$，核等于克罗内克δ函数$\lambda(s'\mids, a) = \delta_{ss'}$，则称状态$s \in S$为吸收状态。
+存在唯一的最优目标到达目标$J^* = \max_\pi J^\pi$，其中最大化是在所有策略的集合上进行的。很容易看出，对于任何最优策略$\pi^*$，都有$J^{\pi^*} = J^*$。为了方便起见，我们引入了CE的吸收状态的单独符号。回顾一下，对于MDP $M$，如果一旦达到吸收状态，底层过程总是保持在这个状态，即对于所有状态$s, s'$和动作$a$，核等于克罗内克δ函数$\lambda(s' \mid s, a) = \delta_{ss'}$，则称状态$s \in S$为吸收状态。
 
 **注2（CE的吸收状态）** 设$\bar{M} = (\bar{S}, A, \bar{\lambda}, \bar{\mu}, \bar{r}, \rho)$是一个CE。形式为$(s, g, h) \in \bar{S}$的状态是吸收状态当且仅当$h = 0$。非吸收状态称为瞬态状态。我们分别用$\bar{S}_A \subset \bar{S}$和$\bar{S}_T \subset \bar{S}$表示吸收状态和瞬态状态的集合。
 
@@ -1356,7 +1356,7 @@ $$
 $$
 其中，$l(\tau)$表示轨迹$\tau$首次进入吸收状态之前的转移次数；它等于轨迹的初始范围。假设状态和动作空间是有限的，$\text{Traj}$是可测的，我们用$T: \Omega \to \text{Traj}$表示一个随机变量，其分量为$T = ((S_0, H_0, G_0), A_0, \dots, (S_N, H_N, G_N))$，其结果为CE轨迹。轨迹$\tau \in \text{Traj}$的概率由下式给出：
 $$
-P(T = \tau; \pi) = \left( \prod_{t=1}^{l(\tau)} \lambda(s_t \mid a_{t-1}, s_{t-1}) \right) \cdot \left( \prod_{t=0}^{l(\tau)-1} \pi(a_t \mid \bar{s}_t) \right) \cdot \bar{\mu}(\bar{s}_0).
+P(T = \tau; \pi) = \left( \prod_{t=1}^{l(\tau)} \lambda(s_t  \mid  a_{t-1}, s_{t-1}) \right) \cdot \left( \prod_{t=0}^{l(\tau)-1} \pi(a_t  \mid  \bar{s}_t) \right) \cdot \bar{\mu}(\bar{s}_0).
 $$
 
 每个段包含来自给定轨迹的一段连续的状态-动作转移，以及段的初始范围、目标和长度。我们将用以下形式的元组表示段：
@@ -1377,18 +1377,18 @@ $$
 $$
 我们还将在附录中证明$\Sigma$分布的以下“马尔可夫性”：对于任意长度为$k$的段和任意$i \leq k$，有
 $$
-P(A_{\Sigma}^i = a_i \mid l(\Sigma) = k, S_{\Sigma}^0 = s^0, H_{\Sigma}^0 = h^0, G_{\Sigma}^0 = g^0, A_{\Sigma}^0 = a^0, \dots, S_{\Sigma}^i = s^i; \pi) = \pi(a_i \mid s^i, h - i, g), \quad (2.5)
+P(A_{\Sigma}^i = a_i  \mid  l(\Sigma) = k, S_{\Sigma}^0 = s^0, H_{\Sigma}^0 = h^0, G_{\Sigma}^0 = g^0, A_{\Sigma}^0 = a^0, \dots, S_{\Sigma}^i = s^i; \pi) = \pi(a_i  \mid  s^i, h - i, g), \quad (2.5)
 $$
 $$
-P(S_{\Sigma}^i = s^i \mid l(\Sigma) = k, S_{\Sigma}^0 = s^0, H_{\Sigma}^0 = h^0, G_{\Sigma}^0 = g^0, A_{\Sigma}^0 = a^0, \dots, S_{\Sigma}^{i-1} = s^{i-1}, A_{\Sigma}^{i-1} = a^{i-1}; \pi) = P(S_{\Sigma}^i = s^i \mid S_{\Sigma}^{i-1} = s^{i-1}, A_{\Sigma}^{i-1} = a^{i-1}) = \lambda(s^i \mid s^{i-1}, a^{i-1}). \quad (2.6)
+P(S_{\Sigma}^i = s^i  \mid  l(\Sigma) = k, S_{\Sigma}^0 = s^0, H_{\Sigma}^0 = h^0, G_{\Sigma}^0 = g^0, A_{\Sigma}^0 = a^0, \dots, S_{\Sigma}^{i-1} = s^{i-1}, A_{\Sigma}^{i-1} = a^{i-1}; \pi) = P(S_{\Sigma}^i = s^i  \mid  S_{\Sigma}^{i-1} = s^{i-1}, A_{\Sigma}^{i-1} = a^{i-1}) = \lambda(s^i  \mid  s^{i-1}, a^{i-1}). \quad (2.6)
 $$
 
 ### **限制到尾随段**
-有时将分析限制到$\text{Seg}$的特定子集是有用的。例如，考虑所谓的“尾随段”会很有用。一个段$\sigma = (l(\sigma), s_{\sigma}^0, h_{\sigma}^0, g_{\sigma}^0, a_{\sigma}^0, \dots, s_{\sigma}^{l(\sigma)})$是尾随的，如果它与轨迹的末端对齐，即如果$l(\sigma) = h_{\sigma}^0$。由所有尾随段组成的$\text{Seg}$的子空间记为$\text{Seg}_{\text{trail}} := \{\sigma \in \text{Seg} \mid l(\sigma) = h_{\sigma}
+有时将分析限制到$\text{Seg}$的特定子集是有用的。例如，考虑所谓的“尾随段”会很有用。一个段$\sigma = (l(\sigma), s_{\sigma}^0, h_{\sigma}^0, g_{\sigma}^0, a_{\sigma}^0, \dots, s_{\sigma}^{l(\sigma)})$是尾随的，如果它与轨迹的末端对齐，即如果$l(\sigma) = h_{\sigma}^0$。由所有尾随段组成的$\text{Seg}$的子空间记为$\text{Seg}_{\text{trail}} := \{\sigma \in \text{Seg}  \mid  l(\sigma) = h_{\sigma}
 ^0\}$。ODT和有时eUDRL操作在尾随段上。在eUDRL的情况下，这种限制是出于加快学习过程的考虑，反映了问题的阶段性[^Strupl2022a^]。
 
 ### **限制到对角段**
-满足$g_{\sigma}^0 = \rho(s_{\sigma}^{l(\sigma)})$的段称为目标对角段。这样的段的特点是段的初始目标实际上在段的末尾达成。一个既是尾随的又是目标对角的段称为对角段。由所有对角段组成的$\text{Seg}$的子空间记为$\text{Seg}_{\text{diag}} := \{\sigma \in \text{Seg} \mid l(\sigma) = h_{\sigma}^0, g_{\sigma}^0 = \rho(s_{\sigma}^{l(\sigma)})\}$。我们在讨论与奖励加权回归（Peters和Schaal, 2007）的关系时会考虑这些段，见第3.2节[^Peters2007^]。
+满足$g_{\sigma}^0 = \rho(s_{\sigma}^{l(\sigma)})$的段称为目标对角段。这样的段的特点是段的初始目标实际上在段的末尾达成。一个既是尾随的又是目标对角的段称为对角段。由所有对角段组成的$\text{Seg}$的子空间记为$\text{Seg}_{\text{diag}} := \{\sigma \in \text{Seg}  \mid  l(\sigma) = h_{\sigma}^0, g_{\sigma}^0 = \rho(s_{\sigma}^{l(\sigma)})\}$。我们在讨论与奖励加权回归（Peters和Schaal, 2007）的关系时会考虑这些段，见第3.2节[^Peters2007^]。
 
 
 
@@ -1396,15 +1396,15 @@ $$
 
 假设给定一个CE $\bar{M}$。eUDRL从初始策略$\pi_0$开始，通过迭代过程生成策略序列$(\pi_n)_{n \geq 0}$。每次eUDRL迭代包括以下步骤：首先，根据当前策略$\pi_n$从$\bar{M}$中生成一批轨迹；其次，根据$\Sigma$的分布$d_{\pi_n}^{\Sigma}$从这批轨迹中采样轨迹段$\sigma$；最后，使用监督学习将后续策略$\pi_{n+1}$拟合到采样的轨迹段上。在实践中，通常假设一个参数化的策略类别，$\pi_{n+1}$将是该类别中最小化对数似然损失的策略之一。在这里，我们研究eUDRL在原则上可以实现什么。我们假设没有特定的策略表示，并假设$\pi_{n+1}$是使用交叉熵计算的：
 $$
-\pi_{n+1} = \arg\max_{\pi} \mathbb{E}_{\sigma \sim d_{\pi_n}^{\Sigma}} \left[ \log \pi(a_{\sigma}^0 \mid s_{\sigma}^0, l(\sigma), \rho(s_{\sigma}^{l(\sigma)})) \right], \quad (2.7)
+\pi_{n+1} = \arg\max_{\pi} \mathbb{E}_{\sigma \sim d_{\pi_n}^{\Sigma}} \left[ \log \pi(a_{\sigma}^0  \mid  s_{\sigma}^0, l(\sigma), \rho(s_{\sigma}^{l(\sigma)})) \right], \quad (2.7)
 $$
 这反映了无限样本大小或对分布$d_{\pi_n}^{\Sigma}$的完全了解。换句话说，新策略$\pi_{n+1}$被拟合到条件概率上：
 $$
-\pi_{n+1}(a \mid (s, h, g)) = P(A_{\Sigma}^0 = a \mid S_{\Sigma}^0 = s, l(\Sigma) = h, \rho(S_{\Sigma}^{l(\sigma)}) = g; \pi_n). \quad (2.8)
+\pi_{n+1}(a  \mid  (s, h, g)) = P(A_{\Sigma}^0 = a  \mid  S_{\Sigma}^0 = s, l(\Sigma) = h, \rho(S_{\Sigma}^{l(\sigma)}) = g; \pi_n). \quad (2.8)
 $$
 方程(2.7)中的条件选择可以通过与Andrychowicz等人的Hindsight Experience Replay（HER）算法[^Andrychowicz2017^]进行比较来解释。eUDRL使用段样本的方式与HER相似，不仅使用实现预期目标的轨迹进行学习，还使用未实现预期目标的轨迹及其实际结果。按照类似的推理，如果观察到一个样本$\sigma \sim d_{\pi_n}^{\Sigma}$，可以假设第一个动作$a_{\sigma}^0$是执行实现命令$(l(\sigma), \rho(s_{\sigma}^{l(\sigma)}))$的一个好选择，无论这个段实际选择的命令$(h_{\sigma}^0, g_{\sigma}^0)$是什么。许多遵循“通过监督学习实现强化学习”范式的算法，包括Srivastava等人的eUDRL实际实现[^Srivastava2019^]、Ghosh等人的目标条件监督学习（GCSL）[^Ghosh2021^]和Zheng等人的在线决策变换器（ODT）[^Zheng2022^]，都符合本文的框架。应该指出的是，我们假设的无限样本大小意味着与Srivastava等人[^Srivastava2019^]或Ghosh等人[^Ghosh2021^]讨论的eUDRL变体相比有所简化，我们省略了回放缓冲区（因为它不是必需的）。Srivastava等人的算法使用按回报排序的轨迹组织回放缓冲区，其中目标与轨迹回报相关。此外，根据回放缓冲区中回报分布的最佳分位数采样初始命令。这意味着初始分布会随着时间变化，而在这里我们假设它是固定的。Ghosh等人的GCSL算法可以被视为Srivastava等人算法的一个简化版本，GCSL执行纯状态到达任务。GCSL省略了命令中的范围分量，假设其任务的范围是固定的。与Srivastava等人一样，GCSL使用回放缓冲区，但没有优先级。eUDRL与ODT的关系在下面的第2.5节中描述。
 
-1. 注意到$\pi_{n+1}$由(2.8)定义当且仅当$P(S_{\Sigma}^0 = s, l(\Sigma) = h, \rho(S_{\Sigma}^{l(\sigma)}) = g; \pi_n) > 0$，否则我们暂时将其留作未定义。稍后，为了方便起见，如果$P(S_{\Sigma}^0 = s, l(\Sigma) = h, \rho(S_{\Sigma}^{l(\sigma)}) = g; \pi_n) = 0$，我们选择$\pi_{n+1} = 1/\midA\mid$。
+1. 注意到$\pi_{n+1}$由(2.8)定义当且仅当$P(S_{\Sigma}^0 = s, l(\Sigma) = h, \rho(S_{\Sigma}^{l(\sigma)}) = g; \pi_n) > 0$，否则我们暂时将其留作未定义。稍后，为了方便起见，如果$P(S_{\Sigma}^0 = s, l(\Sigma) = h, \rho(S_{\Sigma}^{l(\sigma)}) = g; \pi_n) = 0$，我们选择$\pi_{n+1} = 1/ \mid A \mid $。
 
 
 ### 2.5 eUDRL与ODT递归的关系
@@ -1413,8 +1413,8 @@ $$
 
 在ODT中，Transformer模型接收状态序列和剩余回报，以预测后续动作。为了在每个时间步$t$近似$a'_t$的分布，Transformer（上下文长度为$K$）接收长度为$\min\{t, K\}$的先前状态序列$s'_{-K,t} := s'_{\min\{0,t-K\}:t}$和剩余回报$g'_{-K,t} := g'_{\min\{0,t-K\}:t}$。与UDRL类似，这个分布被用作基于剩余回报的策略。与原始Transformer架构（使用位置编码）不同，ODT使用时间嵌入。此外，ODT仅在尾随段上操作。与前身决策Transformer（DT）相比，ODT引入了一系列改进，允许在线微调。首先，ODT使用随机策略（而DT仅允许确定性策略），其次，这些策略使用最大似然准则进行训练（而DT依赖于均方误差）。这些特性也以类似的形式出现在eUDRL算法中。此外，ODT引入了熵正则化，这促使我们研究eUDRL的正则化技术。在第8节中，我们将考虑使用均匀分布的凸组合对eUDRL进行策略正则化，这使我们的研究接近ODT算法[^Zheng2022^]。
 
-像Srivastava等人的eUDRL实现[^Srivastava2019^]和Ghosh等人的GCSL[^Ghosh2021^]一样，ODT也需要一些简化，以符合CE框架。与之前一样，我们省略了回放缓冲区，并假设固定范围，这意味着CE初始化范围为$N$。这是为了确保剩余范围$h$和当前时间$t$之间的一一对应关系，通过$t = N - h$。因此，在ODT执行时间嵌入后，这种差异变得无关紧要。在这些简化下，ODT在CE框架内匹配目标到达场景，其中奖励在剧集结束时授予[^Zheng2022^]。对应关系如下：首先，ODT要解决的MDP的状态$s'_t$被组合成过去的序列$s_t = s'_{-K,t}$。底层CE的原始MDP操作在这些组合状态上。目标映射的值域被选择为集合$G = \{\text{所有可能的回报}\}$，其中回报仅依赖于终端状态$s_N$。策略更新使用最大似然匹配到条件$a_t\mids_t, l(\sigma), \rho(s_N)$。使用ODT的尾随段假设、固定范围$l(\sigma) = h_t$以及$\
-rho(s_N)$计算与$s'_N$对应的回报，这等价于匹配$a_t\mids'_{-K,t}, h_t, \rho(s_N)$。一般情况下，只能部分地用CE框架的语言来描述这种情况，通过将回报作为状态的一部分进行累积。我们假设状态由$s_t = (s'_{-K,t}, z_{-K,t})$给出，$z_t$对应于底层MDP的累积回报。目标映射被选择为$\rho(s_t) = z_t$。在这种情况下，策略更新是通过最大似然匹配到条件$a_t\mid(s'_{-K,t}, z_{-K,t}), h_t, z_N$进行的，其中从$z_N - z_{-K,t}$可以恢复剩余回报。这并不完全符合CE框架，因为我们不仅条件于期望的剩余回报$z_N - z_{-K,t}$，还条件于$(z_N, z_{-K,t})$。原则上，这可能会在学习过程中引入一些噪声。然而，这并不是问题，因为我们假设样本数量没有限制。在ODT的CE框架中进行公式化没有缺点，因为噪声的影响在这种情况下变得可以忽略不计[^Zheng2022^]。
+像Srivastava等人的eUDRL实现[^Srivastava2019^]和Ghosh等人的GCSL[^Ghosh2021^]一样，ODT也需要一些简化，以符合CE框架。与之前一样，我们省略了回放缓冲区，并假设固定范围，这意味着CE初始化范围为$N$。这是为了确保剩余范围$h$和当前时间$t$之间的一一对应关系，通过$t = N - h$。因此，在ODT执行时间嵌入后，这种差异变得无关紧要。在这些简化下，ODT在CE框架内匹配目标到达场景，其中奖励在剧集结束时授予[^Zheng2022^]。对应关系如下：首先，ODT要解决的MDP的状态$s'_t$被组合成过去的序列$s_t = s'_{-K,t}$。底层CE的原始MDP操作在这些组合状态上。目标映射的值域被选择为集合$G = \{\text{所有可能的回报}\}$，其中回报仅依赖于终端状态$s_N$。策略更新使用最大似然匹配到条件$a_t \mid s_t, l(\sigma), \rho(s_N)$。使用ODT的尾随段假设、固定范围$l(\sigma) = h_t$以及$\
+rho(s_N)$计算与$s'_N$对应的回报，这等价于匹配$a_t \mid s'_{-K,t}, h_t, \rho(s_N)$。一般情况下，只能部分地用CE框架的语言来描述这种情况，通过将回报作为状态的一部分进行累积。我们假设状态由$s_t = (s'_{-K,t}, z_{-K,t})$给出，$z_t$对应于底层MDP的累积回报。目标映射被选择为$\rho(s_t) = z_t$。在这种情况下，策略更新是通过最大似然匹配到条件$a_t \mid (s'_{-K,t}, z_{-K,t}), h_t, z_N$进行的，其中从$z_N - z_{-K,t}$可以恢复剩余回报。这并不完全符合CE框架，因为我们不仅条件于期望的剩余回报$z_N - z_{-K,t}$，还条件于$(z_N, z_{-K,t})$。原则上，这可能会在学习过程中引入一些噪声。然而，这并不是问题，因为我们假设样本数量没有限制。在ODT的CE框架中进行公式化没有缺点，因为噪声的影响在这种情况下变得可以忽略不计[^Zheng2022^]。
 
 ## 3 eUDRL递归、奖励加权回归及实际实现
 
@@ -1428,137 +1428,135 @@ rho(s_N)$计算与$s'_N$对应的回报，这等价于匹配$a_t\mids'_{-K,t}, h
 
 1. **假设递归在整个集合$\text{Seg}$上进行**。那么对于所有状态$(s, h, g) \in \bar{S}_T$和所有动作$a \in A$，有
    $$
-   \pi_{n+1}(a \mid s, h, g) = P(A_{\Sigma}^0 = a \mid S_{\Sigma}^0 = s, l(\Sigma) = h, \rho(S_{\Sigma}^h) = g; \pi_n)
+   \pi_{n+1}(a  \mid  s, h, g) = P(A_{\Sigma}^0 = a  \mid  S_{\Sigma}^0 = s, l(\Sigma) = h, \rho(S_{\Sigma}^h) = g; \pi_n)
    $$
    $$
-   \propto \sum_{h' \geq h, g' \in G} P(\rho(S^h) = g \mid A_0 = a, H_0 = h', G_0 = g', S_0 = s; \pi_n)
+   \propto \sum_{h' \geq h, g' \in G} P(\rho(S^h) = g  \mid  A_0 = a, H_0 = h', G_0 = g', S_0 = s; \pi_n)
    $$
    $$
-   \cdot \pi_n(a \mid s, h', g') P(H_{\Sigma}^0 = h', G_{\Sigma}^0 = g' \mid S_{\Sigma}^0 = s, l(\Sigma) = h; \pi_n). \quad (3.1)
+   \cdot \pi_n(a  \mid  s, h', g') P(H_{\Sigma}^0 = h', G_{\Sigma}^0 = g'  \mid  S_{\Sigma}^0 = s, l(\Sigma) = h; \pi_n). \quad (3.1)
    $$
 
 2. **假设递归在集合$\text{Seg}_{\text{trail}}$上进行**。那么对于所有状态$(s, h, g) \in \bar{S}_T$和所有动作$a \in A$，有
    $$
-   \pi_{\text{trail}, n+1}(a \mid s, h, g) = P(A_{\Sigma}^0 = a \mid S_{\Sigma}^0 = s, l(\Sigma) = h, \rho(S_{\Sigma}^h) = g, l(\Sigma) = H_{\Sigma}^0; \pi_{\text{trail}, n})
+   \pi_{\text{trail}, n+1}(a  \mid  s, h, g) = P(A_{\Sigma}^0 = a  \mid  S_{\Sigma}^0 = s, l(\Sigma) = h, \rho(S_{\Sigma}^h) = g, l(\Sigma) = H_{\Sigma}^0; \pi_{\text{trail}, n})
    $$
    $$
-   \propto \sum_{g' \in G} P(\rho(S^h) = g \mid A_0 = a, H_0 = h, G_0 = g', S_0 = s; \pi_{\text{trail}, n})
+   \propto \sum_{g' \in G} P(\rho(S^h) = g  \mid  A_0 = a, H_0 = h, G_0 = g', S_0 = s; \pi_{\text{trail}, n})
    $$
    $$
-   \cdot \pi_{\text{trail}, n}(a \mid s, h, g') P(H_{\Sigma}^0 = h, G_{\Sigma}^0 = g' \mid S_{\Sigma}^0 = s, l(\Sigma) = h; \pi_{\text{trail}, n}). \quad (3.2)
+   \cdot \pi_{\text{trail}, n}(a  \mid  s, h, g') P(H_{\Sigma}^0 = h, G_{\Sigma}^0 = g'  \mid  S_{\Sigma}^0 = s, l(\Sigma) = h; \pi_{\text{trail}, n}). \quad (3.2)
    $$
 
 3. **假设递归在集合$\text{Seg}_{\text{diag}}$上进行**。那么对于所有状态$(s, h, g) \in \bar{S}_T$和所有动作$a \in A$，有
    $$
-   \pi_{\text{diag}, n+1}(a \mid s, h, g) = P(A_{\Sigma}^0 = a \mid S_{\Sigma}^0 = s, l(\Sigma) = h, \rho(S_{\Sigma}^h) = g, \rho(S_{\Sigma}^h) = G_{\Sigma}^0, l(\Sigma) = H_{\Sigma}^0; \pi_{\text{diag}, n})
+   \pi_{\text{diag}, n+1}(a  \mid  s, h, g) = P(A_{\Sigma}^0 = a  \mid  S_{\Sigma}^0 = s, l(\Sigma) = h, \rho(S_{\Sigma}^h) = g, \rho(S_{\Sigma}^h) = G_{\Sigma}^0, l(\Sigma) = H_{\Sigma}^0; \pi_{\text{diag}, n})
    $$
    $$
-   \propto P(\rho(S^h) = g \mid A_0 = a, H_0 = h, G_0 = g, S_0 = s; \pi_{\text{diag}, n})
+   \propto P(\rho(S^h) = g  \mid  A_0 = a, H_0 = h, G_0 = g, S_0 = s; \pi_{\text{diag}, n})
    $$
    $$
-   \cdot \pi_{\text{diag}, n}(a \mid s, h, g) P(H_{\Sigma}^0 = h, G_{\Sigma}^0 = g \mid S_{\Sigma}^0 = s, l(\Sigma) = h; \pi_{\text{diag}, n}). \quad (3.3)
+   \cdot \pi_{\text{diag}, n}(a  \mid  s, h, g) P(H_{\Sigma}^0 = h, G_{\Sigma}^0 = g  \mid  S_{\Sigma}^0 = s, l(\Sigma) = h; \pi_{\text{diag}, n}). \quad (3.3)
    $$
    此外，策略可以用Q函数表示为
    $$
-   \pi_{\text{diag}, n+1}(a \mid s, h, g) \propto Q^{\pi_{\text{diag}, n}}((s, h, g), a) \pi_{\text{diag}, n}(a \mid s, h, g)
+   \pi_{\text{diag}, n+1}(a  \mid  s, h, g) \propto Q^{\pi_{\text{diag}, n}}((s, h, g), a) \pi_{\text{diag}, n}(a  \mid  s, h, g)
    $$
    $$
-   \cdot P(H_{\Sigma}^0 = h, G_{\Sigma}^0 = g \mid S_{\Sigma}^0 = s, l(\Sigma) = h; \pi_{\text{diag}, n}),
+   \cdot P(H_{\Sigma}^0 = h, G_{\Sigma}^0 = g  \mid  S_{\Sigma}^0 = s, l(\Sigma) = h; \pi_{\text{diag}, n}),
    $$
    $$
-   \pi_{\text{diag}, n+1}(a \mid s, h, g) \propto Q^{\pi_{\text{diag}, n}}((s, h, g), a) \pi_{\text{diag}, n}(a \mid s, h, g).
+   \pi_{\text{diag}, n+1}(a  \mid  s, h, g) \propto Q^{\pi_{\text{diag}, n}}((s, h, g), a) \pi_{\text{diag}, n}(a  \mid  s, h, g).
    $$
-   注意，$\text{Seg}$、$\text{Seg}_{\text{trail}}$和$\text{Seg}_{\text{diag}}$中的递归公式有一个基本的相似性，即尽管$\pi_{\text{diag}/\text{trail}, n+1}(a \mid s, h, g)$依赖于条件概率$P(H_{\Sigma}^0 = h, G_{\Sigma}^0 = g \mid S_{\Sigma}^0 = s, l(\Sigma) = h; \pi_n)$，但它并不依赖于定义$\text{Seg}_{\text{diag}}$和$\text{Seg}_{\text{trail}}$的条件$l(\Sigma) = H_{\Sigma}^0$和$\rho(S_{\Sigma}^{l(\sigma)}) = G_{\Sigma}^0$。这些递归公式仅通过求和所涉及的集合不同而有所区别。稍后，这一特性将使我们能够为所有三种递归推导出共同的界限（即用$\pi_n$来界定$\pi_{n+1}$），从而得到更简单的证明。
+   注意，$\text{Seg}$、$\text{Seg}_{\text{trail}}$和$\text{Seg}_{\text{diag}}$中的递归公式有一个基本的相似性，即尽管$\pi_{\text{diag}/\text{trail}, n+1}(a  \mid  s, h, g)$依赖于条件概率$P(H_{\Sigma}^0 = h, G_{\Sigma}^0 = g  \mid  S_{\Sigma}^0 = s, l(\Sigma) = h; \pi_n)$，但它并不依赖于定义$\text{Seg}_{\text{diag}}$和$\text{Seg}_{\text{trail}}$的条件$l(\Sigma) = H_{\Sigma}^0$和$\rho(S_{\Sigma}^{l(\sigma)}) = G_{\Sigma}^0$。这些递归公式仅通过求和所涉及的集合不同而有所区别。稍后，这一特性将使我们能够为所有三种递归推导出共同的界限（即用$\pi_n$来界定$\pi_{n+1}$），从而得到更简单的证明。
 
 **证明**  
 **引理3，第1点**：等式直接来自(2.8)。我们首先应用贝叶斯法则，并假设$P(S_{\Sigma}^0 = s, l(\Sigma) = h, \rho(S_{\Sigma}^h) = g; \pi_n) > 0$。随后，我们对$H_{\Sigma}^0$和$G_{\Sigma}^0$进行边缘化处理，前提是$H_{\Sigma}^0 \geq l(\Sigma) = h$（根据定义，段总是包含在轨迹中），并应用乘法规则。我们得到：
 $$
-\pi_{n+1}(a \mid s, h, g) = P(A_{\Sigma}^0 = a \mid S_{\Sigma}^0 = s, l(\Sigma) = h, \rho(S_{\Sigma}^h) = g; \pi_n)
+\pi_{n+1}(a  \mid  s, h, g) = P(A_{\Sigma}^0 = a  \mid  S_{\Sigma}^0 = s, l(\Sigma) = h, \rho(S_{\Sigma}^h) = g; \pi_n)
 $$
 $$
-\propto P(\rho(S_{\Sigma}^h) = g, A_{\Sigma}^0 = a \mid S_{\Sigma}^0 = s, l(\Sigma) = h; \pi_n)
+\propto P(\rho(S_{\Sigma}^h) = g, A_{\Sigma}^0 = a  \mid  S_{\Sigma}^0 = s, l(\Sigma) = h; \pi_n)
 $$
 $$
 = \sum_{h' \geq h, g' \in G
-} P(\rho(S_{\Sigma}^h) = g, A_{\Sigma}^0 = a, H_{\Sigma}^0 = h', G_{\Sigma}^0 = g' \mid S_{\Sigma}^0 = s, l(\Sigma) = h; \pi_n)
+} P(\rho(S_{\Sigma}^h) = g, A_{\Sigma}^0 = a, H_{\Sigma}^0 = h', G_{\Sigma}^0 = g'  \mid  S_{\Sigma}^0 = s, l(\Sigma) = h; \pi_n)
 $$
 $$
-= \sum_{h' \geq h, g' \in G} P(\rho(S_{\Sigma}^h) = g \mid A_{\Sigma}^0 = a, H_{\Sigma}^0 = h', G_{\Sigma}^0 = g', S_{\Sigma}^0 = s, l(\Sigma) = h; \pi_n)
+= \sum_{h' \geq h, g' \in G} P(\rho(S_{\Sigma}^h) = g  \mid  A_{\Sigma}^0 = a, H_{\Sigma}^0 = h', G_{\Sigma}^0 = g', S_{\Sigma}^0 = s, l(\Sigma) = h; \pi_n)
 $$
 $$
-\cdot P(A_{\Sigma}^0 = a \mid H_{\Sigma}^0 = h', G_{\Sigma}^0 = g', S_{\Sigma}^0 = s, l(\Sigma) = h; \pi_n)
+\cdot P(A_{\Sigma}^0 = a  \mid  H_{\Sigma}^0 = h', G_{\Sigma}^0 = g', S_{\Sigma}^0 = s, l(\Sigma) = h; \pi_n)
 $$
 $$
-\cdot P(H_{\Sigma}^0 = h', G_{\Sigma}^0 = g' \mid S_{\Sigma}^0 = s, l(\Sigma) = h; \pi_n)
+\cdot P(H_{\Sigma}^0 = h', G_{\Sigma}^0 = g'  \mid  S_{\Sigma}^0 = s, l(\Sigma) = h; \pi_n)
 $$
 $$
-= \sum_{h' \geq h, g' \in G} P(\rho(S^h) = g \mid A_0 = a, H_0 = h', G_0 = g', S_0 = s; \pi_n)
+= \sum_{h' \geq h, g' \in G} P(\rho(S^h) = g  \mid  A_0 = a, H_0 = h', G_0 = g', S_0 = s; \pi_n)
 $$
 $$
-\cdot \pi_n(a \mid s, h', g') P(H_{\Sigma}^0 = h', G_{\Sigma}^0 = g' \mid S_{\Sigma}^0 = s, l(\Sigma) = h; \pi_n),
+\cdot \pi_n(a  \mid  s, h', g') P(H_{\Sigma}^0 = h', G_{\Sigma}^0 = g'  \mid  S_{\Sigma}^0 = s, l(\Sigma) = h; \pi_n),
 $$
 其中在最后一个等式中，我们应用了段分布的性质（2.5）和（2.6）。
 
 **引理3，第2点**：我们有
 $$
-\pi_{\text{trail}, n+1}(a \mid s, h, g) = P(A_{\Sigma}^0 = a \mid S_{\Sigma}^0 = s, l(\Sigma) = h, \rho(S_{\Sigma}^h) = g, l(\Sigma) = H_{\Sigma}^0; \pi_{\text{trail}, n})
+\pi_{\text{trail}, n+1}(a  \mid  s, h, g) = P(A_{\Sigma}^0 = a  \mid  S_{\Sigma}^0 = s, l(\Sigma) = h, \rho(S_{\Sigma}^h) = g, l(\Sigma) = H_{\Sigma}^0; \pi_{\text{trail}, n})
 $$
 $$
-= P(A_{\Sigma}^0 = a, H_{\Sigma}^0 = h \mid S_{\Sigma}^0 = s, l(\Sigma) = h, \rho(S_{\Sigma}^h) = g, l(\Sigma) = H_{\Sigma}^0; \pi_{\text{trail}, n}).
+= P(A_{\Sigma}^0 = a, H_{\Sigma}^0 = h  \mid  S_{\Sigma}^0 = s, l(\Sigma) = h, \rho(S_{\Sigma}^h) = g, l(\Sigma) = H_{\Sigma}^0; \pi_{\text{trail}, n}).
 $$
 第一个等式是(2.7)的直接结果，其中添加了条件$l(\Sigma) = H_{\Sigma}^0$，以将方程限制在$\text{Seg}_{\text{trail}}$上。对于第二个等式，我们利用了蕴含关系$(l(\Sigma) = h) \land (l(\Sigma) = H_{\Sigma}^0) \Rightarrow H_{\Sigma}^0 = h$。按照上述推理，我们应用贝叶斯法则，并假设$P(S_{\Sigma}^0 = s, l(\Sigma) = h, \rho(S_{\Sigma}^h) = g, l(\Sigma) = H_{\Sigma}^0; \pi_{\text{trail}, n}) > 0$。随后，我们对$H_{\Sigma}^0$和$G_{\Sigma}^0$进行边缘化处理，应用乘法规则，并利用蕴含关系$(l(\Sigma) = h) \land (H_{\Sigma}^0 = h) \Rightarrow l(\Sigma) = H_{\Sigma}^0$来消除事件$l(\Sigma) = H_{\Sigma}^0$。我们得到：
 $$
-\pi_{\text{trail}, n+1}(a \mid s, h, g) \propto P(\rho(S_{\Sigma}^h) = g, A_{\Sigma}^0 = a, H_{\Sigma}^0 = h \mid S_{\Sigma}^0 = s, l(\Sigma) = h, l(\Sigma) = H_{\Sigma}^0; \pi_{\text{trail}, n})
+\pi_{\text{trail}, n+1}(a  \mid  s, h, g) \propto P(\rho(S_{\Sigma}^h) = g, A_{\Sigma}^0 = a, H_{\Sigma}^0 = h  \mid  S_{\Sigma}^0 = s, l(\Sigma) = h, l(\Sigma) = H_{\Sigma}^0; \pi_{\text{trail}, n})
 $$
 $$
-= \sum_{g' \in G} P(\rho(S_{\Sigma}^h) = g, A_{\Sigma}^0 = a, H_{\Sigma}^0 = h, G_{\Sigma}^0 = g' \mid S_{\Sigma}^0 = s, l(\Sigma) = h, l(\Sigma) = H_{\Sigma}^0; \pi_{\text{trail}, n})
+= \sum_{g' \in G} P(\rho(S_{\Sigma}^h) = g, A_{\Sigma}^0 = a, H_{\Sigma}^0 = h, G_{\Sigma}^0 = g'  \mid  S_{\Sigma}^0 = s, l(\Sigma) = h, l(\Sigma) = H_{\Sigma}^0; \pi_{\text{trail}, n})
 $$
 $$
-= \sum_{g' \in G} P(\rho(S_{\Sigma}^h) = g \mid A_{\Sigma}^0 = a, H_{\Sigma}^0 = h, G_{\Sigma}^0 = g', S_{\Sigma}^0 = s, l(\Sigma) = h, l(\Sigma) = H_{\Sigma}^0; \pi_{\text{trail}, n})
+= \sum_{g' \in G} P(\rho(S_{\Sigma}^h) = g  \mid  A_{\Sigma}^0 = a, H_{\Sigma}^0 = h, G_{\Sigma}^0 = g', S_{\Sigma}^0 = s, l(\Sigma) = h, l(\Sigma) = H_{\Sigma}^0; \pi_{\text{trail}, n})
 $$
 $$
-\cdot P(A_{\Sigma}^0 = a \mid H_{\Sigma}^0 = h, G_{\Sigma}^0 = g', S_{\Sigma}^0 = s, l(\Sigma) = h, l(\Sigma) = H_{\Sigma}^0; \pi_{\text{trail}, n})
+\cdot P(A_{\Sigma}^0 = a  \mid  H_{\Sigma}^0 = h, G_{\Sigma}^0 = g', S_{\Sigma}^0 = s, l(\Sigma) = h, l(\Sigma) = H_{\Sigma}^0; \pi_{\text{trail}, n})
 $$
 $$
-\cdot P(H_{\Sigma}^0 = h, G_{\Sigma}^0 = g' \mid S_{\Sigma}^0 = s, l(\Sigma) = h; \pi_{\text{trail}, n})
+\cdot P(H_{\Sigma}^0 = h, G_{\Sigma}^0 = g'  \mid  S_{\Sigma}^0 = s, l(\Sigma) = h; \pi_{\text{trail}, n})
 $$
 $$
-= \sum_{g' \in G} P(\rho(S^h) = g \mid A_0 = a, H_0 = h, G_0 = g', S_0 = s; \pi_{\text{trail}, n})
+= \sum_{g' \in G} P(\rho(S^h) = g  \mid  A_0 = a, H_0 = h, G_0 = g', S_0 = s; \pi_{\text{trail}, n})
 $$
 $$
-\cdot \pi_{\text{trail}, n}(a \mid s, h, g') P(H_{\Sigma}^0 = h, G_{\Sigma}^0 = g' \mid S_{\Sigma}^0 = s, l(\Sigma) = h; \pi_{\text{trail}, n}).
+\cdot \pi_{\text{trail}, n}(a  \mid  s, h, g') P(H_{\Sigma}^0 = h, G_{\Sigma}^0 = g'  \mid  S_{\Sigma}^0 = s, l(\Sigma) = h; \pi_{\text{trail}, n}).
 $$
 
 **引理3，第3点**：我们有
 $$
-\pi_{\text{diag}, n+1}(a \mid s, h, g) = P(A_{\Sigma}^0 = a \mid S_{\Sigma}^0 = s, l(\Sigma) = h, \rho(S_{\Sigma}^h) = g, \rho(S_{\Sigma}^h) = G_{\Sigma}^0, l(\Sigma) = H_{\Sigma}^0; \pi_{\text{diag}, n})
+\pi_{\text{diag}, n+1}(a  \mid  s, h, g) = P(A_{\Sigma}^0 = a  \mid  S_{\Sigma}^0 = s, l(\Sigma) = h, \rho(S_{\Sigma}^h) = g, \rho(S_{\Sigma}^h) = G_{\Sigma}^0, l(\Sigma) = H_{\Sigma}^0; \pi_{\text{diag}, n})
 $$
 $$
-= P(A_{\Sigma}^0 = a, H_{\Sigma}^0 = h, G_{\Sigma}^0 = g \mid S_{\Sigma}^0 = s, l(\Sigma) = h, \rho(S_{\Sigma}^h) = g, \rho(S_{\Sigma}^h) = G_{\Sigma}^0, l(\Sigma) = H_{\Sigma}^0; \pi_{\text{diag}, n})
+= P(A_{\Sigma}^0 = a, H_{\Sigma}^0 = h, G_{\Sigma}^0 = g  \mid  S_{\Sigma}^0 = s, l(\Sigma) = h, \rho(S_{\Sigma}^h) = g, \rho(S_{\Sigma}^h) = G_{\Sigma}^0, l(\Sigma) = H_{\Sigma}^0; \pi_{\text{diag}, n})
 $$
 
 第一个等式是公式(2.7)的结果，其中添加了条件$l(\Sigma)=H_{0}^{\Sigma}$和$\rho(S_{0}^{\Sigma}) = G_{0}^{\Sigma}$，以便将该等式限制在$\mathrm{Seg}^{\mathrm{diag}}$ 上。对于第二个等式，我们利用了蕴含关系$(l(\Sigma)=h)\land(l(\Sigma)=H_{0}^{\Sigma})\Longrightarrow H_{0}^{\Sigma}=h$ 以及$(\rho(S_{0}^{\Sigma}) = g)\land(\rho(S_{0}^{\Sigma})=G_{0}^{\Sigma})\Longrightarrow G_{0}^{\Sigma}=g$ 。按照上述推理，我们应用贝叶斯规则，其中我们假设$\mathbb{P}(S_{0}^{\Sigma}=s, l(\Sigma)=h,\rho(S_{0}^{\Sigma}) = g,\rho(S_{h}^{\Sigma})=G_{0}^{\Sigma},l(\Sigma)=H_{0}^{\Sigma};\pi^{\mathrm{diag}})>0$ 。随后，我们对$H_{0}^{\Sigma}$ 和$G_{0}^{\Sigma}$ 进行边缘化，应用乘积规则，并利用蕴含关系$(\rho(S_{0}^{\Sigma}) = g)\land(G_{0}^{\Sigma}=g)\Longrightarrow\rho(S_{h}^{\Sigma})=G_{0}^{\Sigma}$ 以及$(l(\Sigma)=h)\land(H_{0}^{\Sigma}=h)\Longrightarrow l(\Sigma)=H_{0}^{\Sigma}$ 来消除事件$\rho(S_{h}^{\Sigma}) = G_{0}^{\Sigma}$ 和$l(\Sigma)=H_{0}^{\Sigma}$ 。我们得到：
 
 $$
-\pi_{\text{diag}, n+1}(a \mid s, h, g) \propto P(\rho(S_{\Sigma}^h) = g, \rho(S_{\Sigma}^h) = G_{\Sigma}^0, A_{\Sigma}^0 = a, H_{\Sigma}^0 = h, G_{\Sigma}^0 = g \mid S_{\Sigma}^0 = s, l(\Sigma) = h, l(\Sigma) = H_{\Sigma}^0; \pi_{\text{diag}, n})
+\pi_{\text{diag}, n+1}(a  \mid  s, h, g) \propto P(\rho(S_{\Sigma}^h) = g, \rho(S_{\Sigma}^h) = G_{\Sigma}^0, A_{\Sigma}^0 = a, H_{\Sigma}^0 = h, G_{\Sigma}^0 = g  \mid  S_{\Sigma}^0 = s, l(\Sigma) = h, l(\Sigma) = H_{\Sigma}^0; \pi_{\text{diag}, n})
 $$
 $$
-= P(\rho(S_{\Sigma}^h) = g \mid A_{\Sigma}^0 = a, H_{\Sigma}^0 = h, G_{\Sigma}^0 = g, S_{\Sigma}^0 = s, l(\Sigma) = h, l(\Sigma) = H_{\Sigma}^0; \pi_{\text{diag}, n})
+= P(\rho(S_{\Sigma}^h) = g  \mid  A_{\Sigma}^0 = a, H_{\Sigma}^0 = h, G_{\Sigma}^0 = g, S_{\Sigma}^0 = s, l(\Sigma) = h, l(\Sigma) = H_{\Sigma}^0; \pi_{\text{diag}, n})
 $$
 $$
-\cdot P(A_{\Sigma}^0 = a \mid H_{\Sigma}^0 = h, G_{\Sigma}^0 = g, S_{\Sigma}^0 = s, l(\Sigma) = h, l(\Sigma) = H_{\Sigma}^0; \pi_{\text{diag}, n})
+\cdot P(A_{\Sigma}^0 = a  \mid  H_{\Sigma}^0 = h, G_{\Sigma}^0 = g, S_{\Sigma}^0 = s, l(\Sigma) = h, l(\Sigma) = H_{\Sigma}^0; \pi_{\text{diag}, n})
 $$
 $$
-\cdot P(H_{\Sigma}^0 = h, G_{\Sigma}^0 = g, l(\Sigma) = H_{\Sigma}^0 \mid S_{\Sigma}^0 = s, l(\Sigma) = h; \pi_{\text{diag}, n}).
+\cdot P(H_{\Sigma}^0 = h, G_{\Sigma}^0 = g, l(\Sigma) = H_{\Sigma}^0  \mid  S_{\Sigma}^0 = s, l(\Sigma) = h; \pi_{\text{diag}, n}).
 $$
 最后，利用动作价值函数的表达式（2.1），我们得到：
-
 $$
-\pi_{\text{diag}, n+1}(a \mid s, h, g) \propto Q^{\pi_{\text{diag}, n}}((s, h, g), a) \pi_{\text{diag}, n}(a \mid s, h, g) P(H_{\Sigma}^0 = h, G_{\Sigma}^0 = g \mid S_{\Sigma}^0 = s, l(\Sigma) = h; \pi_{\text{diag}, n})
+\pi_{\text{diag}, n+1}(a  \mid  s, h, g) \propto Q^{\pi_{\text{diag}, n}}((s, h, g), a) \pi_{\text{diag}, n}(a  \mid  s, h, g) P(H_{\Sigma}^0 = h, G_{\Sigma}^0 = g  \mid  S_{\Sigma}^0 = s, l(\Sigma) = h; \pi_{\text{diag}, n})
 $$
-
 $$
-\propto Q^{\pi_{\text{diag}, n}}((s, h, g), a) \pi_{\text{diag}, n}(a \mid s, h, g).
+\propto Q^{\pi_{\text{diag}, n}}((s, h, g), a) \pi_{\text{diag}, n}(a  \mid  s, h, g).
 $$
 
 ## 9 相关工作 (Related Work)
@@ -1602,7 +1600,7 @@ Strupl等人（2022a）和Paster等人（2022）描述了eUDRL在具有随机转
   J^\pi \geq J^{\text{GCSL}}(\pi) - 4T(T - 1)\alpha'^2 + C,
   $$
   其中$J^\pi$表示策略$\pi$的目标到达目标，$J^{\text{GCSL}}(\pi)$表示策略$\pi$的GCSL目标（与eUDRL目标（2.7）相同，用于尾
-部片段），$T$表示固定时间步长，$\alpha' := \max_{\bar{s}} \text{DTV}(\pi(\cdot\mid\bar{s})\mid\pi^{\text{old}}(\cdot\mid\bar{s}))$表示策略$\pi$与用于收集轨迹的策略$\pi^{\text{old}}$之间的总变差距离，$C$是与策略$\pi$相关的常数。
+部片段），$T$表示固定时间步长，$\alpha' := \max_{\bar{s}} \text{DTV}(\pi(\cdot \mid \bar{s}) \mid \pi^{\text{old}}(\cdot \mid \bar{s}))$表示策略$\pi$与用于收集轨迹的策略$\pi^{\text{old}}$之间的总变差距离，$C$是与策略$\pi$相关的常数。
 
   当尝试将这一结果应用于我们的工作时，例如评估目标到达目标的连续性（或目标到达目标的$\delta$依赖误差界限），存在（至少）两个问题。第一个问题是，要以有意义的方式使用这一界限，需要最小化$\alpha'$。这可以通过假设GCSL（eUDRL）策略序列存在极限来实现（此时$\alpha' \to 0$）。然而，证明这一点是困难的。为了保持一定的严谨性，我们避免了极限假设，而是研究所有可能的累积点。从这个角度来看，这一结果并不实用，因为在有限次迭代中，$\alpha'$可能很大。它对于渐近情况也不实用，因为我们不能承受极限假设。第二个问题是，没有考虑对$\delta$（转移核$\lambda$与确定性核$\lambda_0$的距离）的依赖。为了使用这一界限（例如，评估在$\lambda_0$处的连续性），需要确定右侧所有三项对$\delta$的依赖关系。这似乎比直接确定$J^\pi$对$\delta$的依赖关系更具挑战性（如我们在本文中所做的），并且可能仍然不够精确（见上述观点）。
 
@@ -1638,7 +1636,7 @@ Strupl等人（2022a）和Paster等人（2022）描述了eUDRL在具有随机转
 
 1. **CE的初始分布的支持集包含“关键状态”集合** $\bar{S}_{\lambda_0} \subset \text{supp} \, \bar{\mu}$。简单来说，$\bar{S}_{\lambda_0}$由那些对于证明目标到达目标在给定确定性核$\lambda_0$处的连续性至关重要的状态组成。特别地，CE无法到达的状态被排除在$\bar{S}_{\lambda_0}$之外。
 
-2. **最优策略在$\bar{S}_{\lambda_0}$上是唯一的**，即对于所有状态（$\forall \bar{s} \in \bar{S}_{\lambda_0}$）：$\midO(\bar{s})\mid = 1$。这一条件减轻了研究相对连续性的复杂性，显著简化了稳定性和收敛性分析。
+2. **最优策略在$\bar{S}_{\lambda_0}$上是唯一的**，即对于所有状态（$\forall \bar{s} \in \bar{S}_{\lambda_0}$）：$ \mid O(\bar{s}) \mid  = 1$。这一条件减轻了研究相对连续性的复杂性，显著简化了稳定性和收敛性分析。
 
 因此，这两个条件都意味着在渐近极限下，接近确定性的核处的目标到达目标表现出接近最优的行为，这与任何有限次迭代时的情况相同。我们将这些结果完全明确化，推导出基于转移核与确定性核距离的最优性误差估计。我们还推导了eUDRL策略误差的界限，并评估了其$q$-线性收敛速率。尽管我们相信所概述的条件涵盖了广泛的实用场景，但关于eUDRL生成策略在确定性核处的累积点集合的相对连续性的完全一般性讨论仍然是一个开放问题。
 
