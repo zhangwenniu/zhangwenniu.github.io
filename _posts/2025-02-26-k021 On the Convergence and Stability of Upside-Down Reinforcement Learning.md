@@ -879,7 +879,7 @@ $$
 
 假设$\beta_h, \gamma_h \in (0, 1)$且$1 > \gamma_h + \epsilon$，注意到$\beta_h, \kappa_h, \gamma_h$随$h$增加而增加，并且在$\delta \to 0$时趋近于0。则对于所有$\lambda \in U_\delta(\lambda_0)$和所有$\pi_0 > 0$，以下结论成立：
 1. $$
-   \limsup_{n} \max_{\bar{s} \in \bar{S}_{\lambda_0}} \left \mid  1 - \epsilon \left(1 - \frac{ \mid O(\bar{s}) \mid }{ \mid A \mid }\right) - \pi_{n, \epsilon}(O(\bar{s}) \mid \bar{s}) \right \mid  \leq \kappa_N
+   \limsup_{n} \max_{\bar{s} \in \bar{S}_{\lambda_0}} \left|  1 - \epsilon \left(1 - \frac{ \mid O(\bar{s}) \mid }{ \mid A \mid }\right) - \pi_{n, \epsilon}(O(\bar{s}) \mid \bar{s}) \right|  \leq \kappa_N
    $$
 2. $$
    (\exists (\pi^*_{n, \epsilon}), \pi^*_{n, \epsilon} \in \Pi^*_{\lambda_0, \epsilon}) : \limsup_{n} \max_{\bar{s}, a \in \bar{S}_{\lambda_0} \times A}  \mid Q_{\pi_{n, \epsilon}}^\lambda(\bar{s}, a) - Q_{\pi^*_{n, \epsilon}}^{\lambda_0}(\bar{s}, a) \mid  \leq \beta_N
