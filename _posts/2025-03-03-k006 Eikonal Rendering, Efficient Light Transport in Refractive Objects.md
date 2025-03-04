@@ -1,6 +1,6 @@
 ---
 layout: mypost
-title: Eikonal Rendering, Efficient Light Transport in Refractive Objects
+title: k006 Eikonal Rendering, Efficient Light Transport in Refractive Objects
 categories: [透明]
 ---
 
