@@ -118,7 +118,9 @@ categories: [物理, Transformer]
 - **跨模态**：数据集中的物理量通过不同类型的传感器进行测量，例如加速度计、电流传感器和气象传感器。
 
 ## 3. 数据集示例
+
 论文中列举了部分用于预训练的数据集及其特点：
+
 | Dataset | Repository | Domain | # observations |
 |--|--|--|--|
 | LOOP_SEATTLE | LibCity | Transport | 33953760 |
