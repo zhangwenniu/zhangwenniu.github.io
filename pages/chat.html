@@ -7,32 +7,10 @@ title: 留言板
   <h2>欢迎留言交流</h2>
   <p>在这里，您可以分享您的想法、提出问题或者与我交流。</p>
   
-  <div class="setup-guide" style="margin-bottom: 30px; padding: 15px; background-color: #f8f9fa; border-radius: 5px; border-left: 4px solid #4BB596;">
-    <h3 style="margin-top: 0;">Gitalk 设置指南</h3>
-    <p>要启用评论功能，请按照以下步骤操作：</p>
-    <ol>
-      <li>在 GitHub 上创建一个 OAuth App：
-        <ul>
-          <li>访问 <a href="https://github.com/settings/applications/new" target="_blank">GitHub OAuth Apps</a></li>
-          <li>填写应用名称（如 "Blog Comments"）</li>
-          <li>主页 URL 填写您的博客地址（如 "https://zhangwenniu.github.io"）</li>
-          <li>授权回调 URL 也填写您的博客地址</li>
-          <li>点击 "Register application"</li>
-        </ul>
-      </li>
-      <li>获取 Client ID 和 Client Secret</li>
-      <li>在 _config.yml 文件中更新 Gitalk 配置：
-        <pre style="background-color: #f1f1f1; padding: 10px; border-radius: 3px; overflow-x: auto;">
-gitalk:
-  enable: true
-  clientID: '您的 Client ID'
-  clientSecret: '您的 Client Secret'
-  repo: 'zhangwenniu.github.io'
-  owner: 'zhangwenniu'
-  admin: ['zhangwenniu']</pre>
-      </li>
-    </ol>
-    <p>设置完成后，删除此指南即可。</p>
+  <div class="setup-notice" style="margin-bottom: 30px; padding: 15px; background-color: #f8f9fa; border-radius: 5px; border-left: 4px solid #4BB596;">
+    <h3 style="margin-top: 0;">关于评论功能</h3>
+    <p>为了保护 GitHub OAuth 应用凭据安全，我们不再在代码仓库中存储这些敏感信息。</p>
+    <p>如果您看到"Gitalk 评论系统尚未配置"的提示，请查看 <a href="{{ site.baseurl }}/pages/gitalk-setup.html">Gitalk 安全配置指南</a> 了解如何在本地配置评论功能。</p>
   </div>
   
   <!-- 引入评论组件 -->
@@ -65,13 +43,16 @@ gitalk:
     color: #8b949e;
   }
   
-  html.dark .setup-guide {
+  html.dark .setup-notice {
     background-color: #161b22;
     border-left-color: #58a6ff;
   }
   
-  html.dark .setup-guide pre {
-    background-color: #0d1117;
+  html.dark .setup-notice h3 {
     color: #c9d1d9;
+  }
+  
+  html.dark .setup-notice a {
+    color: #58a6ff;
   }
 </style>

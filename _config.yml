@@ -24,10 +24,12 @@ baseurl: ''
 tucaoUrl: https://blog.csdn.net/ProfSnail
 
 # Gitalk评论系统配置
+# 注意：为了安全起见，请不要在此处填写真实的clientID和clientSecret
+# 请在本地开发环境中使用环境变量或其他安全方式存储这些敏感信息
 gitalk:
   enable: true
-  clientID: 'Ov23likRtQ95Smp7qYbQ'
-  clientSecret: 'dc0e060239a0a0786ab66a7cb217882bcdc1acf1'
+  clientID: 'YOUR_CLIENT_ID'      # 请替换为您的GitHub OAuth App的Client ID
+  clientSecret: 'YOUR_CLIENT_SECRET'  # 请替换为您的GitHub OAuth App的Client Secret
   repo: 'zhangwenniu.github.io'
   owner: 'zhangwenniu'
   admin: ['zhangwenniu']

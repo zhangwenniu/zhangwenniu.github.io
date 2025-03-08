@@ -11,56 +11,86 @@ title: 文章分类
   
   <!-- 分类卡片 -->
   <div class="category-cards">
-    {%- for category in site.categories %}
-    <div class="category-card" data-category="{{ category[0] | slugify }}">
+    {% assign sorted_categories = site.categories | sort | reverse %}
+    {% for category in sorted_categories %}
+    {% assign category_name = category[0] %}
+    {% assign posts = category[1] %}
+    {% assign post_count = posts.size %}
+    <div class="category-card" data-category="{{ category_name | slugify }}" data-count="{{ post_count }}">
       <div class="category-card-header">
-        <h3>{{ category[0] }}</h3>
-        <span class="category-count">{{ category[1].size }} 篇文章</span>
+        <h3>{{ category_name }}</h3>
+        <span class="category-count">{{ post_count }} 篇文章</span>
       </div>
       <div class="category-card-body">
         <ul>
-          {% for post in category[1] limit:3 %}
+          {% for post in posts limit:3 %}
           <li>
             <a href="{{ site.baseurl | append: post.url }}" class="hover-underline">{{ post.title }}</a>
             <span class="post-date">{{ post.date | date: "%Y/%m/%d" }}</span>
           </li>
           {% endfor %}
         </ul>
-        {% if category[1].size > 3 %}
+        {% if post_count > 3 %}
         <div class="category-more">
-          <a href="#{{ category[0] }}" class="view-more">查看全部 {{ category[1].size }} 篇文章 »</a>
+          <a href="#{{ category_name }}" class="view-more">查看全部 {{ post_count }} 篇文章 »</a>
         </div>
         {% endif %}
       </div>
     </div>
-    {%- endfor %}
+    {% endfor %}
   </div>
   
   <!-- 分类详细列表 -->
   <div class="category-details">
-    {%- for category in site.categories %}
-    <div class="category-section" id="{{ category[0] }}">
+    {% for category in sorted_categories %}
+    {% assign category_name = category[0] %}
+    {% assign posts = category[1] %}
+    {% assign post_count = posts.size %}
+    <div class="category-section" id="{{ category_name }}">
       <div class="category-section-header">
-        <h2>{{ category[0] }}</h2>
-        <span class="category-count">{{ category[1].size }} 篇文章</span>
+        <h2>{{ category_name }}</h2>
+        <span class="category-count">{{ post_count }} 篇文章</span>
       </div>
       <ul class="category-post-list">
-        {%- for post in category[1] %}
+        {% for post in posts %}
         <li>
           <span class="date">{{ post.date | date: "%Y/%m/%d" }}</span>
           <div class="title">
             <a href="{{ site.baseurl | append: post.url }}" class="hover-underline">{{ post.title }}</a>
           </div>
         </li>
-        {%- endfor %}
+        {% endfor %}
       </ul>
       <div class="back-to-top">
         <a href="#" class="hover-underline">返回顶部</a>
       </div>
     </div>
-    {%- endfor %}
+    {% endfor %}
   </div>
 </div>
+
+<script>
+  // 页面加载完成后，按文章数量排序分类卡片
+  document.addEventListener('DOMContentLoaded', function() {
+    const categoryCards = document.querySelectorAll('.category-card');
+    const categoryCardsContainer = document.querySelector('.category-cards');
+    
+    // 将NodeList转换为数组，以便排序
+    const cardsArray = Array.from(categoryCards);
+    
+    // 按文章数量从多到少排序
+    cardsArray.sort(function(a, b) {
+      const countA = parseInt(a.getAttribute('data-count'));
+      const countB = parseInt(b.getAttribute('data-count'));
+      return countB - countA;
+    });
+    
+    // 重新添加排序后的卡片到容器中
+    cardsArray.forEach(function(card) {
+      categoryCardsContainer.appendChild(card);
+    });
+  });
+</script>
 
 <style>
   /* 分类页面样式 */

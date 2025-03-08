@@ -14,18 +14,35 @@
     gitalkId = gitalkId.substr(gitalkId.length - 50);
   }
   
-  var gitalk = new Gitalk({
-    clientID: "{{ site.gitalk.clientID }}",
-    clientSecret: "{{ site.gitalk.clientSecret }}",
-    repo: "{{ site.gitalk.repo }}", // 存储评论的仓库
-    owner: "{{ site.gitalk.owner }}", // 仓库所有者
-    admin: {{ site.gitalk.admin | jsonify }}, // 仓库管理员，可以有多个
-    id: gitalkId, // 页面唯一标识，长度必须小于50
-    title: "{{ page.title }}", // 页面标题
-    distractionFreeMode: false // 是否启用无干扰模式
-  });
+  // 尝试从localStorage获取Gitalk配置（仅用于本地开发）
+  var clientID = localStorage.getItem('gitalk_client_id') || "{{ site.gitalk.clientID }}";
+  var clientSecret = localStorage.getItem('gitalk_client_secret') || "{{ site.gitalk.clientSecret }}";
   
-  gitalk.render('gitalk-container');
+  // 检查是否有有效的配置
+  if (clientID === 'YOUR_CLIENT_ID' || clientSecret === 'YOUR_CLIENT_SECRET') {
+    document.getElementById('gitalk-container').innerHTML = '<div style="text-align: center; padding: 20px; color: #666;">' +
+      '<p>Gitalk 评论系统尚未配置。</p>' +
+      '<p>请在本地开发环境中使用以下方法设置您的 GitHub OAuth 应用凭据：</p>' +
+      '<pre style="text-align: left; background: #f5f5f5; padding: 10px; border-radius: 5px; margin-top: 10px;">' +
+      'localStorage.setItem("gitalk_client_id", "您的Client ID");\n' +
+      'localStorage.setItem("gitalk_client_secret", "您的Client Secret");</pre>' +
+      '<p>请在浏览器控制台中执行上述代码。</p>' +
+      '<p>注意：这些凭据仅存储在您的浏览器中，不会被提交到仓库。</p>' +
+      '</div>';
+  } else {
+    var gitalk = new Gitalk({
+      clientID: clientID,
+      clientSecret: clientSecret,
+      repo: "{{ site.gitalk.repo }}", // 存储评论的仓库
+      owner: "{{ site.gitalk.owner }}", // 仓库所有者
+      admin: {{ site.gitalk.admin | jsonify }}, // 仓库管理员，可以有多个
+      id: gitalkId, // 页面唯一标识，长度必须小于50
+      title: "{{ page.title }}", // 页面标题
+      distractionFreeMode: false // 是否启用无干扰模式
+    });
+    
+    gitalk.render('gitalk-container');
+  }
 </script>
 
 <style>
@@ -73,6 +90,11 @@
   
   html.dark .gt-container .gt-svg svg {
     fill: #8b949e;
+  }
+  
+  html.dark #gitalk-container pre {
+    background-color: #161b22;
+    color: #c9d1d9;
   }
 </style>
 {% endif %} 
