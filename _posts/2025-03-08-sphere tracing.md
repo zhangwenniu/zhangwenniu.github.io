@@ -1,3 +1,11 @@
+---
+layout: mypost
+title: Sphere Tracing, A Geometric Method for the  Antialiased Ray Tracing of Implicit Surfaces
+categories: [Sphere Tracing]
+---
+
+
+
 # 球面追踪：隐式曲面抗锯齿射线追踪的几何方法
 
 **John C. Hart**  
