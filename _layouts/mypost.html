@@ -19,6 +19,15 @@
   <div class="post">
     {{ content }}
   </div>
+  
+  <!-- 添加评论功能 -->
+  {% if page.comments != false %}
+  <div class="post-comments">
+    <h2>评论</h2>
+    {% include comments.html %}
+  </div>
+  {% endif %}
+  
   {% if site.extAdsense -%}
   <div class="adsense" style="overflow: hidden;">
     {% include ext-adsense.html -%}

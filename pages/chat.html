@@ -3,10 +3,75 @@ layout: mypost
 title: 留言板
 ---
 
-<p>留言功能已迁移到"吐个槽"，跳转中...</p>
+<div class="page-chat">
+  <h2>欢迎留言交流</h2>
+  <p>在这里，您可以分享您的想法、提出问题或者与我交流。</p>
+  
+  <div class="setup-guide" style="margin-bottom: 30px; padding: 15px; background-color: #f8f9fa; border-radius: 5px; border-left: 4px solid #4BB596;">
+    <h3 style="margin-top: 0;">Gitalk 设置指南</h3>
+    <p>要启用评论功能，请按照以下步骤操作：</p>
+    <ol>
+      <li>在 GitHub 上创建一个 OAuth App：
+        <ul>
+          <li>访问 <a href="https://github.com/settings/applications/new" target="_blank">GitHub OAuth Apps</a></li>
+          <li>填写应用名称（如 "Blog Comments"）</li>
+          <li>主页 URL 填写您的博客地址（如 "https://zhangwenniu.github.io"）</li>
+          <li>授权回调 URL 也填写您的博客地址</li>
+          <li>点击 "Register application"</li>
+        </ul>
+      </li>
+      <li>获取 Client ID 和 Client Secret</li>
+      <li>在 _config.yml 文件中更新 Gitalk 配置：
+        <pre style="background-color: #f1f1f1; padding: 10px; border-radius: 3px; overflow-x: auto;">
+gitalk:
+  enable: true
+  clientID: '您的 Client ID'
+  clientSecret: '您的 Client Secret'
+  repo: 'zhangwenniu.github.io'
+  owner: 'zhangwenniu'
+  admin: ['zhangwenniu']</pre>
+      </li>
+    </ol>
+    <p>设置完成后，删除此指南即可。</p>
+  </div>
+  
+  <!-- 引入评论组件 -->
+  {% include comments.html %}
+</div>
 
-<p><a href="{{ site.tucaoUrl }}">如未跳转请手动点击这里</a></p>
-
-<script language="javascript" type="text/javascript">
-  window.location.href = '{{site.tucaoUrl}}'
-</script>
+<style>
+  .page-chat {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .page-chat h2 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .page-chat p {
+    margin-bottom: 30px;
+    color: #666;
+  }
+  
+  /* 暗色模式支持 */
+  html.dark .page-chat h2 {
+    color: #c9d1d9;
+  }
+  
+  html.dark .page-chat p {
+    color: #8b949e;
+  }
+  
+  html.dark .setup-guide {
+    background-color: #161b22;
+    border-left-color: #58a6ff;
+  }
+  
+  html.dark .setup-guide pre {
+    background-color: #0d1117;
+    color: #c9d1d9;
+  }
+</style>

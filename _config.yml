@@ -23,6 +23,15 @@ baseurl: ''
 # 吐个槽地址，会在chat页面中重定向到该地址
 tucaoUrl: https://blog.csdn.net/ProfSnail
 
+# Gitalk评论系统配置
+gitalk:
+  enable: true
+  clientID: 'Ov23likRtQ95Smp7qYbQ'
+  clientSecret: 'dc0e060239a0a0786ab66a7cb217882bcdc1acf1'
+  repo: 'zhangwenniu.github.io'
+  owner: 'zhangwenniu'
+  admin: ['zhangwenniu']
+
 # 菜单
 # 必填字段 title: '文本' url: '链接'
 # 可选字段 target: '_blank' 新页面打开 
