@@ -487,6 +487,29 @@ blog.addLoadEvent(function () {
   const tocTitle = document.createElement('div')
   tocTitle.className = 'toc-title'
   tocTitle.textContent = '目录'
+  
+  // 添加展开/折叠图标
+  const toggleIcon = document.createElement('span')
+  toggleIcon.className = 'toc-toggle-icon'
+  toggleIcon.innerHTML = '−' // 默认展开状态显示减号
+  tocTitle.appendChild(toggleIcon)
+  
+  // 添加点击事件，实现折叠/展开功能
+  tocTitle.addEventListener('click', function() {
+    const tocList = tocContainer.querySelector('.toc-list')
+    if (tocList.style.display === 'none') {
+      // 展开目录
+      tocList.style.display = 'block'
+      toggleIcon.innerHTML = '−' // 展开状态显示减号
+      localStorage.setItem('tocCollapsed', 'false')
+    } else {
+      // 折叠目录
+      tocList.style.display = 'none'
+      toggleIcon.innerHTML = '+' // 折叠状态显示加号
+      localStorage.setItem('tocCollapsed', 'true')
+    }
+  })
+  
   tocContainer.appendChild(tocTitle)
 
   // 创建目录列表
@@ -528,5 +551,11 @@ blog.addLoadEvent(function () {
   const postContent = document.querySelector('.page-post .post')
   if (postContent) {
     postContent.parentNode.insertBefore(tocContainer, postContent)
+    
+    // 检查本地存储中的折叠状态并应用
+    if (localStorage.getItem('tocCollapsed') === 'true') {
+      tocList.style.display = 'none'
+      toggleIcon.innerHTML = '+'
+    }
   }
 })
