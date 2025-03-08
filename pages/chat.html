@@ -1,6 +1,7 @@
 ---
 layout: mypost
 title: 留言板
+comments: false
 ---
 
 <div class="page-chat">
@@ -9,12 +10,17 @@ title: 留言板
   
   <div class="setup-notice" style="margin-bottom: 30px; padding: 15px; background-color: #f8f9fa; border-radius: 5px; border-left: 4px solid #4BB596;">
     <h3 style="margin-top: 0;">关于评论功能</h3>
-    <p>为了保护 GitHub OAuth 应用凭据安全，我们不再在代码仓库中存储这些敏感信息。</p>
-    <p>如果您看到"Gitalk 评论系统尚未配置"的提示，请查看 <a href="{{ site.baseurl }}/pages/gitalk-setup.html">Gitalk 安全配置指南</a> 了解如何在本地配置评论功能。</p>
+    <p>评论功能正在维护中，暂时无法使用。</p>
+    <p>您可以通过以下方式与我联系：</p>
+    <ul style="margin-top: 10px;">
+      <li>发送邮件至：<a href="mailto:zhangwenniu@163.com">zhangwenniu@163.com</a></li>
+      <li>访问我的 <a href="https://github.com/zhangwenniu" target="_blank">GitHub</a> 页面</li>
+      <li>访问我的 <a href="https://blog.csdn.net/ProfSnail" target="_blank">CSDN 博客</a></li>
+    </ul>
   </div>
   
-  <!-- 引入评论组件 -->
-  {% include comments.html %}
+  <!-- 暂时禁用评论组件 -->
+  <!-- {% include comments.html %} -->
 </div>
 
 <style>
@@ -54,5 +60,9 @@ title: 留言板
   
   html.dark .setup-notice a {
     color: #58a6ff;
+  }
+  
+  html.dark .setup-notice ul {
+    color: #8b949e;
   }
 </style>
