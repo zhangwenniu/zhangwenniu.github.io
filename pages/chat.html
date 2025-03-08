@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: 留言板
-comments: false
+comments: true
 ---
 
 <div class="page-chat">
@@ -10,17 +10,24 @@ comments: false
   
   <div class="setup-notice" style="margin-bottom: 30px; padding: 15px; background-color: #f8f9fa; border-radius: 5px; border-left: 4px solid #4BB596;">
     <h3 style="margin-top: 0;">关于评论功能</h3>
-    <p>评论功能正在维护中，暂时无法使用。</p>
-    <p>您可以通过以下方式与我联系：</p>
+    <p>本站使用 Utterances 评论系统，它基于 GitHub Issues，安全且轻量。</p>
+    <p>要发表评论，您需要：</p>
     <ul style="margin-top: 10px;">
+      <li>拥有 GitHub 账号</li>
+      <li>登录您的 GitHub 账号</li>
+      <li>点击下方"Sign in with GitHub"按钮授权 Utterances</li>
+    </ul>
+    <p>详细使用说明请查看 <a href="{{ site.baseurl }}/pages/comment-guide.html">评论系统使用指南</a>。</p>
+    <p>您也可以通过以下方式与我联系：</p>
+    <ul>
       <li>发送邮件至：<a href="mailto:zhangwenniu@163.com">zhangwenniu@163.com</a></li>
       <li>访问我的 <a href="https://github.com/zhangwenniu" target="_blank">GitHub</a> 页面</li>
       <li>访问我的 <a href="https://blog.csdn.net/ProfSnail" target="_blank">CSDN 博客</a></li>
     </ul>
   </div>
   
-  <!-- 暂时禁用评论组件 -->
-  <!-- {% include comments.html %} -->
+  <!-- 引入评论组件 -->
+  {% include comments.html %}
 </div>
 
 <style>

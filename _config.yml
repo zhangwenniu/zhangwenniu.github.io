@@ -23,16 +23,13 @@ baseurl: ''
 # 吐个槽地址，会在chat页面中重定向到该地址
 tucaoUrl: https://blog.csdn.net/ProfSnail
 
-# Gitalk评论系统配置
-# 注意：为了安全起见，请不要在此处填写真实的clientID和clientSecret
-# 请在本地开发环境中使用环境变量或其他安全方式存储这些敏感信息
-gitalk:
-  enable: false  # 暂时禁用Gitalk，以确保构建成功
-  clientID: ''   # 留空
-  clientSecret: ''  # 留空
-  repo: 'zhangwenniu.github.io'
-  owner: 'zhangwenniu'
-  admin: ['zhangwenniu']
+# Utterances评论系统配置
+# 基于GitHub Issues的轻量级评论系统，不需要Client Secret
+utterances:
+  enable: true
+  repo: 'zhangwenniu/zhangwenniu.github.io'  # 存储评论的仓库
+  issue_term: 'pathname'  # 如何将页面映射到issue [pathname, url, title, og:title]
+  label: 'comment'  # 为评论issue添加的标签
 
 # 菜单
 # 必填字段 title: '文本' url: '链接'
