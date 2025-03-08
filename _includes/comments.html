@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 
-<script>
+<script type="text/javascript">
   // 获取页面唯一标识
   var gitalkId = '{{ page.url | slugify }}';
   // 如果标识超过50个字符，则取其哈希值的后50个字符
@@ -28,24 +28,32 @@
   }
   
   // 检查是否有有效的配置
-  if (clientID === 'YOUR_CLIENT_ID' || clientSecret === 'YOUR_CLIENT_SECRET') {
+  if (clientID === 'YOUR_CLIENT_ID' || clientSecret === 'YOUR_CLIENT_SECRET' || clientID === '' || clientSecret === '') {
     document.getElementById('gitalk-container').innerHTML = '<div style="text-align: center; padding: 20px; color: #666;">' +
       '<p>Gitalk 评论系统尚未配置。</p>' +
       '<p>请查看 <a href="{{ site.baseurl }}/pages/gitalk-setup.html">Gitalk 安全配置指南</a> 了解如何配置。</p>' +
       '</div>';
   } else {
-    var gitalk = new Gitalk({
-      clientID: clientID,
-      clientSecret: clientSecret,
-      repo: "{{ site.gitalk.repo }}", // 存储评论的仓库
-      owner: "{{ site.gitalk.owner }}", // 仓库所有者
-      admin: {{ site.gitalk.admin | jsonify }}, // 仓库管理员，可以有多个
-      id: gitalkId, // 页面唯一标识，长度必须小于50
-      title: "{{ page.title }}", // 页面标题
-      distractionFreeMode: false // 是否启用无干扰模式
-    });
-    
-    gitalk.render('gitalk-container');
+    try {
+      var gitalk = new Gitalk({
+        clientID: clientID,
+        clientSecret: clientSecret,
+        repo: "{{ site.gitalk.repo }}",
+        owner: "{{ site.gitalk.owner }}",
+        admin: {{ site.gitalk.admin | jsonify }},
+        id: gitalkId,
+        title: "{{ page.title }}",
+        distractionFreeMode: false
+      });
+      
+      gitalk.render('gitalk-container');
+    } catch (e) {
+      console.error("Gitalk 初始化失败:", e);
+      document.getElementById('gitalk-container').innerHTML = '<div style="text-align: center; padding: 20px; color: #666;">' +
+        '<p>Gitalk 评论系统初始化失败。</p>' +
+        '<p>错误信息: ' + e.message + '</p>' +
+        '</div>';
+    }
   }
 </script>
 
