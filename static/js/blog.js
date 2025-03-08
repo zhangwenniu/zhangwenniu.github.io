@@ -557,5 +557,53 @@ blog.addLoadEvent(function () {
       tocList.style.display = 'none'
       toggleIcon.innerHTML = '+'
     }
+    
+    // 添加滚动监听，高亮当前可见的标题对应的目录项
+    const tocLinks = tocList.querySelectorAll('a')
+    const headingElements = []
+    
+    // 收集所有标题元素及其对应的目录链接
+    tocLinks.forEach(link => {
+      const targetId = link.getAttribute('href').substring(1)
+      const targetHeading = document.getElementById(targetId)
+      if (targetHeading) {
+        headingElements.push({
+          heading: targetHeading,
+          link: link
+        })
+      }
+    })
+    
+    // 滚动时更新活跃的目录项
+    function updateActiveHeading() {
+      let activeIndex = 0
+      const scrollTop = window.scrollY
+      
+      // 找到当前可见的标题
+      for (let i = 0; i < headingElements.length; i++) {
+        const headingTop = headingElements[i].heading.getBoundingClientRect().top + scrollTop
+        if (headingTop - 100 <= scrollTop) {
+          activeIndex = i
+        } else {
+          break
+        }
+      }
+      
+      // 移除所有活跃类
+      tocLinks.forEach(link => {
+        link.parentNode.classList.remove('active')
+      })
+      
+      // 添加活跃类到当前项
+      if (headingElements.length > 0) {
+        headingElements[activeIndex].link.parentNode.classList.add('active')
+      }
+    }
+    
+    // 初始化活跃标题
+    updateActiveHeading()
+    
+    // 添加滚动监听
+    window.addEventListener('scroll', updateActiveHeading)
   }
 })

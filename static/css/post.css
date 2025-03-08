@@ -244,24 +244,37 @@
 
 /* 暗色模式支持 */
 [theme="dark"] .toc-container {
-  background: #2d2d2d;
+  background: #161b22;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  border: 1px solid #30363d;
 }
 
 [theme="dark"] .toc-title {
-  color: #fff;
-  border-bottom-color: #444;
+  color: #c9d1d9;
+  border-bottom-color: #30363d;
 }
 
 [theme="dark"] .toc-toggle-icon {
-  color: #aaa;
+  color: #8b949e;
 }
 
 [theme="dark"] .toc-item a {
-  color: #aaa;
+  color: #8b949e;
 }
 
 [theme="dark"] .toc-item a:hover {
+  color: #58a6ff;
+}
+
+/* 当前活跃的目录项 */
+.toc-item.active a {
   color: #4BB596;
+  font-weight: bold;
+}
+
+[theme="dark"] .toc-item.active a {
+  color: #58a6ff;
+  font-weight: bold;
 }
 
 .post-meta {
