@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: 055, G044 Environment Matting and Compositing
-categories: [透明]
+categories: [透明, 折射]
 ---
 
 

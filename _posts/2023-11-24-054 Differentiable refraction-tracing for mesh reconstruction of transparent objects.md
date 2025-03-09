@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: 054 Differentiable refraction-tracing for mesh reconstruction of transparent objects
-categories: [透明]
+categories: [透明, 折射, 表面重建]
 ---
 
 
@@ -11,7 +11,7 @@ categories: [透明]
 
 Differentiable refraction-tracing for mesh reconstruction of transparent objects
 
-用于透明物体网格重建的可谓折射追踪算法
+用于透明物体网格重建的可以微分的折射追踪算法
 
 ## 作者
 

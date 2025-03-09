@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: 032 Instant Neural Graphics Primitives with a Multiresolution Hash Encoding
-categories: [NeRF]
+categories: [NeRF, 表面重建]
 ---
 
 - [标题](#标题)

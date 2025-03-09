@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: 035 Through the Looking Glass, Nerual 3D Reconstruction of Transparent Objects
-categories: [透明]
+categories: [透明, 表面重建, 折射]
 ---
 
 # Through the Looking Glass: Neural 3D Reconstruction of Transparent Shapes

@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: G043, k015 From Transparent to Opaque, Rethinking Neural Implicit Surfaces with α-NeuS
-categories: [透明, SDF, UDF]
+categories: [透明, SDF, UDF, 表面重建]
 ---
 
 

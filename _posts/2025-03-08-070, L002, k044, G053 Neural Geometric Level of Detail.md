@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: 070, L002, k044, G053 Neural Geometric Level of Detail, Real-time Rendering with Implicit 3D Shapes
-categories: [SDF]
+categories: [SDF, 表面重建]
 ---
 
 # 论文链接

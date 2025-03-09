@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: k006 Eikonal Rendering, Efficient Light Transport in Refractive Objects
-categories: [透明]
+categories: [透明, 折射]
 ---
 
 如果有研究透明物体场景研究的研究者，可以通过邮箱zhangwenniu@163.com联系我，我目前创建了一个透明物体场景研究的研究者交流群，欢迎感兴趣的研究者加入。

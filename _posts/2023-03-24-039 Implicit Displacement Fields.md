@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: 039 Geometry-consistent Neural Shape Representation with Implicit Displacement Fields
-categories: [SDF]
+categories: [SDF, 表面重建]
 ---
 
 # Geometry-consistent Neural Shape Representation with Implicit Displacement Fields
@@ -60,12 +60,6 @@ categories: [SDF]
 # 摘要
 
 几何表面重建可以分为两个步骤，一个步骤是表示平滑表面的基本函数，另一个是在平滑表面的基础上发生形变，产生表面上的细节，这种置换、形变的网络就是displacement network。
-
-# 简介
-
-文章引用了NeuS, VolSDF，同样是一篇使用神经隐式表达，构建三维几何表面的文章。
-
----
 
 # 相关工作
 

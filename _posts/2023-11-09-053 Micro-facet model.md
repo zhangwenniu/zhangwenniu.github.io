@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: 053 A Reflectance Model for Computer Graphics
-categories: [反射]
+categories: [反光, 图形学]
 ---
 
 

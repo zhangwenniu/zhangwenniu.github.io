@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: k040, G052 Transparency for Computer Synthesized images
-categories: [透明, refraction]
+categories: [透明, 折射]
 ---
 
 # 链接

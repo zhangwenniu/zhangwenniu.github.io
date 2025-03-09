@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: k017 Neural Transmitted Radiance Fields
-categories: [3DGS, 反光]
+categories: [NeRF, 反光]
 ---
 
 如果有研究反光场景3D重建的研究者，可以通过邮箱zhangwenniu@163.com联系我，我目前创建了一个反光场景3D重建的研究者交流群，欢迎感兴趣的研究者加入。

@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: k038 An Approximate Image-Space Approach for Interactive Refraction
-categories: [透明, refraction]
+categories: [透明, 折射]
 ---
 
 # 链接

@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: 063 NeReF Neural Refractive Field for Fluid Surface Reconstruction and Rendering
-categories: [透明, 表面重建]
+categories: [透明, 表面重建, 折射, NeRF]
 ---
 
 
@@ -86,9 +86,3 @@ Kai Han1 · Kwan-Yee K. Wong1 · Miaomiao Liu2
     - Second method on a spherical shell
   - 6.2 Real Data
 - 7 Conslusions
-
-
-# Key Points
-
-# Abstract 
-

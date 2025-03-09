@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: k029, G050 Looking Through the Glass Neural Surface Reconstruction Against  High Specular Reflections
-categories: [SDF, 透明, 反光]
+categories: [SDF, 透明, 反光, 表面重建]
 ---
 
 如果有研究镜面反射或透明场景3D重建的研究者，可以通过邮箱zhangwenniu@163.com联系我，我目前创建了一个透明场景、镜面反射场景的研究者交流群，欢迎感兴趣的研究者加入。

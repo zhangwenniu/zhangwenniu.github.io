@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: 052 Transparent and Specular Object Reconstruction
-categories: [透明]
+categories: [透明, 反光, 表面重建, 折射]
 ---
 
 

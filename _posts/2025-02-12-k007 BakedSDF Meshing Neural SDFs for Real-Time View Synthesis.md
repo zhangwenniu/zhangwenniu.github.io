@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: k007, G041 BakedSDF Meshing Neural SDFs for Real-Time View Synthesis
-categories: [SDF]
+categories: [SDF, 表面重建]
 ---
 
 # 链接
