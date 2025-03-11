@@ -527,12 +527,12 @@ blog.addLoadEvent(function () {
       // 展开目录
       tocList.style.display = 'block'
       toggleIcon.innerHTML = '−' // 展开状态显示减号
-      localStorage.setItem('tocCollapsed', 'false')
+      localStorage.setItem('tocContentCollapsed', 'false')
     } else {
       // 折叠目录
       tocList.style.display = 'none'
       toggleIcon.innerHTML = '+' // 折叠状态显示加号
-      localStorage.setItem('tocCollapsed', 'true')
+      localStorage.setItem('tocContentCollapsed', 'true')
     }
   })
   
@@ -573,15 +573,52 @@ blog.addLoadEvent(function () {
 
   tocContainer.appendChild(tocList)
 
+  // 创建侧边栏切换按钮
+  const sidebarToggle = document.createElement('div')
+  sidebarToggle.className = 'toc-sidebar-toggle'
+  sidebarToggle.setAttribute('title', '切换目录')
+  // 将按钮添加到body中，而不是tocContainer中
+  document.body.appendChild(sidebarToggle)
+
+  // 添加脉动动画，使按钮更加明显
+  sidebarToggle.classList.add('pulse')
+  setTimeout(() => {
+    sidebarToggle.classList.remove('pulse')
+  }, 6000) // 6秒后移除脉动动画
+
+  // 添加侧边栏切换事件
+  sidebarToggle.addEventListener('click', toggleSidebar)
+  sidebarToggle.addEventListener('touchend', function(e) {
+    e.preventDefault()
+    toggleSidebar()
+  })
+
+  // 侧边栏切换函数
+  function toggleSidebar() {
+    tocContainer.classList.toggle('collapsed')
+    document.body.classList.toggle('toc-sidebar-collapsed')
+    if (tocContainer.classList.contains('collapsed')) {
+      localStorage.setItem('tocSidebarCollapsed', 'true')
+    } else {
+      localStorage.setItem('tocSidebarCollapsed', 'false')
+    }
+  }
+
   // 将目录插入到 .post 元素之前
   const postContent = document.querySelector('.page-post .post')
   if (postContent) {
     postContent.parentNode.insertBefore(tocContainer, postContent)
     
     // 检查本地存储中的折叠状态并应用
-    if (localStorage.getItem('tocCollapsed') === 'true') {
+    if (localStorage.getItem('tocContentCollapsed') === 'true') {
       tocList.style.display = 'none'
       toggleIcon.innerHTML = '+'
+    }
+
+    // 检查侧边栏折叠状态并应用
+    if (localStorage.getItem('tocSidebarCollapsed') === 'true') {
+      tocContainer.classList.add('collapsed')
+      document.body.classList.add('toc-sidebar-collapsed')
     }
     
     // 添加滚动监听，高亮当前可见的标题对应的目录项
