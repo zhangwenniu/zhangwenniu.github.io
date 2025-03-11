@@ -43,3 +43,6 @@ date: 2023-01-01
 - **函数**：用于组织和重用代码。
 
 在下一章中，我们将开始学习Python编程语言的基础知识。 
+
+
+![sibar_ellipsiod.png](sibar_ellipsiod.png)

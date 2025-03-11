@@ -30,8 +30,8 @@
     {% endif %}
   </div>
   
-  <div class="post">
-    {{ content }}
+  <div class="post book-content" data-book-id="{{ page.book_id }}">
+    {{ content | replace: 'src="', 'src="' | replace: ".md)", ".html)" }}
   </div>
   
   <div class="book-navigation">
@@ -60,7 +60,65 @@
   </div>
   {% endif %}
 </div>
+
+<!-- 图片查看器 -->
+<div id="imageViewer" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); z-index: 1000; justify-content: center; align-items: center; flex-direction: column;">
+  <img id="viewerImage" style="max-width: 90%; max-height: 80%; object-fit: contain;" />
+  <div style="color: white; margin-top: 20px; font-size: 16px;">点击图片关闭</div>
+</div>
+
 {% include footer.html -%}
 {% include script.html -%}
+
+<!-- 处理图片相对路径和图片查看器 -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // 获取书籍ID
+    var bookContent = document.querySelector('.book-content');
+    if (!bookContent) return;
+    
+    var bookId = bookContent.getAttribute('data-book-id');
+    if (!bookId) return;
+    
+    // 获取当前页面URL
+    var pageUrl = window.location.pathname;
+    var baseUrl = '{{ site.baseurl }}';
+    
+    // 提取当前章节的路径
+    var pathMatch = pageUrl.match(/\/books\/([^\/]+)\/([^\/]+)/);
+    if (!pathMatch) return;
+    
+    var bookPath = pathMatch[1];
+    var chapterPath = pathMatch[2].replace(/\.html$/, '');
+    
+    // 查找所有图片元素
+    var images = bookContent.querySelectorAll('img');
+    
+    images.forEach(function(img) {
+      var src = img.getAttribute('src');
+      
+      // 检查是否是相对路径（不以http://, https://, /或data:开头）
+      if (src && !src.match(/^(https?:\/\/|\/|data:)/)) {
+        // 构建新的图片路径
+        var newSrc = baseUrl + '/assets/books/' + bookPath + '/' + src;
+        img.setAttribute('src', newSrc);
+      }
+      
+      // 添加点击事件，打开图片查看器
+      img.addEventListener('click', function() {
+        var viewer = document.getElementById('imageViewer');
+        var viewerImg = document.getElementById('viewerImage');
+        viewerImg.src = img.src;
+        viewer.style.display = 'flex';
+      });
+    });
+    
+    // 点击图片查看器关闭它
+    var viewer = document.getElementById('imageViewer');
+    viewer.addEventListener('click', function() {
+      viewer.style.display = 'none';
+    });
+  });
+</script>
 </body>
 </html> 

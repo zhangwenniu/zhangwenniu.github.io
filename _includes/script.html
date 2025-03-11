@@ -12,7 +12,7 @@
 </script>
 {% endif %}
 
-{%- if page.layout=="mypost" -%}
+{%- if page.layout=="mypost" or page.layout=="book" -%}
   {%- if site.extMath -%}
     {% include ext-mathjax.html %}
   {% elsif page.extMath %}
