@@ -43,10 +43,10 @@ $$
 或者，使用距离度量，可以通过隐式方程几何地表示单位球
 
 $$
-||\mathbf{x}|| - 1 = 0
+\vert \vert \mathbf{x}\vert \vert  - 1 = 0
 $$
 
-作为与原点距离为单位的点的轨迹。这里 $\mathbf{x} = (x, y, z)$，$||(x, y, z)||$ 表示欧几里得模 $\sqrt{x^2 + y^2 + z^2}$。方程 (2) 的隐式曲面与方程 (1) 的一致，尽管它们的值在 $\mathbb{R}^3$ 中几乎每个其他点都不同。具体来说，(1) 返回代数距离 [Rockwood & Owen, 1987]，而 (2) 返回几何距离。
+作为与原点距离为单位的点的轨迹。这里 $\mathbf{x} = (x, y, z)$，$\vert \vert (x, y, z)\vert \vert $ 表示欧几里得模 $\sqrt{x^2 + y^2 + z^2}$。方程 (2) 的隐式曲面与方程 (1) 的一致，尽管它们的值在 $\mathbb{R}^3$ 中几乎每个其他点都不同。具体来说，(1) 返回代数距离 [Rockwood & Owen, 1987]，而 (2) 返回几何距离。
 
 
 几何表示与代数表示的二次曲面比较中，更倾向于几何表示 [Goldman, 1983]。几何表示的参数是坐标无关的，比代数系数更稳健和直观。基于距离的函数如(2)是几何表示隐式曲面的一种方法。
@@ -116,7 +116,7 @@ $$d(\boldsymbol{x}, A) = \min_{\boldsymbol{y} \in A} \|\boldsymbol{x} - \boldsym
 
 
 **定义2** 函数$f:\mathbb{R}^3\rightarrow\mathbb{R}$是其隐式曲面$f^{-1}(0)$的有向距离边界，当且仅当
-$$|f(\boldsymbol{x})| \leq d(\boldsymbol{x}, f^{-1}(0)). \tag{7}$$
+$$\vert f(\boldsymbol{x})\vert  \leq d(\boldsymbol{x}, f^{-1}(0)). \tag{7}$$
 如果式(7) 中等式成立，那么$f$是一个有向距离函数。
 
 一些基本体，比如球体，很容易用有向距离函数来定义。而计算到其他形状的距离可能相当困难。表1列出了附录中包含有向距离函数和边界的基本体和操作。
@@ -140,7 +140,7 @@ $$\|\boldsymbol{x} - \boldsymbol{y}\| = d(\boldsymbol{x}, f^{-1}(0)). \tag{9}$$
 的点之一。
 
 然后根据(8)以及$f(\boldsymbol{y}) = 0$，可以得出
-$$|f(\boldsymbol{x})| \leq \lambda d(\boldsymbol{x}, f^{-1}(0)). \tag{10}$$
+$$\vert f(\boldsymbol{x})\vert  \leq \lambda d(\boldsymbol{x}, f^{-1}(0)). \tag{10}$$
 
 因此，对于任何李普希茨函数$f$，$\lambda^{-1}f(\boldsymbol{x})$是一个有向距离边界（对比[Kalra & Barr, 1989]中的公式(8)）。$\square$
 
@@ -164,9 +164,9 @@ $$t_{i + 1} = t_i + F(t_i) \tag{11}$$
 **定理2** 给定函数$F:\mathbb{R}\to\mathbb{R}$，其李普希茨界为$\lambda\geq \text{Lip }F$，以及初始点$t_0$，球体追踪线性收敛到大于$t_0$的最小根。
 
 球体追踪序列可以写成
-$$t_{i + 1} = g(t_i) = t_i + \frac{|F(t_i)|}{\lambda}. \tag{12}$$
+$$t_{i + 1} = g(t_i) = t_i + \frac{\vert F(t_i)\vert }{\lambda}. \tag{12}$$
 
-从这个形式来看，式(12)与牛顿法的相似之处更为明显。设$r$是大于初始点$t_0$的最小根。由于$F(r) = 0$，那么$g(r) = r$，并且在任何非根点处$|F|/\lambda$为正。因此，式(12)收敛到第一个根。 
+从这个形式来看，式(12)与牛顿法的相似之处更为明显。设$r$是大于初始点$t_0$的最小根。由于$F(r) = 0$，那么$g(r) = r$，并且在任何非根点处$\vert F\vert /\lambda$为正。因此，式(12)收敛到第一个根。 
 
 
 不失一般性，假设$F$在感兴趣的区域内非负，这样就无需使用绝对值。$F(t_i)$在根$r$处的泰勒展开式为
@@ -408,7 +408,7 @@ $$d(\boldsymbol{x}, Cyl)=\|(x,y)\|-1. \tag{25}$$
 注意，在公式(25)以及本附录的其余部分中，$\boldsymbol{x} = (x, y, z)$。
 
 **圆锥体** 到以原点为中心、沿$z$轴方向的圆锥体的距离为
-$$d(\boldsymbol{x}, Cone)=\|(x,y)\|\cos\theta - |z|\sin\theta, \tag{26}$$
+$$d(\boldsymbol{x}, Cone)=\|(x,y)\|\cos\theta - \vert z\vert \sin\theta, \tag{26}$$
 其中$\theta$是与$z$轴的发散角。其推导背后的三角函数关系如图14所示。
 
 **环面** 环面是两个圆的乘积，其距离计算如下
@@ -421,7 +421,7 @@ $$d(\boldsymbol{x}, T)=\|(\|(x,y)\|-R,z)\|-r \tag{27}$$
 ### B 到超二次曲面的距离
 超二次曲面[Barr, 1981]源于距离度量的一般化。到基本图元的距离都使用 $\|\cdot\|$ 运算符。在二维空间中，该运算符一般化为$p$-范数：
 $$
-\|(x, y)\|^p = (|x|^p + |y|^p)^{\frac{1}{p}}
+\|(x, y)\|^p = (\vert x\vert ^p + \vert y\vert ^p)^{\frac{1}{p}}
 \tag{28}
 $$
 当 $p = 2$ 时，它就变成了我们熟悉的欧几里得度量，其“圆” 是正圆形。曼哈顿度量（$p = 1$）的“圆” 是菱形。当 $p \to \infty$ 时取极限，得到棋盘度量：
@@ -536,7 +536,7 @@ C''(r)=12\frac{r}{R^3}-\frac{6}{R^2}
 $$
 求解$C''(r)=0$可得到最大斜率，其出现在中点$r = R/2$处。其利普希茨常数为：
 $$
-\text{Lip }C(r)=|C'(R/2)|=\frac{3}{2R}
+\text{Lip }C(r)=\vert C'(R/2)\vert =\frac{3}{2R}
 \tag{41}
 $$
 和的利普希茨常数由各部分利普希茨常数之和界定，由此得到上述结果。$\square$ 
@@ -638,7 +638,7 @@ $$
 
 带限实体噪声源于对随机单位向量晶格的平滑插值。概括[Perlin & Hoffert, 1989]的内容，噪声函数表示为：
 $$
-\text{noise}(x, y, z)=\sum_{k = \lfloor z \rfloor}^{\lfloor z \rfloor + 1} \sum_{j = \lfloor y \rfloor}^{\lfloor y \rfloor + 1} \sum_{i = \lfloor x \rfloor}^{\lfloor x \rfloor + 1} C_1(|x - i|) C_1(|y - j|) C_1(|z - k|) \Gamma(i, j, k) \cdot (x - i, y - j, z - k) \tag{52}
+\text{noise}(x, y, z)=\sum_{k = \lfloor z \rfloor}^{\lfloor z \rfloor + 1} \sum_{j = \lfloor y \rfloor}^{\lfloor y \rfloor + 1} \sum_{i = \lfloor x \rfloor}^{\lfloor x \rfloor + 1} C_1(\vert x - i\vert ) C_1(\vert y - j\vert ) C_1(\vert z - k\vert ) \Gamma(i, j, k) \cdot (x - i, y - j, z - k) \tag{52}
 $$
 其中 $C_R$ 是用于软物体的三次高斯近似公式(36)，$\Gamma$ 是一个随机单位向量数组。根据定理5，我们知道 $\text{Lip }C_1 = 3/2$。在 $\Gamma$ 中，两个相反的向量可能是相邻的，所以 $\text{Lip }\Gamma = 2$。因此，它们的复合结果是 $\text{Lip noise} = 3$。
 
