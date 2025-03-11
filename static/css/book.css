@@ -1,0 +1,127 @@
+/* 书籍页面样式 */
+.page-book {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.page-book .title {
+  font-size: 2em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.page-book .subtitle {
+  font-size: 1em;
+  color: #666;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.book-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+  padding: 10px 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.book-navigation a {
+  padding: 8px 15px;
+  background-color: #f5f5f5;
+  color: #333;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.book-navigation a:hover {
+  background-color: #e0e0e0;
+}
+
+.prev-chapter:before {
+  content: "← ";
+}
+
+.next-chapter:after {
+  content: " →";
+}
+
+/* 书籍列表页样式 */
+.page-books {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.book-item {
+  margin-bottom: 30px;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  transition: transform 0.3s;
+}
+
+.book-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.book-title {
+  margin-top: 0;
+  color: #333;
+  font-size: 1.8em;
+}
+
+.book-description {
+  color: #666;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.book-chapters {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.book-chapters h3 {
+  margin-top: 0;
+  color: #444;
+  font-size: 1.3em;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.book-chapters ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.book-chapters li {
+  margin-bottom: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.3s;
+}
+
+.book-chapters li:hover {
+  background-color: #f5f5f5;
+}
+
+.book-chapters li:last-child {
+  border-bottom: none;
+}
+
+.book-chapters a {
+  color: #0366d6;
+  text-decoration: none;
+  display: block;
+}
+
+.book-chapters a:hover {
+  text-decoration: underline;
+} 

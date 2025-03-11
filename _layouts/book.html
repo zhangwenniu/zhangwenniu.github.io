@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+{% include head.html -%}
+<body>
+{% include header.html -%}
+<div class="page page-book">
+  <h1 class="title" id="{{ page.title }}">{{ page.title }}</h1>
+  <div class="subtitle">
+    <span>{{ page.book_title }} - 第{{ page.chapter_number }}章</span>
+    {% if page.date %}
+    <span> | {{site.author}} 于 {{ page.date | date: "%Y-%m-%d" }} 发布</span>
+    {% endif %}
+    <span class="post-meta">
+      &nbsp;| &nbsp;
+      <span id="busuanzi_container_page_pv">
+        阅读量: <span id="busuanzi_value_page_pv"></span>次
+      </span>
+    </span>
+  </div>
+  
+  <div class="book-navigation">
+    {% if page.previous_chapter %}
+    <a href="{{ page.previous_chapter | relative_url }}" class="prev-chapter">上一章</a>
+    {% endif %}
+    
+    <a href="{{ site.baseurl }}/pages/books.html#{{ page.book_id }}" class="book-index">返回目录</a>
+    
+    {% if page.next_chapter %}
+    <a href="{{ page.next_chapter | relative_url }}" class="next-chapter">下一章</a>
+    {% endif %}
+  </div>
+  
+  <div class="post">
+    {{ content }}
+  </div>
+  
+  <div class="book-navigation">
+    {% if page.previous_chapter %}
+    <a href="{{ page.previous_chapter | relative_url }}" class="prev-chapter">上一章</a>
+    {% endif %}
+    
+    <a href="{{ site.baseurl }}/pages/books.html#{{ page.book_id }}" class="book-index">返回目录</a>
+    
+    {% if page.next_chapter %}
+    <a href="{{ page.next_chapter | relative_url }}" class="next-chapter">下一章</a>
+    {% endif %}
+  </div>
+  
+  <!-- 添加评论功能 -->
+  {% if page.comments != false %}
+  <div class="post-comments">
+    <h2>评论</h2>
+    {% include comments.html %}
+  </div>
+  {% endif %}
+  
+  {% if site.extAdsense -%}
+  <div class="adsense" style="overflow: hidden;">
+    {% include ext-adsense.html -%}
+  </div>
+  {% endif %}
+</div>
+{% include footer.html -%}
+{% include script.html -%}
+</body>
+</html> 

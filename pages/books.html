@@ -1,0 +1,87 @@
+---
+layout: page
+title: 书籍
+---
+
+<div class="page-books">
+  <div class="books-list">
+    {% assign books_by_id = site.books | group_by: "book_id" %}
+    {% for book in books_by_id %}
+      <div class="book-item" id="{{ book.name }}">
+        {% assign first_chapter = book.items | first %}
+        <h2 class="book-title">{{ first_chapter.book_title }}</h2>
+        <p class="book-description">{{ first_chapter.book_description }}</p>
+        
+        <div class="book-chapters">
+          <h3>章节列表</h3>
+          <ul>
+            {% assign sorted_chapters = book.items | sort: "chapter_number" %}
+            {% for chapter in sorted_chapters %}
+              <li>
+                <a href="{{ chapter.url | relative_url }}">
+                  第{{ chapter.chapter_number }}章: {{ chapter.title }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      <hr>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  .book-item {
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .book-title {
+    margin-top: 0;
+    color: #333;
+  }
+  
+  .book-description {
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  .book-chapters {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  .book-chapters h3 {
+    margin-top: 0;
+    color: #444;
+  }
+  
+  .book-chapters ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .book-chapters li {
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .book-chapters li:last-child {
+    border-bottom: none;
+  }
+  
+  .book-chapters a {
+    color: #0366d6;
+    text-decoration: none;
+  }
+  
+  .book-chapters a:hover {
+    text-decoration: underline;
+  }
+</style> 
