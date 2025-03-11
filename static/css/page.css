@@ -1,23 +1,64 @@
-.list-post > h2 {
-  font-size: 15px;
-  font-weight: bold;
-  padding: 12px 0;
+.page-index {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px;
 }
+
+.list-post > h2 {
+  font-size: 24px;
+  font-weight: 600;
+  padding: 20px 0 15px;
+  color: #333;
+  border-bottom: 2px solid #f0f0f0;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.list-post > h2::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background-color: #4BB596;
+}
+
 .list-post ul {
   box-sizing: border-box;
-  padding-left: 15px;
+  padding-left: 0;
 }
+
 .list-post li {
   display: flex;
   align-items: center;
-  padding: 8px 0;
+  padding: 12px 0;
+  border-bottom: 1px dashed #eee;
+  transition: all 0.3s ease;
 }
+
+.list-post li:hover {
+  background-color: #f9f9f9;
+  padding-left: 10px;
+  border-bottom-color: #ddd;
+}
+
 .list-post li .date {
-  color: #666666;
+  color: #888;
   font-size: 14px;
   flex-shrink: 0;
-  margin-right: 10px;
+  margin-right: 15px;
+  background-color: #f5f5f5;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
 }
+
+.list-post li:hover .date {
+  background-color: #e8f5f1;
+  color: #4BB596;
+}
+
 .list-post li .title {
   width: 0;
   flex-grow: 1;
@@ -26,99 +67,365 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .list-post li .title a {
-  font-size: 15px;
+  font-size: 16px;
+  color: #333;
+  transition: all 0.3s ease;
+  font-weight: 500;
 }
+
+.list-post li:hover .title a {
+  color: #4BB596;
+}
+
 .list-post li .categories {
   flex-shrink: 0;
   padding: 3px 0;
-  margin-left: 10px;
+  margin-left: 15px;
 }
+
 .list-post li .categories a {
-  font-size: 12px;
-  color: #666666;
+  font-size: 13px;
+  color: #777;
   margin-left: 8px;
+  transition: all 0.3s ease;
+  background-color: #f5f5f5;
+  padding: 2px 8px;
+  border-radius: 12px;
 }
+
+.list-post li .categories a:hover {
+  background-color: #4BB596;
+  color: white;
+}
+
 .list-category h2 {
-  font-size: 15px;
-  font-weight: bold;
-  padding: 12px 0;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 15px 0;
+  color: #333;
+  border-bottom: 2px solid #f0f0f0;
+  margin-bottom: 15px;
+  position: relative;
 }
+
+.list-category h2::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background-color: #4BB596;
+}
+
 .list-category div {
-  padding: 8px 0 8px 10px;
+  padding: 10px 0 15px 0;
+  display: flex;
+  flex-wrap: wrap;
 }
+
 .list-category div a {
-  margin: 4px 6px;
+  margin: 5px 10px 5px 0;
   white-space: nowrap;
   font-size: 15px;
   display: inline-block;
-  border-bottom: 1px solid #333333;
+  color: #555;
+  background-color: #f5f5f5;
+  padding: 5px 12px;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  border-bottom: none;
 }
+
+.list-category div a:hover {
+  background-color: #4BB596;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.page-search {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
 .page-search #search-input {
   text-align: center;
-  font-size: 14px;
+  font-size: 16px;
   border: 1px solid #eaeaea;
   width: 100%;
-  padding: 10px 0;
+  padding: 12px 15px;
   background-color: transparent;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
 }
+
+.page-search #search-input:focus {
+  border-color: #4BB596;
+  box-shadow: 0 0 5px rgba(75, 181, 150, 0.3);
+}
+
 .page-search h1 {
-  font-size: 16px;
-  height: 46px;
+  font-size: 20px;
+  font-weight: 600;
+  height: 50px;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
+  color: #333;
+  border-bottom: 2px solid #f0f0f0;
+  margin-bottom: 20px;
+  position: relative;
 }
+
+.page-search h1::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background-color: #4BB596;
+}
+
 .page-search h1 i {
-  font-size: 20px;
-  margin-left: 6px;
+  font-size: 22px;
+  margin-left: 8px;
+  color: #4BB596;
 }
+
 .page-search .list-search li {
   list-style: disc;
-  margin-left: 15px;
-  margin-bottom: 20px;
+  margin-left: 20px;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px dashed #eee;
 }
+
 .page-search .list-search a {
   display: block;
-  border-bottom: 1px dashed #ccc;
+  border-bottom: none;
+  transition: all 0.3s ease;
 }
+
+.page-search .list-search a:hover {
+  transform: translateX(5px);
+}
+
 .page-search .list-search .title {
   display: inline-block;
   word-break: break-all;
-  font-size: 14px;
-  font-weight: bold;
-  padding-bottom: 1px;
-  border-bottom: 1px solid #999;
+  font-size: 16px;
+  font-weight: 600;
+  padding-bottom: 2px;
+  color: #333;
+  border-bottom: 1px solid #4BB596;
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
 }
+
+.page-search .list-search a:hover .title {
+  color: #4BB596;
+}
+
 .page-search .list-search .content {
   display: block;
-  font-size: 14px;
-  color: #5a5a5a;
+  font-size: 15px;
+  color: #666;
   word-break: break-all;
   padding: 10px 0;
+  line-height: 1.8;
 }
+
 .page-search .list-search .hint {
   font-size: inherit;
   font-weight: bold;
-  color: #ff7f7f;
+  color: #4BB596;
+  background-color: #f0f8f5;
+  padding: 0 3px;
 }
+
+/* 暗色模式支持 */
+html.dark .page-search #search-input {
+  border-color: #30363d;
+  color: #c9d1d9;
+}
+
+html.dark .page-search #search-input:focus {
+  border-color: #58a6ff;
+  box-shadow: 0 0 5px rgba(88, 166, 255, 0.3);
+}
+
+html.dark .page-search h1 {
+  color: #e6edf3;
+  border-bottom-color: #30363d;
+}
+
+html.dark .page-search h1::after {
+  background-color: #58a6ff;
+}
+
+html.dark .page-search h1 i {
+  color: #58a6ff;
+}
+
+html.dark .page-search .list-search li {
+  border-bottom-color: #30363d;
+}
+
+html.dark .page-search .list-search .title {
+  color: #e6edf3;
+  border-bottom-color: #58a6ff;
+}
+
+html.dark .page-search .list-search a:hover .title {
+  color: #58a6ff;
+}
+
+html.dark .page-search .list-search .content {
+  color: #8b949e;
+}
+
+html.dark .page-search .list-search .hint {
+  color: #58a6ff;
+  background-color: #1d3b53;
+}
+
 @media screen and (max-width: 560px) {
-  .list-post > h2 {
-    padding: 10px 0;
+  .page-search {
+    padding: 15px;
   }
-  .list-post li {
-    padding: 6px 0;
+  
+  .page-search #search-input {
+    font-size: 15px;
+    padding: 10px;
   }
-  .list-post li .title a {
+  
+  .page-search h1 {
+    font-size: 18px;
+    height: 45px;
+  }
+  
+  .page-search .list-search .title {
+    font-size: 15px;
+  }
+  
+  .page-search .list-search .content {
     font-size: 14px;
   }
-  .list-post .categories {
-    display: none;
+  
+  .list-post > h2 {
+    font-size: 20px;
+    padding: 15px 0 10px;
   }
+  
+  .list-post li {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px 0;
+  }
+  
+  .list-post li .date {
+    margin-bottom: 8px;
+    font-size: 13px;
+  }
+  
+  .list-post li .title {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+  
+  .list-post li .title a {
+    font-size: 15px;
+  }
+  
+  .list-post li .categories {
+    margin-left: 0;
+  }
+  
+  .list-post li .categories a {
+    font-size: 12px;
+    margin-left: 0;
+    margin-right: 8px;
+  }
+  
   .list-category h2 {
-    padding: 10px 0;
+    font-size: 18px;
+    padding: 12px 0;
   }
+  
   .list-category div a {
     font-size: 14px;
+    margin: 4px 8px 4px 0;
+    padding: 4px 10px;
   }
+}
+
+/* 暗色模式支持 */
+html.dark .list-post > h2 {
+  color: #e6edf3;
+  border-bottom-color: #30363d;
+}
+
+html.dark .list-post > h2::after {
+  background-color: #58a6ff;
+}
+
+html.dark .list-post li {
+  border-bottom-color: #30363d;
+}
+
+html.dark .list-post li:hover {
+  background-color: #161b22;
+}
+
+html.dark .list-post li .date {
+  color: #8b949e;
+  background-color: #21262d;
+}
+
+html.dark .list-post li:hover .date {
+  background-color: #1d3b53;
+  color: #58a6ff;
+}
+
+html.dark .list-post li .title a {
+  color: #c9d1d9;
+}
+
+html.dark .list-post li:hover .title a {
+  color: #58a6ff;
+}
+
+html.dark .list-post li .categories a {
+  color: #8b949e;
+  background-color: #21262d;
+}
+
+html.dark .list-post li .categories a:hover {
+  background-color: #1d3b53;
+  color: #58a6ff;
+}
+
+html.dark .list-category h2 {
+  color: #e6edf3;
+  border-bottom-color: #30363d;
+}
+
+html.dark .list-category h2::after {
+  background-color: #58a6ff;
+}
+
+html.dark .list-category div a {
+  color: #8b949e;
+  background-color: #21262d;
+  border-bottom: none;
+}
+
+html.dark .list-category div a:hover {
+  background-color: #1d3b53;
+  color: #58a6ff;
 }

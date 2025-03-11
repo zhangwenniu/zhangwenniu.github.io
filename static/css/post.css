@@ -1,22 +1,29 @@
 .page-post {
-  font-size: 14px;
-  line-height: 2;
+  font-size: 16px;
+  line-height: 1.9;
   word-break: break-all;
   margin-left: 280px;
   margin-right: auto;
   max-width: 920px;
+  color: #333;
+  letter-spacing: 0.01em;
 }
 .page-post .title {
-  font-size: 18px;
-  font-weight: bold;
-  color: #666666;
+  font-size: 28px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
+  line-height: 1.4;
 }
 .page-post .subtitle {
-  font-size: 12px;
-  color: #999999;
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
 }
 .page-post .post > * {
-  margin: 18px 0;
+  margin: 25px 0;
 }
 .page-post .post > iframe {
   margin: 0;
@@ -24,61 +31,91 @@
 }
 .page-post .post h1,
 .page-post .post h2 {
-  font-weight: normal;
-  font-size: 17px;
+  font-weight: 600;
+  font-size: 22px;
   position: relative;
   cursor: pointer;
+  margin-top: 40px;
+  color: #222;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f0f0f0;
 }
 .page-post .post h1::before,
 .page-post .post h2::before {
   content: '#';
   top: 0;
   font-weight: bold;
-  padding-right: 6px;
+  padding-right: 10px;
+  color: #4BB596;
 }
 .page-post h3,
 .page-post h4,
 .page-post h5,
 .page-post h6 {
-  font-size: 15px;
-  font-weight: bold;
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 30px;
+  color: #333;
 }
 .page-post blockquote {
-  border-left: 3px solid #333333;
-  background-color: #f7f7f7;
-  padding: 9px 9px 9px 15px;
+  border-left: 4px solid #4BB596;
+  background-color: #f9f9f9;
+  padding: 15px 20px;
+  margin: 20px 0;
+  border-radius: 0 4px 4px 0;
+  color: #555;
+  font-style: italic;
 }
 
 .page-post a {
-  color: #000000;
+  color: #4BB596;
   margin: 0 2px;
-  border-bottom: 1px solid #000000;
+  border-bottom: 1px solid #4BB596;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.page-post a:hover {
+  color: #3a9077;
+  border-bottom-color: #3a9077;
 }
 .page-post strong,
 .page-post b {
-  color: #000000;
+  color: #222;
+  font-weight: 600;
 }
 .page-post .post ul {
-  margin-left: 16px;
+  margin-left: 20px;
+  padding-left: 15px;
 }
 .page-post .post ol {
-  margin-left: 23px;
+  margin-left: 20px;
+  padding-left: 15px;
 }
 .page-post ul > li {
   list-style: disc;
+  margin-bottom: 10px;
+  line-height: 1.8;
 }
 .page-post ol > li {
   list-style: decimal;
+  margin-bottom: 10px;
+  line-height: 1.8;
 }
 .page-post li > *{
-  margin: 6px 0;
+  margin: 10px 0;
 }
 .page-post img {
   display: block;
   max-width: 100%;
-  margin: 0 auto;
+  margin: 25px auto;
   height: auto;
-  box-shadow: 0 0 5px #e0e0e0;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+.page-post img:hover {
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
 }
 .page-post img[alt='line'] {
   display: inline-block;
@@ -90,53 +127,76 @@
 }
 .page-post pre {
   font-size: 0;
-  padding: 10px;
+  padding: 15px;
   overflow: auto;
-  border-radius: 2px;
+  border-radius: 6px;
   max-height: 610px;
   -moz-tab-size: 4;
   -o-tab-size: 4;
   tab-size: 4;
-  line-height: 1.6;
+  line-height: 1.7;
+  background-color: #f6f8fa;
+  border: 1px solid #eee;
+  margin: 20px 0;
+  position: relative;
+}
+.page-post pre::before {
+  content: attr(data-lang);
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #999;
+  font-size: 12px;
+  padding: 5px 10px;
+  background-color: #f1f1f1;
+  border-bottom-left-radius: 5px;
 }
 .page-post code {
-  font-size: 13px;
-  background-color: #eeeeee;
+  font-size: 14px;
+  background-color: #f6f8fa;
   word-break: break-all;
-  padding: 3px 5px;
+  padding: 3px 6px;
   margin: 0 4px;
-  border-radius: 5px;
-  color: #4d4d4c;
+  border-radius: 4px;
+  color: #e83e8c;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
 }
 .page-post pre code {
-  font-size: 13px;
+  font-size: 14px;
   background-color: transparent !important;
   word-break: keep-all;
   padding: 0;
   margin: 0;
   border-radius: unset;
   color: inherit;
+  display: block;
+  overflow-x: auto;
 }
 .page-post hr {
   border: none;
-  height: 3px;
-  background-color: #eeeeee;
+  height: 2px;
+  background-color: #eee;
+  margin: 30px 0;
 }
 .page-post table {
   min-width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
-  border: 1px solid #dddddd;
+  border: 1px solid #e0e0e0;
+  margin: 20px 0;
+  border-radius: 4px;
+  overflow: hidden;
 }
 .page-post tr {
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid #e0e0e0;
 }
 .page-post th {
-  font-weight: bold;
+  font-weight: 600;
+  background-color: #f5f5f5;
 }
 .page-post th,
 .page-post td {
-  padding: 5px 10px;
+  padding: 10px 15px;
   text-align: left;
 }
 .page-post table tr:nth-child(even) {
@@ -144,8 +204,9 @@
 }
 .page-post .table-container {
   overflow: auto;
-  margin: 14px 0;
-  border: 1px solid #dddddd;
+  margin: 20px 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
 }
 .page-post .table-container table {
   margin: 0;
@@ -154,17 +215,6 @@
 .page-post .table-container table tbody tr:last-child {
   border-bottom: 0;
 }
-@media screen and (max-width: 560px) {
-  .page-post {
-    font-size: 13px;
-  }
-  .page-post pre code {
-    font-size: 12px;
-  }
-  .page-post .post > * {
-    margin: 15px 0;
-  }
-}
 @media screen and (max-width: 1300px) {
   .toc-container {
     display: none;
@@ -172,6 +222,81 @@
   .page-post {
     margin-left: auto;
     max-width: 100%;
+    padding: 0 20px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .page-post {
+    font-size: 15px;
+    padding: 0 15px;
+  }
+  .page-post .title {
+    font-size: 24px;
+    line-height: 1.3;
+  }
+  .page-post .subtitle {
+    font-size: 13px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+  }
+  .page-post .post h1,
+  .page-post .post h2 {
+    font-size: 20px;
+    margin-top: 30px;
+    padding-bottom: 8px;
+  }
+  .page-post h3,
+  .page-post h4,
+  .page-post h5,
+  .page-post h6 {
+    font-size: 17px;
+    margin-top: 25px;
+  }
+  .page-post blockquote {
+    padding: 12px 15px;
+  }
+  .page-post pre {
+    padding: 12px;
+  }
+  .page-post img {
+    margin: 20px auto;
+  }
+}
+@media screen and (max-width: 560px) {
+  .page-post {
+    font-size: 15px;
+    padding: 0 12px;
+  }
+  .page-post .title {
+    font-size: 22px;
+  }
+  .page-post pre code {
+    font-size: 13px;
+  }
+  .page-post .post > * {
+    margin: 20px 0;
+  }
+  .page-post blockquote {
+    padding: 10px 15px;
+  }
+  .page-post .post ul,
+  .page-post .post ol {
+    padding-left: 10px;
+    margin-left: 15px;
+  }
+  .page-post table {
+    font-size: 14px;
+  }
+  .page-post th,
+  .page-post td {
+    padding: 8px 10px;
+  }
+  .post-comments {
+    margin-top: 40px;
+    padding-top: 25px;
+  }
+  .post-comments h2 {
+    font-size: 20px;
   }
 }
 
@@ -183,10 +308,11 @@
   max-height: calc(100vh - 120px);
   overflow-y: auto;
   background: #f8f9fa;
-  border-radius: 4px;
-  padding: 15px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  border-radius: 6px;
+  padding: 20px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
   z-index: 999;
+  border: 1px solid #eee;
 }
 
 /* 目录的层级缩进 */
@@ -197,8 +323,8 @@
 }
 
 .toc-item {
-  line-height: 1.8;
-  margin: 4px 0;
+  line-height: 1.9;
+  margin: 6px 0;
 }
 
 .toc-item a {
@@ -206,10 +332,16 @@
   text-decoration: none;
   font-size: 14px;
   border-bottom: none;  /* 移除文章链接的下划线 */
+  transition: all 0.3s ease;
+  display: block;
+  padding: 3px 5px;
+  border-radius: 3px;
 }
 
 .toc-item a:hover {
   color: #4BB596;  /* 鼠标悬停时的颜色 */
+  background-color: #f0f0f0;
+  padding-left: 8px;
 }
 
 /* 不同级别标题的缩进 */
@@ -223,10 +355,10 @@
 /* 目录标题样式 */
 .toc-title {
   font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 12px;
+  font-weight: 600;
+  margin-bottom: 15px;
   color: #333;
-  padding-bottom: 8px;
+  padding-bottom: 10px;
   border-bottom: 1px solid #eee;
   cursor: pointer;
   display: flex;
@@ -269,7 +401,9 @@ html.dark .toc-item a:hover {
 /* 当前活跃的目录项 */
 .toc-item.active a {
   color: #4BB596;
-  font-weight: bold;
+  font-weight: 600;
+  background-color: #f0f0f0;
+  padding-left: 8px;
 }
 
 html.dark .toc-item.active a {
@@ -278,10 +412,231 @@ html.dark .toc-item.active a {
 }
 
 .post-meta {
-  color: #999999;
-  font-size: 12px;
+  color: #888;
+  font-size: 13px;
 }
 
 #busuanzi_container_page_pv {
   display: inline;
+}
+
+.post-comments {
+  margin-top: 50px;
+  padding-top: 30px;
+  border-top: 1px solid #eee;
+}
+
+.post-comments h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* 语法高亮增强 */
+.page-post .hljs-keyword,
+.page-post .hljs-selector-tag,
+.page-post .hljs-subst {
+  color: #d73a49;
+  font-weight: bold;
+}
+
+.page-post .hljs-string,
+.page-post .hljs-doctag,
+.page-post .hljs-regexp {
+  color: #032f62;
+}
+
+.page-post .hljs-title,
+.page-post .hljs-section,
+.page-post .hljs-selector-id {
+  color: #6f42c1;
+  font-weight: bold;
+}
+
+.page-post .hljs-number,
+.page-post .hljs-literal,
+.page-post .hljs-variable,
+.page-post .hljs-template-variable,
+.page-post .hljs-tag .hljs-attr {
+  color: #005cc5;
+}
+
+.page-post .hljs-comment,
+.page-post .hljs-quote {
+  color: #6a737d;
+  font-style: italic;
+}
+
+.page-post .hljs-doctag {
+  color: #d73a49;
+}
+
+.page-post .hljs-keyword,
+.page-post .hljs-formula {
+  color: #d73a49;
+}
+
+.page-post .hljs-section,
+.page-post .hljs-name,
+.page-post .hljs-selector-tag,
+.page-post .hljs-deletion,
+.page-post .hljs-subst {
+  color: #22863a;
+}
+
+.page-post .hljs-class .hljs-title {
+  color: #6f42c1;
+}
+
+.page-post .hljs-function .hljs-title {
+  color: #6f42c1;
+}
+
+.page-post .hljs-function .hljs-params {
+  color: #24292e;
+}
+
+/* 暗色模式下的代码高亮 */
+html.dark .page-post pre {
+  background-color: #1e1e1e;
+  border-color: #2d2d2d;
+}
+
+html.dark .page-post pre::before {
+  background-color: #2d2d2d;
+  color: #aaa;
+}
+
+html.dark .page-post code {
+  background-color: #2d2d2d;
+  color: #f08c8c;
+}
+
+html.dark .page-post .hljs-keyword,
+html.dark .page-post .hljs-selector-tag,
+html.dark .page-post .hljs-subst {
+  color: #ff7b72;
+}
+
+html.dark .page-post .hljs-string,
+html.dark .page-post .hljs-doctag,
+html.dark .page-post .hljs-regexp {
+  color: #a5d6ff;
+}
+
+html.dark .page-post .hljs-title,
+html.dark .page-post .hljs-section,
+html.dark .page-post .hljs-selector-id {
+  color: #d2a8ff;
+}
+
+html.dark .page-post .hljs-number,
+html.dark .page-post .hljs-literal,
+html.dark .page-post .hljs-variable,
+html.dark .page-post .hljs-template-variable,
+html.dark .page-post .hljs-tag .hljs-attr {
+  color: #79c0ff;
+}
+
+html.dark .page-post .hljs-comment,
+html.dark .page-post .hljs-quote {
+  color: #8b949e;
+}
+
+/* 暗色模式样式 */
+html.dark .page-post {
+  color: #c9d1d9;
+}
+
+html.dark .page-post .title {
+  color: #e6edf3;
+}
+
+html.dark .page-post .subtitle {
+  color: #8b949e;
+  border-bottom-color: #30363d;
+}
+
+html.dark .page-post .post h1,
+html.dark .page-post .post h2 {
+  color: #e6edf3;
+  border-bottom-color: #30363d;
+}
+
+html.dark .page-post .post h1::before,
+html.dark .page-post .post h2::before {
+  color: #58a6ff;
+}
+
+html.dark .page-post h3,
+html.dark .page-post h4,
+html.dark .page-post h5,
+html.dark .page-post h6 {
+  color: #e6edf3;
+}
+
+html.dark .page-post blockquote {
+  border-left-color: #58a6ff;
+  background-color: #161b22;
+  color: #8b949e;
+}
+
+html.dark .page-post a {
+  color: #58a6ff;
+  border-bottom-color: #58a6ff;
+}
+
+html.dark .page-post a:hover {
+  color: #79c0ff;
+  border-bottom-color: #79c0ff;
+}
+
+html.dark .page-post strong,
+html.dark .page-post b {
+  color: #e6edf3;
+}
+
+html.dark .page-post img {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+html.dark .page-post img:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+html.dark .page-post hr {
+  background-color: #30363d;
+}
+
+html.dark .page-post table {
+  border-color: #30363d;
+}
+
+html.dark .page-post tr {
+  border-bottom-color: #30363d;
+}
+
+html.dark .page-post th {
+  background-color: #161b22;
+}
+
+html.dark .page-post table tr:nth-child(even) {
+  background-color: #161b22;
+}
+
+html.dark .page-post .table-container {
+  border-color: #30363d;
+}
+
+html.dark .post-comments {
+  border-top-color: #30363d;
+}
+
+html.dark .post-comments h2 {
+  color: #e6edf3;
+}
+
+html.dark .post-meta {
+  color: #8b949e;
 }

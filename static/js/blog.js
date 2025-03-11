@@ -308,14 +308,19 @@ blog.addLoadEvent(function () {
     '  bottom: 0;',
     '  opacity: 0;',
     '  background-color: #000000;',
-    '  z-index: 100;',
+    '  z-index: 1000;',
     '}',
     '.img-move-item {',
     '  transition: all 300ms ease;',
     '  position: fixed;',
     '  opacity: 0;',
     '  cursor: pointer;',
-    '  z-index: 101;',
+    '  z-index: 1001;',
+    '  box-shadow: 0 5px 25px rgba(0,0,0,0.3);',
+    '  border: 1px solid rgba(255,255,255,0.2);',
+    '  max-width: 100%;',
+    '  max-height: 100%;',
+    '  object-fit: contain;',
     '}'
   ].join('')
   var styleDOM = document.createElement('style')
@@ -340,7 +345,8 @@ blog.addLoadEvent(function () {
     if (!imgMoveOrigin) {
       return
     }
-    let width = Math.min(imgMoveOrigin.naturalWidth, parseInt(document.documentElement.clientWidth * 0.9))
+    let availableWidth = document.documentElement.clientWidth
+    let width = Math.min(imgMoveOrigin.naturalWidth, parseInt(availableWidth * 0.9))
     let height = (width * imgMoveOrigin.naturalHeight) / imgMoveOrigin.naturalWidth
     if (window.innerHeight * 0.95 < height) {
       height = Math.min(imgMoveOrigin.naturalHeight, parseInt(window.innerHeight * 0.95))
@@ -348,7 +354,7 @@ blog.addLoadEvent(function () {
     }
 
     let img = document.querySelector('.img-move-item')
-    img.style.left = (document.documentElement.clientWidth - width) / 2 + 'px'
+    img.style.left = (availableWidth - width) / 2 + 'px'
     img.style.top = (window.innerHeight - height) / 2 + 'px'
     img.style.width = width + 'px'
     img.style.height = height + 'px'
@@ -361,6 +367,9 @@ blog.addLoadEvent(function () {
     restoreLock = true
     let div = document.querySelector('.img-move-bg')
     let img = document.querySelector('.img-move-item')
+
+    // 移除键盘事件监听器
+    document.removeEventListener('keydown', currentKeyHandler)
 
     div.style.opacity = 0
     img.style.opacity = 0
@@ -377,6 +386,9 @@ blog.addLoadEvent(function () {
     }, 300)
   }
 
+  // 当前的键盘事件处理函数
+  let currentKeyHandler = null
+
   function imgClickEvent(event) {
     imgMoveOrigin = event.target
 
@@ -390,6 +402,11 @@ blog.addLoadEvent(function () {
     img.style.top = imgMoveOrigin.y + 'px'
     img.style.width = imgMoveOrigin.width + 'px'
     img.style.height = imgMoveOrigin.height + 'px'
+    
+    // 添加 alt 文本作为标题，如果有的话
+    if (imgMoveOrigin.alt) {
+      img.title = imgMoveOrigin.alt
+    }
 
     div.onclick = restore
     div.onmousewheel = restore
@@ -403,8 +420,17 @@ blog.addLoadEvent(function () {
     document.body.appendChild(div)
     document.body.appendChild(img)
 
+    // 添加键盘 ESC 键关闭功能
+    function handleKeyDown(e) {
+      if (e.key === 'Escape') {
+        restore()
+      }
+    }
+    currentKeyHandler = handleKeyDown
+    document.addEventListener('keydown', handleKeyDown)
+
     setTimeout(function () {
-      div.style.opacity = 0.5
+      div.style.opacity = 0.7
       img.style.opacity = 1
       toCenter()
     }, 0)
