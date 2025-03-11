@@ -3,20 +3,42 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 50px; /* 为页脚添加空间 */
+}
+
+/* 顶部彩色条 */
+.page-book::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #4776E6, #8E54E9);
 }
 
 .page-book .title {
   font-size: 2em;
   margin-bottom: 10px;
   color: #333;
+  padding-top: 15px;
 }
 
 .page-book .subtitle {
   font-size: 1em;
   color: #666;
-  margin-bottom: 20px;
-  padding-bottom: 10px;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
   border-bottom: 1px solid #eee;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
 }
 
 /* 确保图片不超出容器宽度 */
@@ -24,16 +46,17 @@
   max-width: 100%;
   height: auto;
   display: block;
-  margin: 20px auto;
-  border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin: 25px auto;
+  border-radius: 6px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* 为大图片添加可点击放大功能的视觉提示 */
 .book-content img:hover {
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  transition: box-shadow 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  transform: scale(1.01);
 }
 
 /* 图片标题样式 */
@@ -43,29 +66,122 @@
   color: #666;
   font-size: 0.9em;
   margin-top: -15px;
+  margin-bottom: 25px;
+}
+
+/* 内容样式优化 */
+.book-content {
+  line-height: 1.8;
+  color: #333;
+  font-size: 1.05em;
+  letter-spacing: 0.01em;
+}
+
+/* 增加段落行间距 */
+.book-content p {
   margin-bottom: 20px;
+  line-height: 1.9;
+  margin-top: 20px;
+}
+
+/* 调整段落内文本行高 */
+.book-content p, 
+.book-content li,
+.book-content blockquote {
+  line-height: 2;
+}
+
+.book-content h2 {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  font-size: 1.6em;
+  color: #333;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.book-content h3 {
+  margin-top: 30px;
+  margin-bottom: 15px;
+  font-size: 1.3em;
+  color: #444;
+}
+
+.book-content ul, .book-content ol {
+  margin-bottom: 20px;
+  padding-left: 25px;
+  margin-top: 20px;
+}
+
+.book-content li {
+  margin-bottom: 12px;
+}
+
+.book-content code {
+  background-color: #f5f7f9;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, 'Andale Mono', monospace;
+  font-size: 0.9em;
+}
+
+.book-content pre {
+  background-color: #f5f7f9;
+  padding: 15px;
+  border-radius: 5px;
+  overflow-x: auto;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.book-content pre code {
+  background-color: transparent;
+  padding: 0;
+  line-height: 1.7;
+}
+
+.book-content blockquote {
+  border-left: 4px solid #4776E6;
+  padding: 15px 20px;
+  margin: 25px 0;
+  background-color: #f9f9f9;
+  color: #555;
+  border-radius: 0 4px 4px 0;
 }
 
 .book-navigation {
   display: flex;
   justify-content: space-between;
-  margin: 20px 0;
-  padding: 10px 0;
+  margin: 30px 0;
+  padding: 15px 0;
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
 }
 
 .book-navigation a {
-  padding: 8px 15px;
-  background-color: #f5f5f5;
-  color: #333;
+  padding: 10px 20px;
+  background: linear-gradient(90deg, #4776E6, #8E54E9);
+  color: white;
   text-decoration: none;
-  border-radius: 4px;
-  transition: background-color 0.3s;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  box-shadow: 0 3px 8px rgba(71, 118, 230, 0.2);
 }
 
 .book-navigation a:hover {
-  background-color: #e0e0e0;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(71, 118, 230, 0.3);
+}
+
+.book-navigation .book-index {
+  background: #f5f5f5;
+  color: #333;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.book-navigation .book-index:hover {
+  background: #e8e8e8;
 }
 
 .prev-chapter:before {
@@ -78,9 +194,17 @@
 
 /* 书籍列表页样式 */
 .page-books {
-  max-width: 900px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 20px;
+}
+
+/* 确保页脚可见 */
+.footer {
+  position: relative;
+  z-index: 10;
+  margin-top: 30px;
+  clear: both;
 }
 
 .book-item {
@@ -157,6 +281,7 @@
 @media (max-width: 768px) {
   .page-book {
     padding: 15px;
+    margin: 0 10px 50px 10px;
   }
   
   .page-book .title {
@@ -175,11 +300,23 @@
   .book-content img {
     margin: 15px auto;
   }
+  
+  .book-content h2 {
+    font-size: 1.4em;
+    margin-top: 30px;
+  }
+  
+  .book-content h3 {
+    font-size: 1.2em;
+    margin-top: 25px;
+  }
 }
 
 @media (max-width: 480px) {
   .page-book {
-    padding: 10px;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 50px;
   }
   
   .page-book .title {
@@ -191,6 +328,14 @@
   }
   
   .book-content {
-    font-size: 0.95em;
+    font-size: 1em;
+  }
+  
+  .book-content h2 {
+    font-size: 1.3em;
+  }
+  
+  .book-content h3 {
+    font-size: 1.1em;
   }
 } 

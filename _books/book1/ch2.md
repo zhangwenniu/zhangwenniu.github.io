@@ -3,7 +3,7 @@ layout: book
 title: 第二章：Python基础
 book_id: book1
 book_title: 编程入门指南
-book_description: 这是一本面向初学者的编程入门指南，涵盖了基础概念和实践示例。
+book_description: 不太一样的描述。
 chapter_number: 2
 previous_chapter: /books/book1/ch1
 date: 2023-01-02
