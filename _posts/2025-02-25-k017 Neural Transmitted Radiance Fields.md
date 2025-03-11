@@ -597,7 +597,7 @@ $$
 
 $$
 L_{\text{excl}}(\theta) = \|\Psi(C_T, C_R)\|_F, \quad
-\Psi(C_T, C_R) = \tanh(\lambda_T |G(C_T)|) \odot \tanh(\lambda_R |G(C_R)|), \quad (11)
+\Psi(C_T, C_R) = \tanh(\lambda_T \vert G(C_T)\vert ) \odot \tanh(\lambda_R \vert G(C_R)\vert ), \quad (11)
 $$
 
 其中，$\lambda_T = \sqrt{\frac{\|G(C_R)\|_F}{\|G(C_T)\|_F}}$，$\lambda_R = \sqrt{\frac{\|G(C_T)\|_F}{\|G(C_R)\|_F}}$。由于我们的块已经足够小，因此丢弃了其原始设置中的下采样操作。$\Psi(\cdot, \cdot)$定义了透射和反射之间的像素相关性，这有助于在梯度域中将它们分开。

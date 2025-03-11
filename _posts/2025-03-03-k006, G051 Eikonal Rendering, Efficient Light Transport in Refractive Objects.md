@@ -122,7 +122,7 @@ categories: [透明, 折射]
 论文的核心是基于几何光学的Eikonal方程：
 
 $$
-|▽S| = n
+\vert ▽S\vert  = n
 $$
 
 其中，$ S $ 是光程函数，$ n $ 是折射率。基于Eikonal方程，论文推导出光线的运动方程：
@@ -223,7 +223,7 @@ $$
 #### **1.1 Eikonal方程与光线传播**
 
 Eikonal方程是几何光学的核心方程，用于描述光波前的传播：
-$$ |▽S| = n $$
+$$ \vert ▽S\vert  = n $$
 
 其中：
 
@@ -466,7 +466,7 @@ $$ y_{n+1} = y_n + \frac{h}{6} (k_1 + 2k_2 + 2k_3 + k_4) $$
 ### **2. 波前的数学表示**
 
 波前的数学描述基于**Eikonal方程**：
-$$ |▽S| = n(x, y, z) $$
+$$ \vert ▽S\vert  = n(x, y, z) $$
 
 其中：
 
@@ -789,11 +789,11 @@ $$ \mathbf{J}_{\text{左旋}} = \begin{pmatrix} 1 \\ i \end{pmatrix}, \quad \mat
 菲涅尔方程描述了光在两种介质界面处的反射和透射特性。对于偏振光，菲涅尔方程需要考虑偏振方向的影响。例如：
 - **平行偏振光（p-polarized light）**：
   $$
-  R_p = \left| \frac{n_1 \cos\theta_i - n_2 \cos\theta_t}{n_1 \cos\theta_i + n_2 \cos\theta_t} \right|^2
+  R_p = \left\vert  \frac{n_1 \cos\theta_i - n_2 \cos\theta_t}{n_1 \cos\theta_i + n_2 \cos\theta_t} \right\vert ^2
   $$
 - **垂直偏振光（s-polarized light）**：
   $$
-  R_s = \left| \frac{n_1 \cos\theta_t - n_2 \cos\theta_i}{n_1 \cos\theta_t + n_2 \cos\theta_i} \right|^2
+  R_s = \left\vert  \frac{n_1 \cos\theta_t - n_2 \cos\theta_i}{n_1 \cos\theta_t + n_2 \cos\theta_i} \right\vert ^2
   $$
 其中，$n_1$ 和 $n_2$ 是两种介质的折射率，$\theta_i$ 是入射角，$\theta_t$ 是折射角。
 
@@ -855,7 +855,7 @@ $$ \mathbf{J}_{\text{左旋}} = \begin{pmatrix} 1 \\ i \end{pmatrix}, \quad \mat
 
 对于非偏振光，菲涅尔定律通常给出的是**平均反射率**和**平均透射率**。非偏振光的反射率可以通过以下公式计算：
 
-$$ R = R_s = R_p = \left| \frac{n_1 \cos \theta_i - n_2 \cos \theta_t}{n_1 \cos \theta_i + n_2 \cos \theta_t} \right|^2 $$
+$$ R = R_s = R_p = \left\vert  \frac{n_1 \cos \theta_i - n_2 \cos \theta_t}{n_1 \cos \theta_i + n_2 \cos \theta_t} \right\vert ^2 $$
 
 其中：
 - \( n_1 \) 和 \( n_2 \) 分别是两种介质的折射率。
@@ -875,7 +875,7 @@ $$ R = R_s = R_p = \left| \frac{n_1 \cos \theta_i - n_2 \cos \theta_t}{n_1 \cos 
 
 平行偏振光的电场振动方向平行于入射平面。其反射率 \( R_p \) 和透射率 \( T_p \) 可以通过以下公式计算：
 
-$$ R_p = \left| \frac{n_1 \cos \theta_i - n_2 \cos \theta_t}{n_1 \cos \theta_i + n_2 \cos \theta_t} \right|^2 $$
+$$ R_p = \left\vert  \frac{n_1 \cos \theta_i - n_2 \cos \theta_t}{n_1 \cos \theta_i + n_2 \cos \theta_t} \right\vert ^2 $$
 
 $$ T_p = \frac{2 n_1 \cos \theta_i}{n_1 \cos \theta_i + n_2 \cos \theta_t} $$
 
@@ -883,7 +883,7 @@ $$ T_p = \frac{2 n_1 \cos \theta_i}{n_1 \cos \theta_i + n_2 \cos \theta_t} $$
 
 垂直偏振光的电场振动方向垂直于入射平面。其反射率 \( R_s \) 和透射率 \( T_s \) 可以通过以下公式计算：
 
-$$ R_s = \left| \frac{n_1 \cos \theta_t - n_2 \cos \theta_i}{n_1 \cos \theta_t + n_2 \cos \theta_i} \right|^2 $$
+$$ R_s = \left\vert  \frac{n_1 \cos \theta_t - n_2 \cos \theta_i}{n_1 \cos \theta_t + n_2 \cos \theta_i} \right\vert ^2 $$
 
 $$ T_s = \frac{2 n_1 \cos \theta_i}{n_1 \cos \theta_t + n_2 \cos \theta_i} $$
 
@@ -1232,13 +1232,13 @@ $$
 我们推导了几何光学中光线方程的恒定空间步长和恒定时间步长参数化形式。方程（8）是通过结合Eikonal方程：
 
 $$
-|▽S| = n, \quad (19)
+\vert ▽S\vert  = n, \quad (19)
 $$
 
 和粒子沿波前$S=\text{常数}$的法线运动方程：
 
 $$
-\frac{dx}{ds} = \frac{▽S}{|▽S|}. \quad (20)
+\frac{dx}{ds} = \frac{▽S}{\vert ▽S\vert }. \quad (20)
 $$
 
 得到的。$S$是Eikonal方程的解，该函数的等值面称为波前，它们是从光源出发的等时面。方程（8）的推导可以在[Born and Wolf 1999]中找到。
@@ -1248,7 +1248,7 @@ $$
 根据方程（20），我们立即有：
 
 $$
-\left|\frac{dx}{ds}\right|^2 = \frac{dx}{ds} \cdot \frac{dx}{ds} = 1. \quad (21)
+\left\vert \frac{dx}{ds}\right\vert ^2 = \frac{dx}{ds} \cdot \frac{dx}{ds} = 1. \quad (21)
 $$
 
 将方程（19）代入方程（20）得到：
