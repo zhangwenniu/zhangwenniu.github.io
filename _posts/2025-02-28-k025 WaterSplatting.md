@@ -250,7 +250,7 @@ $$ C_{\text{med}, \infty}(r) = T_{\text{obj}, N} c_{\text{med}} \exp(-\sigma_{\t
 
 **加权L1损失：**
 
-$$ L_{\text{Reg}-L1} = \left\vert  W \odot (\hat{y} - y) \right\vert  $$
+$$ L_{\text{Reg}-L1} = \left| W \odot (\hat{y} - y) \right| $$
 
 其中，权重 $ W = \{w_{i,j}\} $，且 $ w_{i,j} = (\text{sg}(\hat{y}_{i,j}) + \epsilon)^{-1} $，$\text{sg}(\cdot)$ 表示停止梯度传播。
 
@@ -442,7 +442,7 @@ $$
 在标准的3DGS中，损失函数结合了L1损失和D-SSIM损失，适用于没有共享参数的原语。受文献[25]的启发，我们提出了一种正则化的损失函数$L_{\text{Reg}}$，以增强优化过程中对暗部区域的权重，使其与人类对动态范围的感知一致。具体来说，我们在渲染估计值$\hat{y}$和目标图像$y$上应用逐像素的权重$W = \{w_{i,j}\}$，其中$w_{i,j} = (\text{sg}(\hat{y}_{i,j}) + \varepsilon)^{-1}$，$(i, j)$为像素坐标，$\text{sg}(\cdot)$表示停止其参数的梯度传播，反向传播的导数为零。因此，我们得到正则化的L1损失：
 
 $$
-L_{\text{Reg}-L1} = \vert W \odot (\hat{y} - y)\vert  \quad (19)
+L_{\text{Reg}-L1} = |W \odot (\hat{y} - y)| \quad (19)
 $$
 
 这将减少模糊并使边缘更加锐利。我们还定义了正则化的D-SSIM损失：
