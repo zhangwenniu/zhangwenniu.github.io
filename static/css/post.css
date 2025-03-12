@@ -1,12 +1,13 @@
 .page-post {
   font-size: 16px;
-  line-height: 1.9;
+  line-height: 2.0;
   word-break: break-all;
   margin-left: 280px;
   margin-right: auto;
   max-width: 920px;
   color: #333;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.03em;
+  word-spacing: 0.05em;
   transition: margin-left 0.3s ease;
 }
 
@@ -72,6 +73,9 @@
   border-radius: 0 4px 4px 0;
   color: #555;
   font-style: italic;
+  letter-spacing: 0.03em;
+  word-spacing: 0.05em;
+  line-height: 1.9;
 }
 
 .page-post a {
@@ -101,12 +105,16 @@
 .page-post ul > li {
   list-style: disc;
   margin-bottom: 10px;
-  line-height: 1.8;
+  line-height: 1.9;
+  letter-spacing: 0.03em;
+  word-spacing: 0.05em;
 }
 .page-post ol > li {
   list-style: decimal;
   margin-bottom: 10px;
-  line-height: 1.8;
+  line-height: 1.9;
+  letter-spacing: 0.03em;
+  word-spacing: 0.05em;
 }
 .page-post li > *{
   margin: 10px 0;
@@ -240,7 +248,17 @@
   .page-post {
     font-size: 15px;
     padding: 0 15px;
+    letter-spacing: 0.025em;
+    word-spacing: 0.04em;
+    line-height: 1.9;
   }
+  
+  /* 移动设备上的段落样式 */
+  .page-post p {
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+  
   .page-post .title {
     font-size: 24px;
     line-height: 1.3;
@@ -298,9 +316,19 @@
 }
 @media screen and (max-width: 560px) {
   .page-post {
-    font-size: 15px;
-    padding: 0 12px;
+    font-size: 14px;
+    padding: 0 10px;
+    letter-spacing: 0.02em;
+    word-spacing: 0.03em;
+    line-height: 1.8;
   }
+  
+  /* 小屏幕设备上的段落样式 */
+  .page-post p {
+    margin-top: 14px;
+    margin-bottom: 14px;
+  }
+  
   .page-post .title {
     font-size: 22px;
   }
@@ -786,7 +814,16 @@ html.dark .page-post .hljs-quote {
 
 /* 暗色模式样式 */
 html.dark .page-post {
-  color: #c9d1d9;
+  color: #e0e0e0;
+  background-color: transparent;
+  letter-spacing: 0.03em;
+  word-spacing: 0.05em;
+}
+
+/* 确保暗黑模式下段落样式一致 */
+html.dark .page-post p {
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 html.dark .page-post .title {
@@ -820,6 +857,9 @@ html.dark .page-post blockquote {
   border-left-color: #58a6ff;
   background-color: #161b22;
   color: #8b949e;
+  letter-spacing: 0.03em;
+  word-spacing: 0.05em;
+  line-height: 1.9;
 }
 
 html.dark .page-post a {
@@ -932,4 +972,10 @@ body.toc-sidebar-collapsed .toc-sidebar-toggle {
 body.toc-sidebar-collapsed .toc-sidebar-toggle::before {
   transform: rotate(135deg);
   margin-left: -5px;
+}
+
+/* 增加段落间距，提高阅读体验 */
+.page-post p {
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
