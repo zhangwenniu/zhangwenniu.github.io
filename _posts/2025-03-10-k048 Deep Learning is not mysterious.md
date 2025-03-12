@@ -1,11 +1,7 @@
 ---
-
 layout: mypost
-
 title: k048 Deep Learning is Not So Mysterious or Different
-
 categories: [泛化]
-
 ---
 
 # 论文重点和难点
