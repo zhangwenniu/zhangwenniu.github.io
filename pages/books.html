@@ -27,11 +27,31 @@ title: 书籍
         <div class="book-chapters">
           <h3>章节列表</h3>
           <ul>
-            {% assign sorted_chapters = book.items | sort: "chapter_number" %}
+            <!-- 使用文件名排序 -->
+            {% assign sorted_chapters = book.items | sort: "path" %}
+            
             {% for chapter in sorted_chapters %}
+              {% assign file_path_parts = chapter.path | split: "/" %}
+              {% assign file_name = file_path_parts | last %}
+              {% assign file_name_parts = file_name | split: "." %}
+              {% assign chapter_file_name = file_name_parts | first %}
+              
+              <!-- 尝试从文件名中提取数字部分 -->
+              {% if chapter_file_name contains "ch" %}
+                {% assign chapter_number_str = chapter_file_name | remove: "ch" %}
+                {% if chapter_number_str contains "_" %}
+                  {% assign chapter_number_parts = chapter_number_str | split: "_" %}
+                  {% assign display_number = chapter_number_parts | first %}
+                {% else %}
+                  {% assign display_number = chapter_number_str %}
+                {% endif %}
+              {% else %}
+                {% assign display_number = forloop.index %}
+              {% endif %}
+              
               <li>
                 <a href="{{ chapter.url | relative_url }}">
-                  <span class="chapter-number">第{{ chapter.chapter_number }}章</span>
+                  <span class="chapter-number">第{{ display_number }}章</span>
                   <span class="chapter-title">{{ chapter.title }}</span>
                 </a>
               </li>
@@ -209,13 +229,6 @@ title: 书籍
   .book-read-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 15px rgba(71, 118, 230, 0.3);
-  }
-  
-  .footer {
-    position: relative;
-    z-index: 10;
-    margin-top: 30px;
-    clear: both;
   }
   
   /* 暗色模式样式 */

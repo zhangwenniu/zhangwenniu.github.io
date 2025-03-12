@@ -1,12 +1,82 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 {% include head.html -%}
+<!-- 在页面加载前拦截错误的图片请求 -->
+<script>
+(function() {
+  // 获取当前页面URL中的书籍ID
+  var pathParts = window.location.pathname.split('/');
+  var bookIdIndex = pathParts.indexOf('books') + 1;
+  var bookId = bookIdIndex < pathParts.length ? pathParts[bookIdIndex] : '';
+  
+  if (!bookId) return;
+  
+  // 创建一个MutationObserver来监视DOM变化，拦截新添加的图片
+  var observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.type === 'childList') {
+        mutation.addedNodes.forEach(function(node) {
+          if (node.tagName === 'IMG') {
+            var src = node.getAttribute('src');
+            if (src && (src.includes('/books/' + bookId + '/') || 
+                src.match(new RegExp('/books/' + bookId + '/ch[0-9_]+/')))) {
+              // 立即设置为空白图片
+              node.setAttribute('src', 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==');
+            }
+          }
+        });
+      }
+    });
+  });
+  
+  // 配置观察器
+  var config = { childList: true, subtree: true };
+  
+  // 开始观察文档
+  observer.observe(document, config);
+  
+  // 拦截网络请求
+  var originalFetch = window.fetch;
+  window.fetch = function(url, options) {
+    if (typeof url === 'string' && 
+        (url.includes('/books/' + bookId + '/') || 
+         url.match(new RegExp('/books/' + bookId + '/ch[0-9_]+/')))) {
+      console.warn('拦截到错误的图片请求路径: ' + url);
+      return Promise.resolve(new Response('', {
+        status: 200,
+        headers: { 'Content-Type': 'text/plain' }
+      }));
+    }
+    return originalFetch.apply(this, arguments);
+  };
+  
+  var originalXHROpen = XMLHttpRequest.prototype.open;
+  XMLHttpRequest.prototype.open = function(method, url, async, user, password) {
+    if (typeof url === 'string' && 
+        (url.includes('/books/' + bookId + '/') || 
+         url.match(new RegExp('/books/' + bookId + '/ch[0-9_]+/')))) {
+      url = 'data:,';
+    }
+    return originalXHROpen.call(this, method, url, async, user, password);
+  };
+})();
+</script>
 <body>
 {% include header.html -%}
 <div class="page page-book">
   <h1 class="title" id="{{ page.title }}">{{ page.title }}</h1>
   <div class="subtitle">
-    <span>{{ page.book_title }} - 第{{ page.chapter_number }}章</span>
+    <span>{{ page.book_title }} - 
+    {% if page.display_chapter_number %}
+      {% if page.display_chapter_number contains '.' %}
+        {{ page.display_chapter_number }}
+      {% else %}
+        第{{ page.display_chapter_number }}章
+      {% endif %}
+    {% else %}
+      第{{ page.chapter_number }}章
+    {% endif %}
+    </span>
     {% if page.date %}
     <span> | {{site.author}} 于 {{ page.date | date: "%Y-%m-%d" }} 发布</span>
     {% endif %}
@@ -72,6 +142,7 @@
 
 <!-- 处理图片相对路径和图片查看器 -->
 <script>
+  // DOM加载完成后处理图片
   document.addEventListener('DOMContentLoaded', function() {
     // 获取书籍ID
     var bookContent = document.querySelector('.book-content');
@@ -80,16 +151,7 @@
     var bookId = bookContent.getAttribute('data-book-id');
     if (!bookId) return;
     
-    // 获取当前页面URL
-    var pageUrl = window.location.pathname;
     var baseUrl = '{{ site.baseurl }}';
-    
-    // 提取当前章节的路径
-    var pathMatch = pageUrl.match(/\/books\/([^\/]+)\/([^\/]+)/);
-    if (!pathMatch) return;
-    
-    var bookPath = pathMatch[1];
-    var chapterPath = pathMatch[2].replace(/\.html$/, '');
     
     // 查找所有图片元素
     var images = bookContent.querySelectorAll('img');
@@ -98,19 +160,62 @@
       var src = img.getAttribute('src');
       
       // 检查是否是相对路径（不以http://, https://, /或data:开头）
-      if (src && !src.match(/^(https?:\/\/|\/|data:)/)) {
-        // 构建新的图片路径
-        var newSrc = baseUrl + '/assets/books/' + bookPath + '/' + src;
-        img.setAttribute('src', newSrc);
+      // 或者是错误的路径（包含/books/bookId/）
+      if (src && (!src.match(/^(https?:\/\/|\/|data:)/) || 
+                  src.includes('/books/' + bookId + '/') || 
+                  src.match(new RegExp('/books/' + bookId + '/ch[0-9_]+/')))) {
+        
+        // 如果是错误的路径，提取文件名
+        var fileName = src;
+        if (src.includes('/')) {
+          var parts = src.split('/');
+          fileName = parts[parts.length - 1];
+        }
+        
+        // 构建新的图片路径，直接使用书籍ID
+        var newSrc = baseUrl + '/assets/books/' + bookId + '/' + fileName;
+        
+        // 立即设置为空白图片，防止浏览器请求错误路径
+        img.setAttribute('src', 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==');
+        
+        // 预加载图片以检查是否存在，避免控制台错误
+        var preloadImg = new Image();
+        preloadImg.onload = function() {
+          // 图片存在，设置正确的路径
+          img.setAttribute('src', newSrc);
+          
+          // 添加点击事件，打开图片查看器
+          img.addEventListener('click', function() {
+            var viewer = document.getElementById('imageViewer');
+            var viewerImg = document.getElementById('viewerImage');
+            viewerImg.src = img.src;
+            viewer.style.display = 'flex';
+          });
+        };
+        
+        preloadImg.onerror = function() {
+          console.warn('图片未找到: ' + newSrc);
+          // 标记图片为错误状态
+          img.classList.add('error');
+          // 设置一个最小高度，以便显示错误消息
+          img.style.minHeight = '30px';
+          img.style.border = '1px dashed #ccc';
+          img.style.padding = '10px';
+          img.style.display = 'inline-block';
+          
+          // 添加错误提示
+          var errorMsg = document.createElement('div');
+          errorMsg.className = 'image-error';
+          errorMsg.textContent = '图片未找到: ' + fileName;
+          errorMsg.style.color = 'red';
+          errorMsg.style.fontSize = '14px';
+          errorMsg.style.marginTop = '5px';
+          img.parentNode.insertBefore(errorMsg, img.nextSibling);
+        };
+        
+        // 开始加载图片
+        preloadImg.src = newSrc;
       }
-      
-      // 添加点击事件，打开图片查看器
-      img.addEventListener('click', function() {
-        var viewer = document.getElementById('imageViewer');
-        var viewerImg = document.getElementById('viewerImage');
-        viewerImg.src = img.src;
-        viewer.style.display = 'flex';
-      });
     });
     
     // 点击图片查看器关闭它

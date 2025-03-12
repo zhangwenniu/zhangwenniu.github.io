@@ -4,8 +4,6 @@ title: 第一章：入门基础
 book_id: book1
 book_title: 编程入门指南
 book_description: 随便说一下。
-chapter_number: 1
-next_chapter: /books/book1/ch2
 date: 2023-01-01
 ---
 
