@@ -688,3 +688,28 @@ blog.addLoadEvent(function () {
     window.addEventListener('scroll', updateActiveHeading)
   }
 })
+
+// 确保文本选择功能正常工作
+blog.addLoadEvent(function() {
+  // 移除可能禁用文本选择的事件监听器
+  document.onmousedown = null;
+  document.onselectstart = null;
+  
+  // 确保文章内容可以被选择
+  const postContent = document.querySelector('.page-post');
+  if (postContent) {
+    postContent.style.userSelect = 'text';
+    postContent.style.webkitUserSelect = 'text';
+    postContent.style.mozUserSelect = 'text';
+    postContent.style.msUserSelect = 'text';
+    
+    // 遍历所有子元素，确保它们也可以被选择
+    const allElements = postContent.querySelectorAll('*');
+    allElements.forEach(function(el) {
+      el.style.userSelect = 'text';
+      el.style.webkitUserSelect = 'text';
+      el.style.mozUserSelect = 'text';
+      el.style.msUserSelect = 'text';
+    });
+  }
+});

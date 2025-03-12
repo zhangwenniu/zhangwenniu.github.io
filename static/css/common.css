@@ -10,6 +10,11 @@ html {
   -moz-osx-font-smoothing: grayscale;
   font-family: 'Cascadia Code', Consolas, Helvetica, 'Microsoft YaHei', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
   overflow-y: overlay;
+  /* 确保文本可以被选择 */
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
 }
 html[transition] {
   transition: all 500ms ease;

@@ -9,6 +9,10 @@
   letter-spacing: 0.03em;
   word-spacing: 0.05em;
   transition: none;
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
 }
 
 .page-post .title {
@@ -990,4 +994,12 @@ body:has(.img-move-bg) .toc-sidebar-toggle {
   z-index: 999;
   opacity: 0.2;
   pointer-events: none;
+}
+
+/* 确保文章内容中的所有元素都可以被选择 */
+.page-post * {
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
 }
