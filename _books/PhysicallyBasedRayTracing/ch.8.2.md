@@ -1,0 +1,253 @@
+---
+layout: book
+title: 08.2 镜面反射和透射
+book_id: PhysicallyBasedRayTracing
+book_title: 基于物理的光线追踪
+book_description: 这本书介绍了基于物理的光线追踪的基本概念、算法和应用，适合对计算机图形学感兴趣的读者。
+chapter_number: 9
+previous_chapter: /books/PhysicallyBasedRayTracing/ch.8.1
+date: 2025-03-12
+---
+
+
+
+### 8.2 镜面反射和透射
+
+使用物理光学模型和几何光学模型，在数学上对完全光滑表面上的光的行为进行描述相对容易。这些表面对入射光呈现出完美的镜面反射和透射；对于给定的入射方向$$\omega_{i}$$，所有光线都被散射到单一的出射方向$$\omega_{o}$$。对于镜面反射，该出射方向与法线的夹角和入射方向与法线的夹角相同：
+
+$$
+\theta_{i} = \theta_{o}
+$$
+
+并且$$\phi_{o} = \phi_{i} + \pi$$。对于透射，同样有$$\phi_{o} = \phi_{i} + \pi$$，而出射方向$$\theta_{t}$$由斯涅尔定律给出，该定律将透射方向与表面法线$$\mathbf{n}$$之间的夹角$$\theta_{t}$$和入射光线与表面法线$$\mathbf{n}$$之间的夹角$$\theta_{i}$$联系起来。（本章结尾的其中一个练习是使用光学中的费马原理推导斯涅尔定律。）斯涅尔定律基于入射光线所在介质的折射率以及光线进入的介质的折射率。折射率描述了光在特定介质中传播的速度比在真空中慢多少。我们将使用希腊字母$$\eta$$（发音为“eta”）来表示折射率。斯涅尔定律为：
+
+$$
+\eta_{i} \sin \theta_{i} = \eta_{t} \sin \theta_{t} \tag{8.2}
+$$
+
+一般来说，折射率随光的波长而变化。因此，入射光通常会在两种不同介质的边界处以多个方向散射，这种效应被称为色散。当入射的白光被棱镜分解为光谱成分时，就可以观察到这种效应。在图形学中，常见的做法是忽略这种波长相关性，因为这种效应通常对视觉准确性并非至关重要，而且忽略它可以大大简化光传输计算。或者，也可以追踪在有色散物体存在的环境中多束光（例如，在一系列离散波长下）的传播路径。第14章结尾的
+
+#### 8.2.1 菲涅尔反射率
+
+除了反射方向和透射方向外，还需要计算入射光中被反射或透射的比例。对于物理上准确的反射或折射，这些比例与方向有关，不能用固定的表面缩放系数来表示。菲涅尔方程描述了从表面反射的光量，它们是光滑表面上麦克斯韦方程组的解。
+
+给定折射率以及入射光线与表面法线的夹角，菲涅尔方程会针对入射光的两种不同偏振态指定材料相应的反射率。由于在大多数环境中，偏振的视觉效果有限，在基于物理的光线追踪（pbrt）中，我们通常会假设光是非偏振的，也就是说，光相对于光波是随机取向的。基于这个简化假设，菲涅尔反射率是平行偏振项和垂直偏振项平方的平均值。 
+
+在这一点上，有必要区分几种重要的材料类别：
+
+`1.` 第一类是电介质，即不导电的材料。它们具有实值折射率（通常在1到3的范围内），并且会透射$$^{3}$$一部分入射光。电介质的例子有玻璃、矿物油、水和空气。
+
+`2.` 第二类是导体，比如金属。价电子可以在其原子晶格内自由移动，使得电流能够从一个地方流到另一个地方。当导体受到如可见光这样的电磁辐射时，这种基本的原子特性会表现出截然不同的行为：材料是不透明的，并且会反射回相当一部分入射光。
+
+也有一部分光会透射到导体内部，并在那里迅速被吸收：总吸收通常发生在材料最外层0.1微米的范围内，因此只有极薄的金属薄膜才能透射相当数量的光。在基于物理的光线追踪（pbrt）中，我们忽略这种效应，只对导体的反射分量进行建模。
+
+与电介质不同，导体具有复值折射率$$\tilde{\eta} = \eta + \mathrm{i}k$$。
+
+`3.` 第三类是半导体，如硅或锗，不过本书不会讨论它们。 
+
+导体和电介质都遵循相同的菲涅尔方程组。尽管如此，我们还是倾向于为电介质创建一个特殊的计算函数，以便利用当折射率为实值时这些方程所呈现的特别简单的形式。
+
+要计算两种电介质材料界面处的菲涅尔反射率，我们需要知道这两种介质的折射率。表8.1列出了一些电介质材料的折射率。电介质的菲涅尔反射率公式如下：
+
+$$
+r_{\parallel} = \frac{\eta_{\mathrm{t}} \cos \theta_{\mathrm{i}} - \eta_{\mathrm{i}} \cos \theta_{\mathrm{t}}}{\eta_{\mathrm{t}} \cos \theta_{\mathrm{i}} + \eta_{\mathrm{i}} \cos \theta_{\mathrm{t}}},
+$$
+
+$$
+r_{\perp} = \frac{\eta_{\mathrm{i}} \cos \theta_{\mathrm{i}} - \eta_{\mathrm{t}} \cos \theta_{\mathrm{t}}}{\eta_{\mathrm{i}} \cos \theta_{\mathrm{i}} + \eta_{\mathrm{t}} \cos \theta_{\mathrm{t}}},
+$$
+
+其中$$r_{\parallel}$$是平行偏振光的菲涅尔反射率，$$r_{\perp}$$是垂直偏振光的反射率，$$\eta_{\mathrm{i}}$$和$$\eta_{\mathrm{t}}$$分别是入射介质和透射介质的折射率，$$\omega_{\mathrm{i}}$$和$$\omega_{\mathrm{t}}$$分别是入射方向和透射方向。$$\omega_{\mathrm{t}}$$可以用斯涅尔定律计算（见8.2.3节）。
+
+余弦项都应大于或等于0；为了计算这些值，在分别计算$$\cos \theta_{\mathrm{i}}$$和$$\cos \theta_{\mathrm{t}}$$时，几何法线应翻转到与$$\omega_{\mathrm{i}}$$和$$\omega_{\mathrm{t}}$$在同一侧。
+
+对于非偏振光，菲涅尔反射率为
+
+$$
+F_{\mathrm{r}} = \frac{1}{2}(r_{\parallel}^{2} + r_{\perp}^{2}).
+$$
+
+由于能量守恒，电介质透射的能量为$$1 - F_{\mathrm{r}}$$。
+
+函数`FrDielectric()`用于计算电介质材料和非偏振光的菲涅尔反射公式。$$\cos \theta_{\mathrm{i}}$$的值通过参数`cosThetaI`传入。 
+
+`〈BxDF实用函数〉≡`
+
+```cpp
+Float FrDielectric(Float cosThetaI, Float etaI, Float etaT) {
+    cosThetaI = Clamp(cosThetaI, -1, 1);
+    〈可能交换折射率 519〉
+    〈使用斯涅尔定律计算cosThetaT 520〉
+    Float Rparl = ((etaT * cosThetaI) - (etaI * cosThetaT)) / 
+                  ((etaT * cosThetaI) + (etaI * cosThetaT));
+    Float Rperp = ((etaI * cosThetaI) - (etaT * cosThetaT)) / 
+                   ((etaI * cosThetaI) + (etaT * cosThetaT));
+    return (Rparl * Rparl + Rperp * Rperp) / 2;
+}
+```
+
+为了求出透射角的余弦值`cosThetaT`，首先需要确定入射方向是在介质外部还是内部，这样才能正确理解两个折射率。
+
+入射角余弦值的符号表明入射光线位于介质的哪一侧（图8.5）。如果余弦值在0到1之间，光线在介质外部；如果余弦值在-1到0之间，光线在介质内部。参数`etaI`和`etaT`会进行调整，使得`etaI`表示入射介质的折射率，从而确保`cosThetaI`是非负的。
+
+`〈可能交换折射率〉≡`
+
+```cpp
+bool entering = cosThetaI > 0.f;
+if (!entering) {
+    std::swap(etaI, etaT);
+    cosThetaI = std::abs(cosThetaI);
+}
+``` 
+
+一旦确定了折射率，我们就可以使用斯涅尔定律（公式(8.2)）计算透射方向与表面法线之间夹角的正弦值$$\sin\theta_{t}$$。最后，利用$$\sin^{2}\theta + \cos^{2}\theta = 1$$这一恒等式求出该角度的余弦值。
+
+`〈使用斯涅尔定律计算cosThetaT〉≡`
+
+```cpp
+Float sinThetaI = std::sqrt(std::max((Float)0, 
+                                      1 - cosThetaI * cosThetaI));
+Float sinThetaT = etaI / etaT * sinThetaI;
+〈处理全内反射〉
+Float cosThetaT = std::sqrt(std::max((Float)0, 
+                                      1 - sinThetaT * sinThetaT));
+```
+
+当光从一种介质传播到折射率较低的另一种介质时，接近掠射角入射的光都不会进入另一种介质。发生这种情况的最大角度称为临界角；当$$\theta_{i}$$大于临界角时，就会发生全内反射，所有的光都会被反射。这里通过$$\sin\theta_{t}$$的值大于1来检测这种情况；在这种情况下，就不需要使用菲涅尔方程了。
+
+`〈处理全内反射〉≡`
+
+```cpp
+if (sinThetaT >= 1)
+    return 1;
+```
+
+我们现在关注复折射率$$\tilde{\eta} = \eta + \mathrm{i}k$$的一般情况，在这种情况下，部分入射光可能会被材料吸收并转化为热量。除了实部外，一般的菲涅尔公式现在还依赖于虚部$$k$$，$$k$$被称为吸收系数。 
+
+图8.6展示了金的折射率和吸收系数的曲线图，这两个量都与波长相关。基于物理的光线追踪（pbrt）软件包中的scenes/spds/metals目录，包含了多种金属的与波长相关的$$\eta$$和$$k$$数据。下一章的图9.4展示了一个使用金属材质渲染的模型。
+
+导体和电介质之间边界处的菲涅尔反射率由以下公式给出：
+
+$$
+r_{\perp} = \frac{a^{2} + b^{2} - 2a \cos \theta + \cos^{2} \theta}{a^{2} + b^{2} + 2a \cos \theta + \cos^{2} \theta}, \tag{8.3}
+$$
+
+$$
+r_{\parallel} = r_{\perp} \frac{\cos^{2} \theta (a^{2} + b^{2}) - 2a \cos \theta \sin^{2} \theta + \sin^{4} \theta}{\cos^{2} \theta (a^{2} + b^{2}) + 2a \cos \theta \sin^{2} \theta + \sin^{4} \theta}, \tag{8.4}
+$$
+
+其中
+
+$$
+a^{2} + b^{2} = \sqrt{(\eta^{2} - k^{2} - \sin^{2} \theta)^{2} + 4\eta^{2}k^{2}},
+$$
+
+$$\eta + \mathrm{i}k = \tilde{\eta}_{\mathrm{t}} / \tilde{\eta}_{\mathrm{i}}$$是通过复数除法运算得到的相对折射率。不过，一般情况下$$\tilde{\eta}_{\mathrm{i}}$$是电介质，因此可以使用普通的实数除法。 
+
+该计算由`FrConductor()`函数实现<sup>4</sup>，其实现直接对应公式(8.3)和(8.4)，因此此处不列出。
+
+`〈反射声明〉≡`
+
+```cpp
+Spectrum FrConductor(Float cosThetaI, const Spectrum &etaI, 
+                     const Spectrum &etaT, const Spectrum &k);
+```
+
+为方便起见，我们将定义一个抽象的`Fresnel`类，为计算菲涅尔反射系数提供接口。使用此接口的实现有助于简化后续可能需要支持两种形式的双向反射分布函数（BRDF）的实现。
+
+`〈BxDF声明〉+≡`
+
+```cpp
+class Fresnel {
+public:
+    〈Fresnel接口 522〉
+};
+```
+
+`Fresnel`接口提供的唯一方法是`Fresnel::Evaluate()`。给定入射方向与表面法线夹角的余弦值，它返回表面反射的光量。 
+
+`〈菲涅尔接口〉≡`
+
+```cpp
+virtual Spectrum Evaluate(Float cosI) const = 0;
+```
+
+### 菲涅尔导体
+
+`FresnelConductor`为导体实现了这个接口。
+
+`〈BxDF声明〉+≡`
+
+```cpp
+class FresnelConductor : public Fresnel {
+public:
+    〈FresnelConductor公共方法522〉
+private:
+    Spectrum etaI, etaT, k;
+};
+```
+
+它的构造函数存储给定的折射率$$\eta$$和吸收系数$$k$$。
+
+`〈FresnelConductor公共方法〉≡`
+
+```cpp
+FresnelConductor(const Spectrum &etaI, const Spectrum &etaT, 
+                 const Spectrum &k) : etaI(etaI), etaT(etaT), k(k) {}
+```
+
+`FresnelConductor`的计算例程也很简单，它只是调用前面定义的`FrConductor()`函数。注意，在调用`FrConductor()`之前，它会取`cosThetaI`的绝对值，因为`FrConductor()`要求余弦值是相对于与$$\omega_{i}$$在表面同一侧的法线来测量的，或者等价地，应该使用$$\cos \theta_{i}$$的绝对值。
+
+`〈BxDF方法定义〉+≡`
+
+```cpp
+Spectrum FresnelConductor::Evaluate(Float cosThetaI) const {
+    return FrConductor(std::abs(cosThetaI), etaI, etaT, k);
+}
+``` 
+
+### 菲涅尔电介质
+
+`FresnelDielectric` 同样为电介质材料实现了菲涅尔接口。
+
+`〈BxDF声明〉+≡`
+
+```cpp
+class FresnelDielectric : public Fresnel {
+public:
+    〈FresnelDielectric公共方法522〉
+private:
+    Float etaI, etaT;
+};
+```
+
+它的构造函数存储表面外部和内部的折射率。
+
+`〈FresnelDielectric公共方法〉≡`
+
+```cpp
+FresnelDielectric(Float etaI, Float etaT) : etaI(etaI), etaT(etaT) {}
+```
+
+`FresnelDielectric` 的计算例程类似地调用 `FrDielectric()` 。
+
+`〈BxDF方法定义〉+≡`
+
+```cpp
+Spectrum FresnelDielectric::Evaluate(Float cosThetaI) const {
+    return FrDielectric(cosThetaI, etaI, etaT);
+}
+```
+
+### 特殊的菲涅尔接口
+
+`FresnelNoOp` 对菲涅尔接口的实现，针对所有入射方向都返回100%的反射率。尽管这在物理上不太合理，但却是一种方便可用的功能。
+
+`〈BxDF声明〉+≡`
+
+```cpp
+class FresnelNoOp : public Fresnel {
+public:
+    Spectrum Evaluate(Float) const { return Spectrum(1.); }
+};
+``` 

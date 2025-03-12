@@ -43,6 +43,30 @@ Python是一种高级编程语言，以其简洁、易读的语法而闻名。�
 print("Hello, World!")
 ```
 
+```cpp
+#include <iostream>
+
+int main() {
+    std::cout << "Hello, World!" << std::endl;
+    return 0;
+}
+```
+
+### 8.1 基本接口
+
+我们首先将为单个的双向反射分布函数（BRDF）和双向透射分布函数（BTDF）定义接口。BRDF 和 BTDF 共享一个公共基类 BxDF。由于它们具有完全相同的接口，共享相同的基类可以减少重复代码，并使系统的某些部分能够通用地处理 BxDF，而无需区分 BRDF 和 BTDF。
+
+
+```cpp
+<BxDF 声明>≡
+class BxDF {
+public:
+〈BxDF 接口 513〉
+〈BxDF 公共数据 513〉
+};
+```
+
+
 4. 保存文件
 5. 打开命令行或终端
 6. 导航到保存文件的目录

@@ -1,0 +1,163 @@
+---
+layout: book
+title: 08.1 反射模型
+book_id: PhysicallyBasedRayTracing
+book_title: 基于物理的光线追踪
+book_description: 这本书介绍了基于物理的光线追踪的基本概念、算法和应用，适合对计算机图形学感兴趣的读者。
+chapter_number: 9
+previous_chapter: /books/PhysicallyBasedRayTracing/ch.8
+date: 2025-03-12
+---
+
+### 8.1 基本接口
+
+我们首先将为单个的双向反射分布函数（BRDF）和双向透射分布函数（BTDF）定义接口。BRDF 和 BTDF 共享一个公共基类 BxDF。由于它们具有完全相同的接口，共享相同的基类可以减少重复代码，并使系统的某些部分能够通用地处理 BxDF，而无需区分 BRDF 和 BTDF。
+
+`<BxDF 声明>≡`
+```cpp
+class BxDF {
+public:
+    〈BxDF 接口〉
+    〈BxDF 公共数据〉
+};
+```
+
+第9.1节将介绍的 BSDF 类，包含一组 BxDF 对象，这些对象共同描述了表面上某一点的散射情况。尽管我们在一个通用接口后面隐藏了 BxDF 的实现细节，用于反射和透射材料，但第14至16章中的一些光传输算法需要区分这两种类型。因此，所有 BxDF 都有一个 BxDF::type 成员，该成员保存来自 BxDFType 的标志。对于每个 BxDF，这些标志至少应设置 BSDF_REFLECTION 或 BSDF_TRANSMISSION 中的一个，并且应准确设置漫反射、光泽反射、镜面反射标志中的一个。请注意，这里没有后向反射标志；后向反射被视为光泽反射类别中的一种。
+
+
+`<BSDF 声明>≡`
+```cpp
+enum BxDFType {
+    BSDF_REFLECTION  = 1 << 0,
+    BSDF_TRANSMISSION = 1 << 1,
+    BSDF_DIFFUSE      = 1 << 2,
+    BSDF_GLOSSY       = 1 << 3,
+    BSDF_SPECULAR     = 1 << 4,
+    BSDF_ALL          = BSDF_DIFFUSE | BSDF_GLOSSY | BSDF_SPECULAR |
+    BSDF_REFLECTION | BSDF_TRANSMISSION,
+};
+```
+
+
+`<BxDF 接口>≡`
+```cpp
+BxDF(BxDFType type) : type(type) {}
+```
+
+
+
+
+`<BxDF 公共数据>≡`
+```cpp
+const BxDFType type;
+```
+
+
+
+MatchesFlags() 实用方法用于确定 BxDF 是否与用户提供的类型标志匹配：
+
+
+`<BxDF 接口>+≡`
+```cpp
+bool MatchesFlags(BxDFType t) const {
+    return (type & t) == type;
+}
+```
+
+
+
+BxDF 提供的关键方法是 BxDF::f()。它返回给定方向对的分布函数值。此接口隐含地假设不同波长的光互不相关 —— 一个波长的能量不会在不同波长处反射。通过做出这一假设，反射函数的效果可以直接用 `Spectrum` 来表示。对于荧光材料，该假设不成立，若要支持这类材料，则需要此方法返回一个 $n \times n$ 的矩阵，该矩阵对光谱样本之间的能量传递进行编码（其中 $n$ 是 `Spectrum` 表示中的样本数量）。
+
+
+`<BxDF 接口>+≡`
+```cpp
+virtual Spectrum f(const Vector3f &wo, const Vector3f &wi) const = 0;
+```
+
+
+
+并非所有的 BxDF 都可以使用 f() 方法进行计算。例如，像镜子、玻璃或水这样的完全镜面反射物体，仅将来自单个入射方向的光散射到单个出射方向。这类 BxDF 最好用 delta 分布来描述，除了光被散射的单个方向外，delta 分布在其他方向上的值为零。在基于物理的光线追踪（pbrt）中，这些 BxDF 需要特殊处理，因此我们还将提供 BxDF::Sample_f() 方法。该方法既用于处理由 delta 分布描述的散射，也用于从沿多个方向散射光的 BxDF 中随机采样方向；第二种应用将在第14.1节中关于蒙特卡罗 BSDF 采样的讨论中进行解释。
+
+BxDF::Sample_f() 根据给定的出射方向 $\omega_{o}$ 计算入射光方向 $\omega_{i}$，并返回该方向对的 BxDF 值。对于 delta 分布，BxDF 必须以这种方式选择入射光方向，因为调用者没有机会生成合适的 $\omega_{i}$ 方向。对于 delta 分布的 BxDF，不需要 `sample` 和 `pdf` 参数，因此我们将在后面的第14.1节中，当为非镜面反射函数提供此方法的实现时再对其进行解释。
+
+
+`<BxDF 接口>+≡`
+```cpp
+virtual Spectrum Sample_f(const Vector3f &wo, Vector3f *wi,
+    const Point2f &sample, Float *pdf,
+    BxDFType *sampledType = nullptr) const;
+```
+
+
+
+#### 8.1.1 反射率
+
+将四维的双向反射分布函数（BRDF）或双向透射分布函数（BTDF）的总体行为（定义为方向对的函数）简化为单个方向的二维函数，甚至简化为描述其整体散射行为的常数值，这可能是有用的。
+
+半球 - 方向反射率是一个二维函数，它表示在半球面上均匀照明时，给定方向上的总反射，或者等效地，表示来自给定方向的光在半球面上的总反射 ²。其定义为：
+
+$$
+\rho_{\mathrm{hd}}(\omega_{\mathrm{o}})=\int_{\mathcal{S}^{2}(\mathrm{n})} f_{\mathrm{r}}(\mathrm{p}, \omega_{\mathrm{o}}, \omega_{\mathrm{i}})\left|\cos \theta_{\mathrm{i}}\right| \mathrm{d} \omega_{\mathrm{i}} \tag{8.1}
+$$
+
+BxDF::rho() 方法用于计算反射率函数 $\rho_{\mathrm{hd}}$。一些 BxDF 可以用闭式计算该值，不过大多数使用蒙特卡罗积分来计算其近似值。对于这些 BxDF，蒙特卡罗算法的实现会用到 `nSamples` 和 `samples` 参数，相关内容将在14.1.5节中进行解释。
+
+
+`<BxDF 接口>+≡`
+```cpp
+virtual Spectrum rho(const Vector3f &wo, int nSamples,
+    const Point2f *samples) const;
+```
+
+513
+
+表面的半球 - 半球反射率，用 $\rho_{\mathrm{hh}}$ 表示，是一个光谱值，当入射光从所有方向均匀入射时，它表示表面反射的入射光的比例。其公式为：
+
+$$
+\rho_{\mathrm{hh}}=\frac{1}{\pi} \int_{\mathcal{S}^{2}(\mathrm{n})} \int_{\mathcal{S}^{2}(\mathrm{n})} f_{\mathrm{r}}(\mathrm{p}, \omega_{\mathrm{o}}, \omega_{\mathrm{i}})\left|\cos \theta_{\mathrm{o}} \cos \theta_{\mathrm{i}}\right| \mathrm{d} \omega_{\mathrm{o}} \mathrm{d} \omega_{\mathrm{i}}
+$$
+
+如果未提供方向 $\omega_{\mathrm{o}}$，BxDF::rho() 方法将计算 $\rho_{\mathrm{hh}}$。在需要计算 $\rho_{\mathrm{hh}}$ 的蒙特卡罗估计值时，其余参数同样会被用到。
+
+
+`<BxDF 接口>+≡`
+```cpp
+virtual Spectrum rho(int nSamples, const Point2f *samples1,
+    const Point2f *samples2) const;
+```
+
+
+
+#### 8.1.2 BxDF缩放适配器
+
+对给定的BxDF，用一个 `Spectrum` 值来缩放其贡献也是很有用的。`ScaledBxDF` 包装器持有一个BxDF指针和一个 `Spectrum`，并实现了此功能。`MixMaterial`（在9.2.3节中定义）会使用这个类，`MixMaterial` 根据另外两种材料的加权组合来创建BSDF。
+
+
+`<BxDF声明>+≡`
+```cpp
+class ScaledBxDF : public BxDF {
+public:
+    〈ScaledBxDF公共方法 515〉
+private:
+    BxDF *bxdf;
+    Spectrum scale;
+};
+```
+
+
+`<ScaledBxDF公共方法>≡`
+```cpp
+ScaledBxDF(BxDF *bxdf, const Spectrum &scale)
+: BxDF(BxDFType(bxdf->type)), bxdf(bxdf), scale(scale) {}
+```
+
+
+`ScaledBxDF` 方法的实现很直接，这里我们只给出 `f()` 方法。
+
+
+`<BxDF方法定义>≡`
+```cpp
+Spectrum ScaledBxDF::f(const Vector3f &wo, const Vector3f &wi) const {
+    return scale * bxdf->f(wo, wi);
+}
+```
