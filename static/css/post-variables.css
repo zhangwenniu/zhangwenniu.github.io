@@ -1,0 +1,27 @@
+:root {
+  /* 颜色变量 */
+  --primary-color: #4BB596;
+  --primary-hover: #3a9077;
+  --text-color: #333;
+  --text-light: #777;
+  --text-dark: #222;
+  --bg-light: #f9f9f9;
+  --bg-code: #f6f8fa;
+  --border-color: #eee;
+  --border-light: #f0f0f0;
+  --border-table: #e0e0e0;
+  --shadow: 0 3px 10px rgba(0,0,0,0.1);
+  --shadow-hover: 0 6px 15px rgba(0,0,0,0.15);
+  
+  /* 暗色模式变量 */
+  --dark-bg: #161b22;
+  --dark-bg-light: #1d2026;
+  --dark-border: #30363d;
+  --dark-text: #e0e0e0;
+  --dark-text-light: #8b949e;
+  --dark-text-bright: #e6edf3;
+  --dark-primary: #58a6ff;
+  --dark-primary-hover: #79c0ff;
+  --dark-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  --dark-shadow-hover: 0 6px 15px rgba(0, 0, 0, 0.4);
+} 

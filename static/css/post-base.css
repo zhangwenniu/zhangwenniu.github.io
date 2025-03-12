@@ -1,0 +1,124 @@
+/* 基础样式 */
+@import 'post-variables.css';
+
+.page-post {
+  font-size: 16px;
+  line-height: 2.0;
+  word-break: break-all;
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 0 20px;
+  color: var(--text-color);
+  letter-spacing: 0.03em;
+  word-spacing: 0.05em;
+  transition: none;
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+}
+
+/* 标题样式 */
+.page-post .title {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
+
+.page-post .subtitle {
+  font-size: 14px;
+  color: var(--text-light);
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.page-post .post > * {
+  margin: 25px 0;
+}
+
+.page-post .post > iframe {
+  margin: 0;
+  width: 100%;
+}
+
+/* 标题样式 */
+.page-post .post h1,
+.page-post .post h2 {
+  font-weight: 600;
+  font-size: 22px;
+  position: relative;
+  cursor: pointer;
+  margin-top: 40px;
+  color: var(--text-dark);
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.page-post .post h1::before,
+.page-post .post h2::before {
+  content: '#';
+  top: 0;
+  font-weight: bold;
+  padding-right: 10px;
+  color: var(--primary-color);
+}
+
+.page-post h3,
+.page-post h4,
+.page-post h5,
+.page-post h6 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 30px;
+  color: var(--text-color);
+}
+
+/* 段落样式 */
+.page-post p {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+/* 确保文章内容中的所有元素都可以被选择 */
+.page-post * {
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+}
+
+/* 文章元数据 */
+.post-meta {
+  color: #888;
+  font-size: 13px;
+}
+
+#busuanzi_container_page_pv {
+  display: inline;
+}
+
+/* 评论区 */
+.post-comments {
+  margin-top: 50px;
+  padding-top: 30px;
+  border-top: 1px solid var(--border-color);
+}
+
+.post-comments h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 20px;
+}
+
+/* 其他基础样式 */
+.page-post .title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
+  line-height: 1.4;
+}

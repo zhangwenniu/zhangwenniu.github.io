@@ -1,0 +1,261 @@
+/* 暗色模式样式 */
+@import 'post-variables.css';
+
+/* 基础暗色模式 */
+html.dark .page-post {
+  color: var(--dark-text);
+  background-color: transparent;
+  letter-spacing: 0.03em;
+  word-spacing: 0.05em;
+}
+
+/* 确保暗黑模式下段落样式一致 */
+html.dark .page-post p {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+/* 标题样式 */
+html.dark .page-post .title {
+  color: var(--dark-text-bright);
+}
+
+html.dark .page-post .subtitle {
+  color: var(--dark-text-light);
+  border-bottom-color: var(--dark-border);
+}
+
+html.dark .page-post .post h1,
+html.dark .page-post .post h2 {
+  color: var(--dark-text-bright);
+  border-bottom-color: var(--dark-border);
+}
+
+html.dark .page-post .post h1::before,
+html.dark .page-post .post h2::before {
+  color: var(--dark-primary);
+}
+
+html.dark .page-post h3,
+html.dark .page-post h4,
+html.dark .page-post h5,
+html.dark .page-post h6 {
+  color: var(--dark-text-bright);
+}
+
+/* 引用块 */
+html.dark .page-post blockquote {
+  border-left-color: var(--dark-primary);
+  background-color: var(--dark-bg);
+  color: var(--dark-text-light);
+  letter-spacing: 0.03em;
+  word-spacing: 0.05em;
+  line-height: 1.9;
+}
+
+/* 链接 */
+html.dark .page-post a {
+  color: var(--dark-primary);
+  border-bottom-color: var(--dark-primary);
+}
+
+html.dark .page-post a:hover {
+  color: var(--dark-primary-hover);
+  border-bottom-color: var(--dark-primary-hover);
+}
+
+/* 加粗文本 */
+html.dark .page-post strong,
+html.dark .page-post b {
+  color: var(--dark-text-bright);
+}
+
+/* 图片 */
+html.dark .page-post img {
+  box-shadow: var(--dark-shadow);
+}
+
+html.dark .page-post img:hover {
+  box-shadow: var(--dark-shadow-hover);
+}
+
+/* 分割线 */
+html.dark .page-post hr {
+  background-color: var(--dark-border);
+}
+
+/* 表格 */
+html.dark .page-post table {
+  border-color: var(--dark-border);
+}
+
+html.dark .page-post tr {
+  border-bottom-color: var(--dark-border);
+}
+
+html.dark .page-post th {
+  background-color: var(--dark-bg);
+}
+
+html.dark .page-post table tr:nth-child(even) {
+  background-color: var(--dark-bg);
+}
+
+html.dark .page-post .table-container {
+  border-color: var(--dark-border);
+}
+
+/* 代码 */
+html.dark .page-post pre {
+  background-color: #1e1e1e;
+  border-color: #2d2d2d;
+}
+
+html.dark .page-post pre::before {
+  background-color: #2d2d2d;
+  color: #aaa;
+}
+
+html.dark .page-post code {
+  background-color: #2d2d2d;
+  color: #f08c8c;
+}
+
+/* 语法高亮 */
+html.dark .page-post .hljs-keyword,
+html.dark .page-post .hljs-selector-tag,
+html.dark .page-post .hljs-subst {
+  color: #ff7b72;
+}
+
+html.dark .page-post .hljs-string,
+html.dark .page-post .hljs-doctag,
+html.dark .page-post .hljs-regexp {
+  color: #a5d6ff;
+}
+
+html.dark .page-post .hljs-title,
+html.dark .page-post .hljs-section,
+html.dark .page-post .hljs-selector-id {
+  color: #d2a8ff;
+}
+
+html.dark .page-post .hljs-number,
+html.dark .page-post .hljs-literal,
+html.dark .page-post .hljs-variable,
+html.dark .page-post .hljs-template-variable,
+html.dark .page-post .hljs-tag .hljs-attr {
+  color: #79c0ff;
+}
+
+html.dark .page-post .hljs-comment,
+html.dark .page-post .hljs-quote {
+  color: #8b949e;
+}
+
+/* 评论区 */
+html.dark .post-comments {
+  border-top-color: var(--dark-border);
+}
+
+html.dark .post-comments h2 {
+  color: var(--dark-text-bright);
+}
+
+html.dark .post-meta {
+  color: var(--dark-text-light);
+}
+
+/* 目录相关 */
+html.dark .toc-container {
+  background: var(--dark-bg);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--dark-border);
+}
+
+html.dark .toc-sidebar-toggle {
+  background-color: var(--dark-bg-light);
+  border-color: #2d333b;
+  color: var(--dark-text-light);
+  box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+}
+
+html.dark .toc-sidebar-toggle:hover {
+  background-color: #2d333b;
+  color: var(--dark-primary);
+  box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+}
+
+html.dark .toc-sidebar-toggle::before {
+  border-color: var(--dark-text-light);
+}
+
+html.dark .toc-sidebar-toggle:hover::before {
+  border-color: var(--dark-primary);
+}
+
+html.dark body.toc-sidebar-collapsed .toc-sidebar-toggle::before {
+  border-color: var(--dark-text-light);
+}
+
+html.dark .toc-sidebar-toggle:hover::after {
+  color: var(--dark-primary);
+}
+
+/* 暗色模式脉动动画 */
+@keyframes darkPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(88, 166, 255, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(88, 166, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(88, 166, 255, 0);
+  }
+}
+
+html.dark .toc-sidebar-toggle.pulse {
+  animation: darkPulse 2s infinite;
+}
+
+html.dark .toc-title {
+  color: #c9d1d9;
+  border-bottom-color: var(--dark-border);
+}
+
+html.dark .toc-toggle-icon {
+  color: var(--dark-text-light);
+}
+
+html.dark .toc-item a {
+  color: #b8b8b8;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  word-wrap: break-word;
+}
+
+html.dark .toc-item a:hover {
+  color: var(--dark-primary);
+  background-color: var(--dark-bg-light);
+}
+
+html.dark .toc-item.active a {
+  color: var(--dark-primary);
+  font-weight: bold;
+  background-color: var(--dark-bg-light);
+}
+
+/* 暗色模式滚动条 */
+html.dark .toc-container::-webkit-scrollbar-track {
+  background: var(--dark-bg-light);
+}
+
+html.dark .toc-container::-webkit-scrollbar-thumb {
+  background: #4d5566;
+}
+
+html.dark .toc-container::-webkit-scrollbar-thumb:hover {
+  background: #5a6377;
+} 

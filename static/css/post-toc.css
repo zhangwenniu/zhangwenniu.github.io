@@ -1,0 +1,228 @@
+/* 目录样式 */
+@import 'post-variables.css';
+
+.toc-container {
+  position: fixed;
+  left: 0;
+  top: 100px;
+  width: 260px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: #f8f9fa;
+  border-radius: 0 6px 6px 0;
+  padding: 20px 20px 20px 25px;
+  box-shadow: var(--shadow);
+  z-index: 999;
+  border: 1px solid var(--border-color);
+  transition: transform 0.3s ease;
+  transform: translateX(0);
+}
+
+.toc-container.collapsed {
+  transform: translateX(calc(-100% + 30px));
+}
+
+/* 添加滚动条样式 */
+.toc-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.toc-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.toc-container::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+.toc-container::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
+}
+
+/* 目录的层级缩进 */
+.toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  width: 100%;
+}
+
+.toc-item {
+  line-height: 1.9;
+  margin: 6px 0;
+  position: relative;
+  width: calc(100% - 10px);
+}
+
+.toc-item a {
+  color: #666;
+  text-decoration: none;
+  font-size: 14px;
+  border-bottom: none;
+  transition: all 0.3s ease;
+  display: block;
+  padding: 3px 5px;
+  border-radius: 3px;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  word-wrap: break-word;
+  line-height: 1.5;
+}
+
+.toc-item a:hover {
+  color: var(--primary-color);
+  background-color: #f0f0f0;
+  padding-left: 8px;
+}
+
+/* 不同级别标题的缩进 */
+.toc-level-1 { margin-left: 0; }
+.toc-level-2 { margin-left: 0.8em; }
+.toc-level-3 { margin-left: 1.6em; }
+.toc-level-4 { margin-left: 2.4em; }
+.toc-level-5 { margin-left: 3.2em; }
+.toc-level-6 { margin-left: 4em; }
+
+/* 目录标题样式 */
+.toc-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: var(--text-color);
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 5px;
+}
+
+/* 折叠图标样式 */
+.toc-toggle-icon {
+  font-size: 18px;
+  font-weight: bold;
+  color: #666;
+  transition: transform 0.3s ease;
+}
+
+/* 侧边栏切换按钮 */
+.toc-sidebar-toggle {
+  position: fixed;
+  left: 260px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 80px;
+  background-color: #f8f9fa;
+  border-radius: 0 6px 6px 0;
+  border: 1px solid var(--border-color);
+  border-left: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #666;
+  font-weight: bold;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+  z-index: 1001;
+  transition: left 0.3s ease;
+}
+
+.toc-sidebar-toggle:hover {
+  background-color: #e8f5f1;
+  color: var(--primary-color);
+  box-shadow: 2px 0 10px rgba(0,0,0,0.15);
+}
+
+/* 使用伪元素创建更明显的箭头图标 */
+.toc-sidebar-toggle::before {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid #666;
+  border-left: 2px solid #666;
+  transform: rotate(-45deg);
+  margin-left: 5px;
+  transition: all 0.3s ease;
+}
+
+/* 添加提示文本 */
+.toc-sidebar-toggle::after {
+  content: '目录';
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  transform: translateX(-50%) rotate(90deg);
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.toc-sidebar-toggle:hover::after {
+  opacity: 1;
+}
+
+.toc-sidebar-toggle:hover::before {
+  border-color: var(--primary-color);
+}
+
+/* 当侧边栏折叠时，按钮位置调整 */
+.toc-container.collapsed + .toc-sidebar-toggle,
+.toc-sidebar-toggle.collapsed {
+  left: 0;
+}
+
+/* 当侧边栏折叠时，按钮箭头方向调整 */
+.toc-container.collapsed + .toc-sidebar-toggle::before,
+.toc-sidebar-toggle.collapsed::before {
+  transform: rotate(135deg);
+  margin-left: -5px;
+}
+
+/* 添加脉动动画，使按钮更加明显 */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(75, 181, 150, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(75, 181, 150, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(75, 181, 150, 0);
+  }
+}
+
+/* 只在页面加载后的前几秒显示脉动动画 */
+.toc-sidebar-toggle.pulse {
+  animation: pulse 2s infinite;
+}
+
+/* 当前活跃的目录项 */
+.toc-item.active a {
+  color: var(--primary-color);
+  font-weight: 600;
+  background-color: #f0f0f0;
+  padding-left: 8px;
+}
+
+/* 当图片灯箱效果激活时，调整目录收起按钮的显示 */
+body:has(.img-move-bg) .toc-sidebar-toggle {
+  z-index: 999; /* 低于灯箱的z-index */
+  opacity: 0.2; /* 降低透明度 */
+  pointer-events: none; /* 禁用点击 */
+}
+
+/* 为不支持:has选择器的浏览器提供备选方案 */
+.img-move-bg ~ .toc-sidebar-toggle {
+  z-index: 999;
+  opacity: 0.2;
+  pointer-events: none;
+} 

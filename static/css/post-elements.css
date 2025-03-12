@@ -1,0 +1,199 @@
+/* 文章元素样式 */
+@import 'post-variables.css';
+
+/* 引用块 */
+.page-post blockquote {
+  border-left: 4px solid var(--primary-color);
+  background-color: var(--bg-light);
+  padding: 15px 20px;
+  margin: 20px 0;
+  border-radius: 0 4px 4px 0;
+  color: #555;
+  font-style: italic;
+  letter-spacing: 0.03em;
+  word-spacing: 0.05em;
+  line-height: 1.9;
+}
+
+/* 链接 */
+.page-post a {
+  color: var(--primary-color);
+  margin: 0 2px;
+  border-bottom: 1px solid var(--primary-color);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.page-post a:hover {
+  color: var(--primary-hover);
+  border-bottom-color: var(--primary-hover);
+}
+
+/* 加粗文本 */
+.page-post strong,
+.page-post b {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+/* 列表 */
+.page-post .post ul {
+  margin-left: 20px;
+  padding-left: 15px;
+}
+
+.page-post .post ol {
+  margin-left: 20px;
+  padding-left: 15px;
+}
+
+.page-post ul > li {
+  list-style: disc;
+  margin-bottom: 10px;
+  line-height: 1.9;
+  letter-spacing: 0.03em;
+  word-spacing: 0.05em;
+}
+
+.page-post ol > li {
+  list-style: decimal;
+  margin-bottom: 10px;
+  line-height: 1.9;
+  letter-spacing: 0.03em;
+  word-spacing: 0.05em;
+}
+
+.page-post li > * {
+  margin: 10px 0;
+}
+
+/* 图片 */
+.page-post img {
+  display: block;
+  max-width: 100%;
+  margin: 25px auto;
+  height: auto;
+  box-shadow: var(--shadow);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.page-post img:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+
+.page-post img[alt='line'] {
+  display: inline-block;
+  vertical-align: middle;
+  background-color: transparent;
+  box-shadow: none;
+  margin: 0 4px;
+  line-height: 1;
+}
+
+/* 代码 */
+.page-post pre {
+  font-size: 0;
+  padding: 15px;
+  overflow: auto;
+  border-radius: 6px;
+  max-height: 610px;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  line-height: 1.7;
+  background-color: var(--bg-code);
+  border: 1px solid var(--border-color);
+  margin: 20px 0;
+  position: relative;
+}
+
+.page-post pre::before {
+  content: attr(data-lang);
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #999;
+  font-size: 12px;
+  padding: 5px 10px;
+  background-color: #f1f1f1;
+  border-bottom-left-radius: 5px;
+}
+
+.page-post code {
+  font-size: 14px;
+  background-color: var(--bg-code);
+  word-break: break-all;
+  padding: 3px 6px;
+  margin: 0 4px;
+  border-radius: 4px;
+  color: #e83e8c;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+}
+
+.page-post pre code {
+  font-size: 14px;
+  background-color: transparent !important;
+  word-break: keep-all;
+  padding: 0;
+  margin: 0;
+  border-radius: unset;
+  color: inherit;
+  display: block;
+  overflow-x: auto;
+}
+
+/* 分割线 */
+.page-post hr {
+  border: none;
+  height: 2px;
+  background-color: var(--border-color);
+  margin: 30px 0;
+}
+
+/* 表格 */
+.page-post table {
+  min-width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid var(--border-table);
+  margin: 20px 0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.page-post tr {
+  border-bottom: 1px solid var(--border-table);
+}
+
+.page-post th {
+  font-weight: 600;
+  background-color: #f5f5f5;
+}
+
+.page-post th,
+.page-post td {
+  padding: 10px 15px;
+  text-align: left;
+}
+
+.page-post table tr:nth-child(even) {
+  background-color: var(--bg-light);
+}
+
+.page-post .table-container {
+  overflow: auto;
+  margin: 20px 0;
+  border: 1px solid var(--border-table);
+  border-radius: 4px;
+}
+
+.page-post .table-container table {
+  margin: 0;
+  border: 0;
+}
+
+.page-post .table-container table tbody tr:last-child {
+  border-bottom: 0;
+} 
