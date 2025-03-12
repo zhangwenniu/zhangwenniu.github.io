@@ -218,6 +218,86 @@ title: 书籍
     clear: both;
   }
   
+  /* 暗色模式样式 */
+  html.dark .books-header {
+    border-bottom-color: #30363d;
+  }
+  
+  html.dark .books-header h1 {
+    color: #e6edf3;
+  }
+  
+  html.dark .books-intro {
+    color: #8b949e;
+  }
+  
+  html.dark .book-item {
+    background-color: #0d1117;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    border-color: #30363d;
+  }
+  
+  html.dark .book-item:hover {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    border-color: #4d5566;
+  }
+  
+  html.dark .book-item::before {
+    background: linear-gradient(90deg, #58a6ff, #a371f7);
+  }
+  
+  html.dark .book-title {
+    color: #e6edf3;
+  }
+  
+  html.dark .book-meta {
+    color: #8b949e;
+  }
+  
+  html.dark .book-description {
+    color: #c9d1d9;
+  }
+  
+  html.dark .book-chapters {
+    background-color: #161b22;
+  }
+  
+  html.dark .book-chapters h3 {
+    color: #e6edf3;
+    border-bottom-color: #30363d;
+  }
+  
+  html.dark .book-chapters li:hover {
+    background-color: #21262d;
+  }
+  
+  html.dark .book-chapters a {
+    color: #c9d1d9;
+  }
+  
+  html.dark .chapter-number {
+    color: #8b949e;
+  }
+  
+  html.dark .book-read-btn {
+    background: linear-gradient(90deg, #58a6ff, #a371f7);
+    box-shadow: 0 4px 10px rgba(88, 166, 255, 0.2);
+  }
+  
+  html.dark .book-read-btn:hover {
+    box-shadow: 0 6px 15px rgba(88, 166, 255, 0.3);
+  }
+  
+  /* 确保文本可以被选择 */
+  .page-books,
+  .book-item,
+  .book-chapters {
+    user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+  }
+  
   @media (max-width: 768px) {
     .books-list {
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -241,5 +321,47 @@ title: 书籍
     .book-title {
       font-size: 1.4em;
     }
+  }
+  
+  /* 章节列表滚动条样式 */
+  .book-chapters ul::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .book-chapters ul::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+  }
+  
+  .book-chapters ul::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
+  }
+  
+  .book-chapters ul::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
+  }
+  
+  /* 暗色模式滚动条 */
+  html.dark .book-chapters ul::-webkit-scrollbar-track {
+    background: #1d2026;
+  }
+  
+  html.dark .book-chapters ul::-webkit-scrollbar-thumb {
+    background: #4d5566;
+  }
+  
+  html.dark .book-chapters ul::-webkit-scrollbar-thumb:hover {
+    background: #5a6377;
+  }
+  
+  /* 暗色模式样式 */
+  html.dark .page-books {
+    background-color: #0d1117;
+    color: #e0e0e0;
+  }
+  
+  html.dark .books-header {
+    border-bottom-color: #30363d;
   }
 </style> 

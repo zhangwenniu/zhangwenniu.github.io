@@ -132,6 +132,20 @@
   overflow-x: auto;
   margin-bottom: 20px;
   margin-top: 20px;
+  position: relative;
+  padding-top: 30px;
+}
+
+.book-content pre::before {
+  content: attr(data-lang);
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #999;
+  font-size: 12px;
+  padding: 5px 10px;
+  background-color: #f1f1f1;
+  border-bottom-left-radius: 5px;
 }
 
 .book-content pre code {
@@ -338,4 +352,171 @@
   .book-content h3 {
     font-size: 1.1em;
   }
+}
+
+/* 暗色模式样式 */
+html.dark .page-book {
+  background-color: #0d1117;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  color: #e0e0e0;
+}
+
+html.dark .page-book::before {
+  background: linear-gradient(90deg, #58a6ff, #a371f7);
+}
+
+html.dark .page-book .title {
+  color: #e6edf3;
+}
+
+html.dark .page-book .subtitle {
+  color: #8b949e;
+  border-bottom-color: #30363d;
+}
+
+html.dark .book-content {
+  color: #e0e0e0;
+}
+
+html.dark .book-content h2 {
+  color: #e6edf3;
+  border-bottom-color: #30363d;
+}
+
+html.dark .book-content h3 {
+  color: #e6edf3;
+}
+
+html.dark .book-content img {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+html.dark .book-content img:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+html.dark .book-content img + em {
+  color: #8b949e;
+}
+
+html.dark .book-content code {
+  background-color: #2d2d2d;
+  color: #f08c8c;
+}
+
+html.dark .book-content pre {
+  background-color: #161b22;
+}
+
+html.dark .book-content pre::before {
+  background-color: #2d2d2d;
+  color: #aaa;
+}
+
+html.dark .book-content pre code {
+  background-color: transparent;
+  color: #e0e0e0;
+}
+
+html.dark .book-content blockquote {
+  border-left-color: #58a6ff;
+  background-color: #161b22;
+  color: #8b949e;
+}
+
+html.dark .book-navigation {
+  border-top-color: #30363d;
+  border-bottom-color: #30363d;
+}
+
+html.dark .book-navigation a {
+  background: linear-gradient(90deg, #58a6ff, #a371f7);
+  box-shadow: 0 3px 8px rgba(88, 166, 255, 0.2);
+}
+
+html.dark .book-navigation a:hover {
+  box-shadow: 0 5px 12px rgba(88, 166, 255, 0.3);
+}
+
+html.dark .book-navigation .book-index {
+  background: #21262d;
+  color: #e0e0e0;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+html.dark .book-navigation .book-index:hover {
+  background: #30363d;
+}
+
+/* 书籍列表页暗色模式样式 */
+html.dark .book-item {
+  background-color: #161b22;
+}
+
+html.dark .book-title {
+  color: #e6edf3;
+}
+
+html.dark .book-description {
+  color: #8b949e;
+}
+
+html.dark .book-chapters {
+  background-color: #0d1117;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+html.dark .book-chapters h3 {
+  color: #e6edf3;
+  border-bottom-color: #30363d;
+}
+
+html.dark .book-chapters ul {
+  color: #e0e0e0;
+}
+
+html.dark .book-chapters li {
+  border-bottom-color: #30363d;
+}
+
+html.dark .book-chapters a {
+  color: #58a6ff;
+}
+
+html.dark .book-chapters a:hover {
+  color: #79c0ff;
+}
+
+/* 确保书籍内容可以被选择 */
+.page-book,
+.book-content,
+.book-content * {
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+}
+
+/* 图片查看器样式 */
+#imageViewer {
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+}
+
+#imageViewer img {
+  max-width: 90%;
+  max-height: 80%;
+  object-fit: contain;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* 暗色模式下的图片查看器 */
+html.dark #imageViewer {
+  background-color: rgba(0, 0, 0, 0.95);
+}
+
+html.dark #imageViewer img {
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 } 
