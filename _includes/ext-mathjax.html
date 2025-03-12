@@ -1,18 +1,60 @@
 <!-- MathJax数学公式支持 -->
 <style>
   .has-jax {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
     background-color: transparent !important;
-    line-height: normal !important;
-    word-break: normal !important;
+    line-height: inherit !important;
+    word-break: inherit !important;
     padding: 0 !important;
     margin: 0 !important;
+    display: inline-block !important;
   }
   .has-jax * {
     outline: 0;
+  }
+  
+  /* 确保包含公式的段落保持正常间距 */
+  p:has(.has-jax) {
+    margin-top: 16px !important;
+    margin-bottom: 24px !important;
+    line-height: 1.9 !important;
+    letter-spacing: 0.03em !important;
+    word-spacing: 0.05em !important;
+    text-align: justify !important;
+    text-justify: inter-word !important;
+    padding: 0 2px !important;
+    text-indent: 0 !important;
+  }
+  
+  /* 为不支持:has选择器的浏览器提供备选方案 */
+  .has-jax-container {
+    margin-top: 16px !important;
+    margin-bottom: 24px !important;
+    line-height: 1.9 !important;
+    letter-spacing: 0.03em !important;
+    word-spacing: 0.05em !important;
+    text-align: justify !important;
+    text-justify: inter-word !important;
+    padding: 0 2px !important;
+    text-indent: 0 !important;
+  }
+  
+  /* 行内公式样式调整 */
+  .MathJax {
+    vertical-align: middle !important;
+    margin: 0 0.1em !important;
+    display: inline-block !important;
+  }
+  
+  /* 行内公式与文本对齐 */
+  .MathJax_Display {
+    margin: 0.5em 0 !important;
+    text-align: center !important;
+    overflow-x: auto;
+    overflow-y: hidden;
   }
 </style>
 <script type="text/x-mathjax-config">
@@ -22,10 +64,18 @@
     tex2jax: {
       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
       displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'a']
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'a'],
+      processEscapes: true
     },
     "HTML-CSS": {
-      showMathMenu: false
+      showMathMenu: false,
+      linebreaks: { automatic: true },
+      matchFontHeight: true,
+      scale: 100,
+      styles: {
+        ".MathJax_Display": { "text-align": "center !important" },
+        ".MathJax": { "vertical-align": "middle !important" }
+      }
     }
   });
   // 父级元素添加类名，便于css控制
@@ -33,7 +83,17 @@
     var all = MathJax.Hub.getAllJax();
     var i = 0;
     for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
+      var parent = all[i].SourceElement().parentNode;
+      parent.className += ' has-jax';
+      // 为段落父元素添加类名
+      if (parent.tagName.toLowerCase() === 'p') {
+        parent.className += ' has-jax-container';
+      } else {
+        var grandParent = parent.parentNode;
+        if (grandParent && grandParent.tagName.toLowerCase() === 'p') {
+          grandParent.className += ' has-jax-container';
+        }
+      }
     }
   });
 </script>
@@ -41,3 +101,41 @@
   type="text/javascript"
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
 ></script>
+
+<!-- 页面加载后重新渲染公式 -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // 等待页面完全加载
+    setTimeout(function() {
+      // 重新渲染公式
+      if (typeof MathJax !== 'undefined') {
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        
+        // 再次应用样式
+        MathJax.Hub.Queue(function() {
+          var all = MathJax.Hub.getAllJax();
+          for(var i=0; i < all.length; i += 1) {
+            var parent = all[i].SourceElement().parentNode;
+            if (!parent.classList.contains('has-jax')) {
+              parent.className += ' has-jax';
+            }
+            
+            // 为段落父元素添加类名
+            if (parent.tagName.toLowerCase() === 'p') {
+              if (!parent.classList.contains('has-jax-container')) {
+                parent.className += ' has-jax-container';
+              }
+            } else {
+              var grandParent = parent.parentNode;
+              if (grandParent && grandParent.tagName.toLowerCase() === 'p') {
+                if (!grandParent.classList.contains('has-jax-container')) {
+                  grandParent.className += ' has-jax-container';
+                }
+              }
+            }
+          }
+        });
+      }
+    }, 1000); // 延迟1秒，确保MathJax已完成初始渲染
+  });
+</script>
