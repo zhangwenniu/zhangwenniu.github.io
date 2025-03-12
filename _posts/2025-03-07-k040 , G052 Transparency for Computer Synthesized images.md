@@ -548,12 +548,12 @@ $$
 然后通过以下公式找到折射向量（$R$）：
 
 $$
-R = S + \sqrt{1 - \vert S\vert ^2} N \tag{5}
+R = S + \sqrt{1 - \lvert S \rvert ^2} N \tag{5}
 $$
 
 其中：
 
-- $\vert \vert $ = 表示向量的大小
+- $\lvert \rvert$ = 表示向量的大小
 
 ### B）背景扭曲
 
