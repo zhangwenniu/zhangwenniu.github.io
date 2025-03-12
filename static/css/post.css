@@ -979,3 +979,17 @@ body.toc-sidebar-collapsed .toc-sidebar-toggle::before {
   margin-top: 16px;
   margin-bottom: 16px;
 }
+
+/* 当图片灯箱效果激活时，调整目录收起按钮的显示 */
+body:has(.img-move-bg) .toc-sidebar-toggle {
+  z-index: 999; /* 低于灯箱的z-index */
+  opacity: 0.2; /* 降低透明度 */
+  pointer-events: none; /* 禁用点击 */
+}
+
+/* 为不支持:has选择器的浏览器提供备选方案 */
+.img-move-bg ~ .toc-sidebar-toggle {
+  z-index: 999;
+  opacity: 0.2;
+  pointer-events: none;
+}

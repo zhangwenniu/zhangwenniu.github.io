@@ -378,6 +378,14 @@ blog.addLoadEvent(function () {
     img.style.width = imgMoveOrigin.width + 'px'
     img.style.height = imgMoveOrigin.height + 'px'
 
+    // 恢复目录收起按钮
+    const tocToggle = document.querySelector('.toc-sidebar-toggle')
+    if (tocToggle) {
+      tocToggle.style.zIndex = ''
+      tocToggle.style.opacity = ''
+      tocToggle.style.pointerEvents = ''
+    }
+
     setTimeout(function () {
       restoreLock = false
       document.body.removeChild(div)
@@ -408,12 +416,22 @@ blog.addLoadEvent(function () {
       img.title = imgMoveOrigin.alt
     }
 
-    div.onclick = restore
-    div.onmousewheel = restore
+    // 处理目录收起按钮
+    const tocToggle = document.querySelector('.toc-sidebar-toggle')
+    if (tocToggle) {
+      tocToggle.style.zIndex = '999'
+      tocToggle.style.opacity = '0.2'
+      tocToggle.style.pointerEvents = 'none'
+    }
+
+    div.onclick = function() {
+      restore()
+    }
+    div.onmousewheel = div.onclick
     div.ontouchmove = prevent
 
-    img.onclick = restore
-    img.onmousewheel = restore
+    img.onclick = div.onclick
+    img.onmousewheel = div.onclick
     img.ontouchmove = prevent
     img.ondragstart = prevent
 
