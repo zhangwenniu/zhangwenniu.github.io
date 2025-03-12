@@ -2,18 +2,13 @@
   font-size: 16px;
   line-height: 2.0;
   word-break: break-all;
-  margin-left: 280px;
-  margin-right: auto;
-  max-width: 920px;
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 0 20px;
   color: #333;
   letter-spacing: 0.03em;
   word-spacing: 0.05em;
-  transition: margin-left 0.3s ease;
-}
-
-/* 当目录折叠时，调整文章内容的左边距 */
-.toc-sidebar-collapsed .page-post {
-  margin-left: 50px;
+  transition: none;
 }
 
 .page-post .title {
@@ -236,12 +231,9 @@
     width: 240px;
   }
   .page-post {
-    margin-left: auto;
-    max-width: 100%;
+    margin: 0 auto;
+    max-width: 800px;
     padding: 0 20px;
-  }
-  .toc-sidebar-collapsed .page-post {
-    margin-left: auto;
   }
 }
 @media screen and (max-width: 768px) {
@@ -251,6 +243,7 @@
     letter-spacing: 0.025em;
     word-spacing: 0.04em;
     line-height: 1.9;
+    max-width: 100%;
   }
   
   /* 移动设备上的段落样式 */
@@ -310,7 +303,7 @@
     font-size: 10px;
   }
   .toc-container.collapsed + .toc-sidebar-toggle,
-  body.toc-sidebar-collapsed .toc-sidebar-toggle {
+  .toc-sidebar-toggle.collapsed {
     left: 0;
   }
 }
@@ -321,6 +314,7 @@
     letter-spacing: 0.02em;
     word-spacing: 0.03em;
     line-height: 1.8;
+    max-width: 100%;
   }
   
   /* 小屏幕设备上的段落样式 */
@@ -380,7 +374,7 @@
     display: none;
   }
   .toc-container.collapsed + .toc-sidebar-toggle,
-  body.toc-sidebar-collapsed .toc-sidebar-toggle {
+  .toc-sidebar-toggle.collapsed {
     left: 0;
   }
 }
@@ -527,7 +521,7 @@ html.dark .toc-container::-webkit-scrollbar-thumb:hover {
   font-weight: bold;
   box-shadow: 2px 0 8px rgba(0,0,0,0.1);
   z-index: 1001;
-  transition: all 0.3s ease, left 0.3s ease;
+  transition: left 0.3s ease;
 }
 
 .toc-sidebar-toggle:hover {
@@ -571,11 +565,15 @@ html.dark .toc-container::-webkit-scrollbar-thumb:hover {
   border-color: #4BB596;
 }
 
-.toc-container.collapsed .toc-sidebar-toggle {
+/* 当侧边栏折叠时，按钮位置调整 */
+.toc-container.collapsed + .toc-sidebar-toggle,
+.toc-sidebar-toggle.collapsed {
   left: 0;
 }
 
-.toc-container.collapsed .toc-sidebar-toggle::before {
+/* 当侧边栏折叠时，按钮箭头方向调整 */
+.toc-container.collapsed + .toc-sidebar-toggle::before,
+.toc-sidebar-toggle.collapsed::before {
   transform: rotate(135deg);
   margin-left: -5px;
 }

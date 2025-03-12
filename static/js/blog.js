@@ -614,7 +614,7 @@ blog.addLoadEvent(function () {
   // 侧边栏切换函数
   function toggleSidebar() {
     tocContainer.classList.toggle('collapsed')
-    document.body.classList.toggle('toc-sidebar-collapsed')
+    sidebarToggle.classList.toggle('collapsed')
     if (tocContainer.classList.contains('collapsed')) {
       localStorage.setItem('tocSidebarCollapsed', 'true')
     } else {
@@ -636,7 +636,7 @@ blog.addLoadEvent(function () {
     // 检查侧边栏折叠状态并应用
     if (localStorage.getItem('tocSidebarCollapsed') === 'true') {
       tocContainer.classList.add('collapsed')
-      document.body.classList.add('toc-sidebar-collapsed')
+      sidebarToggle.classList.add('collapsed')
     }
     
     // 添加滚动监听，高亮当前可见的标题对应的目录项
