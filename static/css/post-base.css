@@ -79,7 +79,18 @@
 /* 段落样式 */
 .page-post p {
   margin-top: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
+  line-height: 1.9;
+  letter-spacing: 0.03em;
+  word-spacing: 0.05em;
+  text-align: justify;
+  text-justify: inter-word;
+  padding: 0 2px;
+}
+
+/* 段落首行缩进 */
+.page-post .post > p:not(:first-of-type) {
+  text-indent: 0em;
 }
 
 /* 确保文章内容中的所有元素都可以被选择 */
@@ -112,13 +123,4 @@
   font-weight: 600;
   color: var(--text-color);
   margin-bottom: 20px;
-}
-
-/* 其他基础样式 */
-.page-post .title {
-  font-size: 28px;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 15px;
-  line-height: 1.4;
 }
