@@ -4,7 +4,6 @@ title: 08. 反射模型
 book_id: PhysicallyBasedRayTracing
 book_title: 基于物理的光线追踪
 book_description: 这本书介绍了基于物理的光线追踪的基本概念、算法和应用，适合对计算机图形学感兴趣的读者。
-next_chapter: /books/PhysicallyBasedRayTracing/ch8_1
 date: 2025-03-12
 ---
 
