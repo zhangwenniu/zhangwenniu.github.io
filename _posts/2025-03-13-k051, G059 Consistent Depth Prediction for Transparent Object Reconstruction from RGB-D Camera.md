@@ -4,9 +4,15 @@ title: k051, G059 Consistent Depth Prediction for Transparent Object Reconstruct
 categories: [透明, 深度预测, SLAM]
 ---
 
+# 论文链接
+
+[ICCV 2023 Link](https://openaccess.thecvf.com/content/ICCV2023/html/Cai_Consistent_Depth_Prediction_for_Transparent_Object_Reconstruction_from_RGB-D_Camera_ICCV_2023_paper.html)
+
+[IEEE Link](https://ieeexplore.ieee.org/document/10377398)
+
 # 论文重点难点
 
-### 论文重点
+## 论文重点
 
 `1.` **问题背景与动机**
 
@@ -40,7 +46,7 @@ categories: [透明, 深度预测, SLAM]
 
 - **重建评估**：在合成场景和真实场景中测试Pseudo-SLAM方法，通过与ClearGrasp和TransCG等方法对比，证明了该方法在透明物体重建上的显著改进。
 
-### 论文难点
+## 论文难点
 
 `1.` **深度一致性问题**
 
